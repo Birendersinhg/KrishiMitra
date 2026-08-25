@@ -1,0 +1,168 @@
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id                String          @id @default(cuid())
+  name              String
+  email             String          @unique
+  phone             String?
+  passwordHash      String
+  role              String          @default("FARMER")
+  location          String?
+  preferredLanguage String          @default("en")
+  profileImage      String?
+  createdAt         DateTime        @default(now())
+  updatedAt         DateTime        @updatedAt
+
+  farmerProfile     FarmerProfile?
+  dealerProfile     DealerProfile?
+  analyses          CropAnalysis[]
+  cropPosts         CropPost[]
+  sentMessages      Message[]
+  notifications     Notification[]
+}
+
+model FarmerProfile {
+  id           String    @id @default(cuid())
+  userId       String    @unique
+  user         User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  farmName     String?
+  farmSize     Float?
+  location     String?
+  district     String?
+  state        String?   @default("Odisha")
+  primaryCrops String?
+  soilType     String?
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+}
+
+model DealerProfile {
+  id                 String           @id @default(cuid())
+  userId             String           @unique
+  user               User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  businessName       String
+  businessAddress    String
+  phone              String
+  whatsappNumber     String
+  products           String?
+  specialization     String?
+  location          String?
+  district          String?
+  state              String?          @default("Odisha")
+  verificationStatus String          @default("VERIFIED")
+  createdAt         DateTime        @default(now())
+  updatedAt         DateTime        @updatedAt
+
+  responses          DealerResponse[]
+}
+
+model CropAnalysis {
+  id                 String    @id @default(cuid())
+  farmerId           String
+  farmer             User      @relation(fields: [farmerId], references: [id], onDelete: Cascade)
+  imageUrl           String
+  cropName           String
+  cropHealth         String
+  disease            String?
+  confidence         Float?
+  pest               String?
+  pathogen           String?
+  nutrientDeficiency String?
+  soilAnalysis       String?
+  severity           String    @default("Medium")
+  recommendations    String
+  farmerExplanation  String
+  aiResponse         String?
+  createdAt         DateTime  @default(now())
+}
+
+model CropPost {
+  id          String           @id @default(cuid())
+  farmerId    String
+  farmer      User             @relation(fields: [farmerId], references: [id], onDelete: Cascade)
+  imageUrl    String
+  cropName    String
+  description String
+  problem     String
+  location    String
+  status      String           @default("OPEN")
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+
+  responses   DealerResponse[]
+}
+
+model DealerResponse {
+  id                  String        @id @default(cuid())
+  cropPostId          String
+  cropPost            CropPost      @relation(fields: [cropPostId], references: [id], onDelete: Cascade)
+  dealerId            String
+  dealer              DealerProfile @relation(fields: [dealerId], references: [id], onDelete: Cascade)
+  message             String
+  recommendedProducts String?
+  createdAt          DateTime      @default(now())
+}
+
+model Conversation {
+  id        String    @id @default(cuid())
+  farmerId  String
+  dealerId  String
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+
+  messages  Message[]
+}
+
+model Message {
+  id             String       @id @default(cuid())
+  conversationId String
+  conversation   Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  senderId       String
+  sender         User         @relation(fields: [senderId], references: [id], onDelete: Cascade)
+  message        String
+  messageType    String       @default("TEXT")
+  createdAt      DateTime     @default(now())
+}
+
+model WeatherRecord {
+  id              String    @id @default(cuid())
+  farmerId        String?
+  location        String
+  temperature     Float
+  humidity        Float
+  rainProbability Float?
+  windSpeed       Float?
+  forecastData    String?
+  createdAt       DateTime  @default(now())
+}
+
+model Product {
+  id             String    @id @default(cuid())
+  name           String
+  category       String
+  brand          String
+  description    String
+  price          Float
+  imageUrl       String
+  purchaseUrl    String
+  recommendedFor String
+  createdAt      DateTime  @default(now())
+}
+
+model Notification {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  title     String
+  message   String
+  type      String   @default("INFO")
+  read      Boolean  @default(false)
+  createdAt DateTime @default(now())
+}
