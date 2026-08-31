@@ -182,7 +182,7 @@ export default function FieldMappingPage() {
                   activeOverlay === "NDVI" ? "bg-emerald-600 text-white shadow-xs" : "text-slate-600 hover:text-slate-900"
                 }`}
               >
-                ??? NDVI Biomass Spectrum
+                🟢 NDVI Biomass Spectrum
               </button>
               <button
                 onClick={() => setActiveOverlay("MOISTURE")}
@@ -190,7 +190,7 @@ export default function FieldMappingPage() {
                   activeOverlay === "MOISTURE" ? "bg-blue-600 text-white shadow-xs" : "text-slate-600 hover:text-slate-900"
                 }`}
               >
-                ?? Soil Moisture Band
+                💧 Soil Moisture Band
               </button>
               <button
                 onClick={() => setActiveOverlay("DISEASE")}
@@ -198,7 +198,7 @@ export default function FieldMappingPage() {
                   activeOverlay === "DISEASE" ? "bg-rose-600 text-white shadow-xs" : "text-slate-600 hover:text-slate-900"
                 }`}
               >
-                ?? Disease Risk Zones
+                🔴 Disease Risk Zones
               </button>
               <button
                 onClick={() => setActiveOverlay("TRUE_COLOR")}
@@ -206,7 +206,7 @@ export default function FieldMappingPage() {
                   activeOverlay === "TRUE_COLOR" ? "bg-slate-900 text-white shadow-xs" : "text-slate-600 hover:text-slate-900"
                 }`}
               >
-                ?? True Color
+                🛰️ True Color
               </button>
             </div>
 

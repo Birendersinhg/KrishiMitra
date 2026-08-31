@@ -62,7 +62,7 @@ export default function Navbar() {
                       onClick={() => setAiMenuOpen(false)}
                       className="block p-2.5 rounded-xl hover:bg-emerald-50 text-xs transition-colors"
                     >
-                      <span className="font-bold text-slate-900 block">?? Digital Twin Engine</span>
+                      <span className="font-bold text-slate-900 block">🖥️ Digital Twin Engine</span>
                       <span className="text-[11px] text-slate-500">Dynamic farm state & soil strata</span>
                     </Link>
                     <Link
@@ -70,7 +70,7 @@ export default function Navbar() {
                       onClick={() => setAiMenuOpen(false)}
                       className="block p-2.5 rounded-xl hover:bg-violet-50 text-xs transition-colors"
                     >
-                      <span className="font-bold text-slate-900 block">?? Multi-Agent Consensus</span>
+                      <span className="font-bold text-slate-900 block">🤖 Multi-Agent Consensus</span>
                       <span className="text-[11px] text-slate-500">LangGraph / CrewAI debate theater</span>
                     </Link>
                     <Link
@@ -78,7 +78,7 @@ export default function Navbar() {
                       onClick={() => setAiMenuOpen(false)}
                       className="block p-2.5 rounded-xl hover:bg-amber-50 text-xs transition-colors"
                     >
-                      <span className="font-bold text-slate-900 block">?? "What-If" Simulation</span>
+                      <span className="font-bold text-slate-900 block">🔮 "What-If" Simulation</span>
                       <span className="text-[11px] text-slate-500">Climate perturbation & yield curves</span>
                     </Link>
                     <Link
@@ -86,7 +86,7 @@ export default function Navbar() {
                       onClick={() => setAiMenuOpen(false)}
                       className="block p-2.5 rounded-xl hover:bg-teal-50 text-xs transition-colors"
                     >
-                      <span className="font-bold text-slate-900 block">?? Agronomy RAG & Guardrails</span>
+                      <span className="font-bold text-slate-900 block">📚 Agronomy RAG & Guardrails</span>
                       <span className="text-[11px] text-slate-500">ICAR / OUAT verified vector store</span>
                     </Link>
                     <Link
@@ -94,7 +94,7 @@ export default function Navbar() {
                       onClick={() => setAiMenuOpen(false)}
                       className="block p-2.5 rounded-xl hover:bg-blue-50 text-xs transition-colors"
                     >
-                      <span className="font-bold text-slate-900 block">??? GIS Field Polygon Mapping</span>
+                      <span className="font-bold text-slate-900 block">🗺️ GIS Field Polygon Mapping</span>
                       <span className="text-[11px] text-slate-500">Satellite spectral NDVI overlays</span>
                     </Link>
                   </div>

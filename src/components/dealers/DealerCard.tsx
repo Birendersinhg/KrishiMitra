@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Phone, MessageSquare, MapPin, ShieldCheck, MessageCircle } from "lucide-react";
+import { Phone, MessageSquare, MapPin, ShieldCheck, MessageCircle, Tag } from "lucide-react";
 
 interface DealerCardProps {
   dealer: {
@@ -12,6 +12,7 @@ interface DealerCardProps {
     address: string;
     district: string;
     rating?: number;
+    products?: string;
   };
 }
 
@@ -37,6 +38,21 @@ export default function DealerCard({ dealer }: DealerCardProps) {
           <MapPin className="w-3.5 h-3.5 text-slate-400 flex-shrink-0 mt-0.5" />
           <span>{dealer.address}, {dealer.district}</span>
         </div>
+
+        <div className="flex items-center gap-1 mt-2 text-xs text-slate-500">
+          <Phone className="w-3.5 h-3.5 text-slate-400 flex-shrink-0" />
+          <span className="font-medium">{dealer.phone}</span>
+          {dealer.rating && (
+            <span className="ml-auto text-amber-500 font-bold">{dealer.rating} ★</span>
+          )}
+        </div>
+
+        {dealer.products && (
+          <div className="flex items-start gap-1.5 mt-2 text-[11px] text-teal-700 bg-teal-50 rounded-lg px-2.5 py-1.5">
+            <Tag className="w-3 h-3 flex-shrink-0 mt-0.5" />
+            <span>{dealer.products}</span>
+          </div>
+        )}
       </div>
 
       <div className="grid grid-cols-3 gap-2 mt-5 pt-3 border-t border-slate-100">

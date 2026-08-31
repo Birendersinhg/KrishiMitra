@@ -2,16 +2,29 @@ import { useState, useRef, useCallback, useEffect } from "react";
 
 export function useCamera() {
   const videoRef = useRef<HTMLVideoElement | null>(null);
-  const [stream, setStream] = useState<MediaStream | null>(null);
+  const streamRef = useRef<MediaStream | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [isActive, setIsActive] = useState(false);
   const [facingMode, setFacingMode] = useState<"environment" | "user">("environment");
 
+  const stopCamera = useCallback(() => {
+    if (streamRef.current) {
+      streamRef.current.getTracks().forEach((track) => track.stop());
+      streamRef.current = null;
+    }
+    if (videoRef.current) {
+      videoRef.current.srcObject = null;
+    }
+    setIsActive(false);
+  }, []);
+
   const startCamera = useCallback(async () => {
     try {
       setError(null);
-      if (stream) {
-        stream.getTracks().forEach((track) => track.stop());
+      // Stop any existing stream first
+      if (streamRef.current) {
+        streamRef.current.getTracks().forEach((track) => track.stop());
+        streamRef.current = null;
       }
       const constraints: MediaStreamConstraints = {
         video: {
@@ -23,7 +36,7 @@ export function useCamera() {
       };
 
       const mediaStream = await navigator.mediaDevices.getUserMedia(constraints);
-      setStream(mediaStream);
+      streamRef.current = mediaStream;
       setIsActive(true);
 
       if (videoRef.current) {
@@ -33,22 +46,11 @@ export function useCamera() {
     } catch (err: any) {
       console.error("Camera access error:", err);
       setError(err.name === "NotAllowedError" 
-        ? "Camera permission denied. Please allow camera access." 
+        ? "Camera permission denied. Please allow camera access."
         : "Failed to open camera. Make sure your device has a working camera.");
       setIsActive(false);
     }
   }, [facingMode]);
-
-  const stopCamera = useCallback(() => {
-    if (stream) {
-      stream.getTracks().forEach((track) => track.stop());
-      setStream(null);
-    }
-    if (videoRef.current) {
-      videoRef.current.srcObject = null;
-    }
-    setIsActive(false);
-  }, [stream]);
 
   const switchCamera = useCallback(() => {
     setFacingMode((prev) => (prev === "environment" ? "user" : "environment"));
@@ -71,15 +73,15 @@ export function useCamera() {
 
   useEffect(() => {
     return () => {
-      if (stream) {
-        stream.getTracks().forEach((t) => t.stop());
+      if (streamRef.current) {
+        streamRef.current.getTracks().forEach((t) => t.stop());
+        streamRef.current = null;
       }
     };
-  }, [stream]);
+  }, []);
 
   return {
     videoRef,
-    stream,
     error,
     isActive,
     facingMode,

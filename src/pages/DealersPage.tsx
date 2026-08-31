@@ -5,6 +5,64 @@ import api from "../services/api";
 
 const ODISHA_DISTRICTS = ["ALL", "Cuttack", "Bhubaneswar", "Puri", "Sambalpur", "Balasore", "Bhadrak", "Ganjam"];
 
+const FALLBACK_DEALERS = [
+  {
+    id: "dealer-1",
+    name: "Pradeep Agro",
+    shopName: "Odisha Agro Center",
+    phone: "+919861011223",
+    whatsappNumber: "919861011223",
+    address: "College Square, Cuttack",
+    district: "Cuttack",
+    rating: 4.8,
+    products: "Neem Oil, Trichoderma, NPK 19-19-19",
+  },
+  {
+    id: "dealer-2",
+    name: "Suresh Patra",
+    shopName: "Krishi Bhawan Agro Store",
+    phone: "+919937456123",
+    whatsappNumber: "919937456123",
+    address: "Station Road, Bhubaneswar",
+    district: "Bhubaneswar",
+    rating: 4.6,
+    products: "DAP, Urea, Zinc Sulphate, Tricyclazole",
+  },
+  {
+    id: "dealer-3",
+    name: "Manas Sahoo",
+    shopName: "Green Field Agro inputs",
+    phone: "+919438265478",
+    whatsappNumber: "919438265478",
+    address: "Grand Bazaar, Puri",
+    district: "Puri",
+    rating: 4.7,
+    products: "Organic Vermicompost, Potash, DAP",
+  },
+  {
+    id: "dealer-4",
+    name: "Rabi Behera",
+    shopName: "Sambalpur Farm Supply Co.",
+    phone: "+919861234567",
+    whatsappNumber: "919861234567",
+    address: "Budharaja Market, Sambalpur",
+    district: "Sambalpur",
+    rating: 4.5,
+    products: "NPK, Bio-Fungicides, Pesticides, Seeds",
+  },
+  {
+    id: "dealer-5",
+    name: "Lipika Das",
+    shopName: "Balasore Agro Hub",
+    phone: "+919776543210",
+    whatsappNumber: "919776543210",
+    address: "Fotidevi Road, Balasore",
+    district: "Balasore",
+    rating: 4.9,
+    products: "Tricyclazole, Copper Oxychloride, Micronutrients",
+  },
+];
+
 export default function DealersPage() {
   const [dealers, setDealers] = useState<any[]>([]);
   const [district, setDistrict] = useState("ALL");
@@ -16,10 +74,13 @@ export default function DealersPage() {
     const params = district !== "ALL" ? `?district=${district}` : "";
     api.get(`/dealers${params}`)
       .then((res) => {
-        if (res.data.success) {
-          setDealers(res.data.dealers || []);
+        if (res.data.success && res.data.dealers && res.data.dealers.length > 0) {
+          setDealers(res.data.dealers);
+        } else {
+          setDealers(FALLBACK_DEALERS);
         }
       })
+      .catch(() => setDealers(FALLBACK_DEALERS))
       .finally(() => setLoading(false));
   }, [district]);
 

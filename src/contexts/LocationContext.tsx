@@ -1,5 +1,4 @@
-import React, { createContext, useContext, useState, useEffect } from "react";
-import api from "../services/api";
+import React, { createContext, useContext, useState, useEffect, useCallback } from "react";
 
 interface LocationContextType {
   latitude: number | null;
@@ -23,6 +22,25 @@ const LocationContext = createContext<LocationContextType>({
   refreshLocation: () => {},
 });
 
+async function reverseGeocode(lat: number, lon: number): Promise<{ city: string; district: string; state: string }> {
+  try {
+    const res = await fetch(
+      `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}`,
+      { headers: { "User-Agent": "KrishiMitra-Agriculture-AI/1.0" } }
+    );
+    const data = await res.json();
+    if (data && data.address) {
+      const city = data.address.city || data.address.town || data.address.village || data.address.county || "";
+      const district = data.address.state_district || data.address.county || data.address.city || "";
+      const state = data.address.state || "";
+      return { city, district, state };
+    }
+  } catch (err) {
+    console.warn("Reverse geocode failed, using defaults");
+  }
+  return { city: "Cuttack", district: "Cuttack", state: "Odisha" };
+}
+
 export function LocationProvider({ children }: { children: React.ReactNode }) {
   const [latitude, setLatitude] = useState<number | null>(null);
   const [longitude, setLongitude] = useState<number | null>(null);
@@ -32,23 +50,10 @@ export function LocationProvider({ children }: { children: React.ReactNode }) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  const fetchGeoDetails = async (lat: number, lon: number) => {
-    try {
-      const res = await api.get(`/weather/geocode?lat=${lat}&lon=${lon}`);
-      if (res.data.success && res.data.location) {
-        setCity(res.data.location.city || "Cuttack");
-        setDistrict(res.data.location.district || "Cuttack");
-        setState(res.data.location.state || "Odisha");
-      }
-    } catch (err) {
-      console.warn("Reverse geocode fallback to default location");
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const refreshLocation = () => {
+  const refreshLocation = useCallback(() => {
     setLoading(true);
+    setError(null);
+
     if (!navigator.geolocation) {
       setError("Geolocation is not supported by your browser");
       setLoading(false);
@@ -56,15 +61,21 @@ export function LocationProvider({ children }: { children: React.ReactNode }) {
     }
 
     navigator.geolocation.getCurrentPosition(
-      (position) => {
+      async (position) => {
         const lat = position.coords.latitude;
         const lon = position.coords.longitude;
         setLatitude(lat);
         setLongitude(lon);
-        fetchGeoDetails(lat, lon);
+
+        const loc = await reverseGeocode(lat, lon);
+        setCity(loc.city || "Unknown City");
+        setDistrict(loc.district || loc.city || "Unknown District");
+        setState(loc.state || "");
+        setLoading(false);
       },
       (err) => {
-        console.warn("Geolocation permission not granted or unavailable, using Odisha defaults:", err.message);
+        console.warn("Geolocation permission denied, using defaults:", err.message);
+        // Use Odisha defaults when location permission is denied
         setLatitude(20.4625);
         setLongitude(85.8828);
         setCity("Cuttack");
@@ -72,13 +83,13 @@ export function LocationProvider({ children }: { children: React.ReactNode }) {
         setState("Odisha");
         setLoading(false);
       },
-      { timeout: 10000 }
+      { timeout: 10000, enableHighAccuracy: false }
     );
-  };
+  }, []);
 
   useEffect(() => {
     refreshLocation();
-  }, []);
+  }, [refreshLocation]);
 
   return (
     <LocationContext.Provider

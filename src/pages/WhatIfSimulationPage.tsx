@@ -68,19 +68,19 @@ export default function WhatIfSimulationPage() {
             onClick={() => applyPreset({ temp: 4, dry: 12, rain: 0, irrig: 40, pest: "High" })}
             className="px-3 py-1.5 rounded-xl bg-white border border-slate-200 hover:border-amber-500 text-xs font-semibold text-slate-700 shadow-xs cursor-pointer"
           >
-            ?? Extreme Heatwave & Drought
+            🔥 Extreme Heatwave & Drought
           </button>
           <button
             onClick={() => applyPreset({ temp: -1, dry: 0, rain: 60, irrig: 0, pest: "Moderate" })}
             className="px-3 py-1.5 rounded-xl bg-white border border-slate-200 hover:border-blue-500 text-xs font-semibold text-slate-700 shadow-xs cursor-pointer"
           >
-            ?? Cyclone & Excess Deluge
+            🌊 Cyclone & Excess Deluge
           </button>
           <button
             onClick={() => applyPreset({ temp: 0, dry: 2, rain: 0, irrig: 100, pest: "Low" })}
             className="px-3 py-1.5 rounded-xl bg-white border border-slate-200 hover:border-emerald-500 text-xs font-semibold text-slate-700 shadow-xs cursor-pointer"
           >
-            ?? Optimal Climate & Irrigation
+            🌱 Optimal Climate & Irrigation
           </button>
         </div>
 
@@ -243,7 +243,7 @@ export default function WhatIfSimulationPage() {
                               <td className="py-2 px-2.5">{dp.projectedTemp}&deg;C</td>
                               <td className="py-2 px-2.5 font-bold">
                                 <span className={isWilted ? "text-rose-600 font-black" : "text-blue-600"}>
-                                  {dp.soilMoisture10cmPercent}% {isWilted && "??"}
+                                  {dp.soilMoisture10cmPercent}% {isWilted && "⚠️"}
                                 </span>
                               </td>
                               <td className="py-2 px-2.5 font-bold text-emerald-600">{dp.projectedNdvi}</td>

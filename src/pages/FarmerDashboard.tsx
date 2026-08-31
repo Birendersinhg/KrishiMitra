@@ -33,7 +33,7 @@ export default function FarmerDashboard() {
         <div className="bg-white rounded-2xl border border-slate-200/80 p-6 shadow-sm flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
           <div>
             <h1 className="text-2xl font-bold text-slate-900">
-              Namaste, {user ? user.name : "Farmer"} ??
+              Namaste, {user ? user.name : "Farmer"} 🙏
             </h1>
             <p className="text-sm text-slate-500 max-w-xl">
               Location: <span className="font-semibold text-emerald-700">{city || "Cuttack"}, Odisha</span>
