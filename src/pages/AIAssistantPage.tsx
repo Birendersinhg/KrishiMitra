@@ -4,6 +4,7 @@ import { useLanguage } from "../contexts/LanguageContext";
 import { useSpeechSynthesis } from "../hooks/useSpeechSynthesis";
 import VoiceButton from "../components/voice/VoiceButton";
 import api from "../services/api";
+import { findFarmingAnswer } from "../utils/farmingKnowledge";
 
 interface Message {
   role: "user" | "assistant";
@@ -33,6 +34,7 @@ export default function AIAssistantPage() {
     setMessages(newMsgs);
     setLoading(true);
 
+    // Try backend API first, fall back to local knowledge base
     try {
       const res = await api.post("/analysis/chat", {
         message: text,
@@ -43,10 +45,14 @@ export default function AIAssistantPage() {
       if (res.data.success) {
         setMessages((prev) => [...prev, { role: "assistant", content: res.data.response }]);
       } else {
-        setMessages((prev) => [...prev, { role: "assistant", content: "I apologize, could you please repeat your question?" }]);
+        // Backend failed, use local knowledge base
+        const localResponse = findFarmingAnswer(text);
+        setMessages((prev) => [...prev, { role: "assistant", content: localResponse }]);
       }
     } catch (err) {
-      setMessages((prev) => [...prev, { role: "assistant", content: "Server busy. Please try again." }]);
+      // Backend not available, use local knowledge base
+      const localResponse = findFarmingAnswer(text);
+      setMessages((prev) => [...prev, { role: "assistant", content: localResponse }]);
     } finally {
       setLoading(false);
     }
@@ -56,6 +62,9 @@ export default function AIAssistantPage() {
     "How to control paddy blast disease?",
     "Which fertilizer is best for tomato flowering?",
     "What crops are suitable for Odisha rainy season?",
+    "How to use neem oil for pest control?",
+    "Government schemes for farmers?",
+    "How to set up drip irrigation?",
   ];
 
   return (
