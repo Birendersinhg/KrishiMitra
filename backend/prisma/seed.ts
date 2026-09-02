@@ -5,7 +5,7 @@ import bcrypt from "bcryptjs";
 const prisma = new PrismaClient();
 
 async function main() {
-  console.log("Seeding AgriNexus AI database...");
+  console.log("Seeding AgriNexus database...");
 
   await prisma.notification.deleteMany();
   await prisma.message.deleteMany();
@@ -28,15 +28,15 @@ async function main() {
       phone: "+919437123456",
       passwordHash,
       role: "FARMER",
-      location: "Cuttack, Odisha",
+      location: "Pune, Maharashtra",
       preferredLanguage: "or",
       farmerProfile: {
         create: {
           farmName: "Ramesh Organic Paddy Farm",
           farmSize: 3.5,
           location: "Salepur, Cuttack",
-          district: "Cuttack",
-          state: "Odisha",
+          district: "Pune",
+          state: "Maharashtra",
           primaryCrops: "Paddy, Tomato, Vegetables",
           soilType: "Alluvial Loam",
         },
@@ -51,18 +51,18 @@ async function main() {
       phone: "+919861011223",
       passwordHash,
       role: "DEALER",
-      location: "Cuttack, Odisha",
+      location: "Pune, Maharashtra",
       dealerProfile: {
         create: {
           businessName: "Odisha Agro Center",
-          businessAddress: "College Square, Cuttack, Odisha 753003",
+          businessAddress: "FC Road, Pune, Maharashtra 411004",
           phone: "+919861011223",
           whatsappNumber: "919861011223",
           specialization: "Bio-Fertilizers & Crop Protection",
           products: "Neem Oil, Trichoderma, NPK",
-          location: "Cuttack, Odisha",
-          district: "Cuttack",
-          state: "Odisha",
+          location: "Pune, Maharashtra",
+          district: "Pune",
+          state: "Maharashtra",
           verificationStatus: "VERIFIED",
         },
       },
@@ -77,7 +77,7 @@ async function main() {
       phone: "+919800000000",
       passwordHash: adminPasswordHash,
       role: "ADMIN",
-      location: "Bhubaneswar, Odisha",
+      location: "New Delhi, Delhi",
     },
   });
 
@@ -163,7 +163,7 @@ async function main() {
         cropName: "Paddy (Rice)",
         description: "Noticed brown spots after 3 days of countinuous cloudy weather in Cuttack.",
         problem: "Rice Blast Disease Suspected",
-        location: "Cuttack, Odisha",
+        location: "Pune, Maharashtra",
         status: "RESPONDED",
       },
     });

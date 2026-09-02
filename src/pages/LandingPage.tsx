@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Camera, Sprout, Sun, ShoppingBag, Users, ArrowRight, Sparkles, Package, BarChart3 } from "lucide-react";
+import { Camera, Sprout, Sun, ShoppingBag, Users, ArrowRight, Sparkles, Package, BarChart3, Store, Truck } from "lucide-react";
 import { useLanguage } from "../contexts/LanguageContext";
 import WeatherWidget from "../components/weather/WeatherWidget";
 import CameraCaptureModal from "../components/camera/CameraCaptureModal";
@@ -66,9 +66,23 @@ export default function LandingPage() {
       color: "bg-teal-500",
     },
     {
+      path: "/marketplace",
+      title: "Produce Marketplace",
+      desc: "Buy and sell harvested produce directly with verified buyers.",
+      icon: Store,
+      color: "bg-violet-600",
+    },
+    {
+      path: "/supply-chain",
+      title: "Supply Chain Tracker",
+      desc: "Track produce from farm to fork with QR verification.",
+      icon: Truck,
+      color: "bg-indigo-600",
+    },
+    {
       path: "/assistant",
       title: "AI Chat Assistant",
-      desc: "Speak or type in Odia, Hindi, or English for expert guidance.",
+      desc: "Speak or type in your language for expert guidance.",
       icon: Sparkles,
       color: "bg-green-600",
     },
@@ -91,7 +105,7 @@ export default function LandingPage() {
               </h1>
 
               <p className="text-base sm:text-lg text-emerald-100 max-w-2xl">
-                Instantly diagnose crop diseases, get pinpoint local weather advisories, buy fertilizers on Amazon & Flipkart, and connect with verified dealers across Odisha and India.
+                Instantly diagnose crop diseases, get pinpoint local weather advisories, track your harvest inventory, check live mandi prices, and connect with verified dealers across India.
               </p>
 
               <div className="flex flex-wrap items-center gap-3.5">

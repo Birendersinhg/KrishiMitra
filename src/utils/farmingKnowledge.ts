@@ -155,7 +155,7 @@ const knowledgeBase: KnowledgeEntry[] = [
 
 🏛️ **Subsidy Available:**
 • Apply throughDistrict Agriculture Office
-• Online: agri.odisha.gov.in`
+• Online: Contact your state agriculture department website`
   },
   {
     keywords: ["soil", "testing", "soil health", "soil test"],

@@ -36,7 +36,7 @@ export default function FarmerDashboard() {
               Namaste, {user ? user.name : "Farmer"} 🙏
             </h1>
             <p className="text-sm text-slate-500 max-w-xl">
-              Location: <span className="font-semibold text-emerald-700">{city || "Cuttack"}, Odisha</span>
+              Location: <span className="font-semibold text-emerald-700">{city || "Detecting location..."}</span>
             </p>
           </div>
 

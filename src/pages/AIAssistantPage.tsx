@@ -15,7 +15,7 @@ export default function AIAssistantPage() {
   const { language } = useLanguage();
   const { speak, isSpeaking } = useSpeechSynthesis();
   const [messages, setMessages] = useState<Message[]>([
-    { role: "assistant", content: "Namaste! I am your AgriNexus AI farming assistant. Ask me anything about crop diseases, fertilizers, weather, or Odisha agricultural schemes." },
+    { role: "assistant", content: "Namaste! I am your AgriNexus farming assistant. Ask me anything about crop diseases, fertilizers, weather, or Odisha agricultural schemes." },
   ]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
@@ -76,7 +76,7 @@ export default function AIAssistantPage() {
               <Sparkles className="w-5 h-5 text-emerald-300" />
             </div>
             <div>
-              <h1 className="text-sm font-bold">AgriNexus AI Assistant</h1>
+              <h1 className="text-sm font-bold">AgriNexus Assistant</h1>
               <p className="text-[10px] text-emerald-300">Online | Voice & Multi-lingual</p>
             </div>
           </div>

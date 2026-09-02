@@ -38,6 +38,8 @@ import FieldMappingPage from "./pages/FieldMappingPage";
 // Pillar 2: Post-Harvest & Market Features
 import InventoryPage from "./pages/InventoryPage";
 import MandiPricePage from "./pages/MandiPricePage";
+import MarketplacePage from "./pages/MarketplacePage";
+import SupplyChainPage from "./pages/SupplyChainPage";
 
 export default function App() {
   return (
@@ -80,6 +82,8 @@ export default function App() {
                     {/* Pillar 2: Post-Harvest & Market */}
                     <Route path="/inventory" element={<InventoryPage />} />
                     <Route path="/mandi-prices" element={<MandiPricePage />} />
+                    <Route path="/marketplace" element={<MarketplacePage />} />
+                    <Route path="/supply-chain" element={<SupplyChainPage />} />
                   </Routes>
                 </main>
                 <Footer />
