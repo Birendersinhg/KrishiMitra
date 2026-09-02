@@ -1,7 +1,7 @@
 export const translations: Record<string, Record<string, string>> = {
   en: {
-    appName: "KrishiMitra AI",
-    tagline: "Farmer's Friend",
+    appName: "AgriNexus",
+    tagline: "Smart Agriculture Platform",
     home: "Home",
     diagnose: "Crop Diagnosis",
     soilAnalysis: "Soil Analysis",
@@ -35,7 +35,7 @@ export const translations: Record<string, Record<string, string>> = {
     voiceSpeak: "Speak your query",
   },
   hi: {
-    appName: "KrishiMitra AI",
+    appName: "AgriNexus",
     tagline: "Kisaan ka Mitra",
     home: "Gahr,",
     diagnose: "Fasal Jaanch",
@@ -56,7 +56,7 @@ export const translations: Record<string, Record<string, string>> = {
     readAloud: "Sunen",
   },
   or: {
-    appName: "KrishiMitra AI",
+    appName: "AgriNexus",
     tagline: "Khashata Saathi",
     home: "Mukhya Pustha",
     diagnose: "Fasala Niranjana",

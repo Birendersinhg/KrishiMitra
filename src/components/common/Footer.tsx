@@ -9,7 +9,7 @@ export default function Footer() {
           <div className="space-y-4">
             <div className="flex items-center gap-2.5">
               <span className="text-2xl">🌾</span>
-              <span className="text-xl font-bold text-white">KrishiMitra AI</span>
+              <span className="text-xl font-bold text-white">AgriNexus</span>
             </div>
             <p className="text-sm">
               AI assistant for Indian farmers. Crop disease detection, weather, and local dealers.
@@ -32,7 +32,7 @@ export default function Footer() {
               <li><Link to="/products" className="hover:text-emerald-400">Amazon & Flipkart Inventory</Link></li>
               <li><Link to="/dealers" className="hover:text-emerald-400">Local Dealers</Link></li>
               <li><Link to="/post-crop" className="hover:text-emerald-400">Post Crop Issue</Link></li>
-              <li><Link to="/learn" className="hover:text-emerald-400">Odisha Farming Guide</Link></li>
+              <li><Link to="/learn" className="hover:text-emerald-400">Farming Guide</Link></li>
             </ul>
           </div>
 
@@ -40,13 +40,13 @@ export default function Footer() {
             <h4 className="text-white font-semibold mb-4">Helplines</h4>
             <ul className="space-y-2 text-sm">
               <li>Kisan Call Centre: <a href="tel:18001801551" className="text-emerald-400">1800-180-1551</a></li>
-              <li>Odisha Agri Helpline: <a href="tel:155333" className="text-emerald-400">155333</a></li>
+              <li>Kisan Credit Card: <a href="tel:1800111555" className="text-emerald-400">1800-111-555</a></li>
             </ul>
           </div>
         </div>
 
         <div className="mt-12 pt-6 border-t border-slate-800 text-center text-xs">
-          &copy; 2026 KrishiMitra AI. Built for Indian Farmers.
+          &copy; 2026 AgriNexus. Built for Farmers of India.
         </div>
       </div>
     </footer>

@@ -3,61 +3,66 @@ import { Users, Search, MapPin } from "lucide-react";
 import DealerCard from "../components/dealers/DealerCard";
 import api from "../services/api";
 
-const ODISHA_DISTRICTS = ["ALL", "Cuttack", "Bhubaneswar", "Puri", "Sambalpur", "Balasore", "Bhadrak", "Ganjam"];
+const INDIAN_STATES = ["ALL", "Maharashtra", "Punjab", "Uttar Pradesh", "Karnataka", "Tamil Nadu", "Gujarat", "Rajasthan"];
 
 const FALLBACK_DEALERS = [
   {
     id: "dealer-1",
-    name: "Pradeep Agro",
-    shopName: "Odisha Agro Center",
-    phone: "+919861011223",
-    whatsappNumber: "919861011223",
-    address: "College Square, Cuttack",
-    district: "Cuttack",
+    name: "Rajesh Kumar",
+    shopName: "Green Valley Agro Center",
+    phone: "+919876543210",
+    whatsappNumber: "919876543210",
+    address: "FC Road, Pune",
+    district: "Pune",
+    state: "Maharashtra",
     rating: 4.8,
     products: "Neem Oil, Trichoderma, NPK 19-19-19",
   },
   {
     id: "dealer-2",
-    name: "Suresh Patra",
-    shopName: "Krishi Bhawan Agro Store",
-    phone: "+919937456123",
-    whatsappNumber: "919937456123",
-    address: "Station Road, Bhubaneswar",
-    district: "Bhubaneswar",
+    name: "Harpreet Singh",
+    shopName: "Punjab Farm Inputs",
+    phone: "+919812345678",
+    whatsappNumber: "919812345678",
+    address: "GT Road, Ludhiana",
+    district: "Ludhiana",
+    state: "Punjab",
     rating: 4.6,
     products: "DAP, Urea, Zinc Sulphate, Tricyclazole",
   },
   {
     id: "dealer-3",
-    name: "Manas Sahoo",
-    shopName: "Green Field Agro inputs",
-    phone: "+919438265478",
-    whatsappNumber: "919438265478",
-    address: "Grand Bazaar, Puri",
-    district: "Puri",
+    name: "Anita Sharma",
+    shopName: "Krishi Seva Kendra",
+    phone: "+919900112233",
+    whatsappNumber: "919900112233",
+    address: "Mall Road, Lucknow",
+    district: "Lucknow",
+    state: "Uttar Pradesh",
     rating: 4.7,
     products: "Organic Vermicompost, Potash, DAP",
   },
   {
     id: "dealer-4",
-    name: "Rabi Behera",
-    shopName: "Sambalpur Farm Supply Co.",
-    phone: "+919861234567",
-    whatsappNumber: "919861234567",
-    address: "Budharaja Market, Sambalpur",
-    district: "Sambalpur",
+    name: "Venkatesh Reddy",
+    shopName: "Deccan Agro Supply",
+    phone: "+919445566778",
+    whatsappNumber: "919445566778",
+    address: "MG Road, Hyderabad",
+    district: "Hyderabad",
+    state: "Karnataka",
     rating: 4.5,
     products: "NPK, Bio-Fungicides, Pesticides, Seeds",
   },
   {
     id: "dealer-5",
-    name: "Lipika Das",
-    shopName: "Balasore Agro Hub",
-    phone: "+919776543210",
-    whatsappNumber: "919776543210",
-    address: "Fotidevi Road, Balasore",
-    district: "Balasore",
+    name: "Priya Patel",
+    shopName: "Gujarat Agro Hub",
+    phone: "+919898989898",
+    whatsappNumber: "919898989898",
+    address: "Ashram Road, Ahmedabad",
+    district: "Ahmedabad",
+    state: "Gujarat",
     rating: 4.9,
     products: "Tricyclazole, Copper Oxychloride, Micronutrients",
   },
@@ -99,7 +104,7 @@ export default function DealersPage() {
             <span>Direct Call & WhatsApp</span>
           </div>
           <h1 className="text-2xl sm:text-4xl font-bold text-slate-900">
-            Verified Agro Dealers in Odisha
+            Verified Agro Dealers Near You
           </h1>
           <p className="text-xs sm:text-sm text-slate-500 max-w-xl mx-auto mt-2">
             Contact local certified dealers directly via phone call, WhatsApp chat with pre-filled messages, or start an in-app chat.
@@ -119,7 +124,7 @@ export default function DealersPage() {
           </div>
 
           <div className="flex flex-wrap gap-2 pt-1 border-t border-slate-100">
-            {ODISHA_DISTRICTS.map((dist) => (
+            {INDIAN_STATES.map((dist) => (
               <button
                 key={dist}
                 onClick={() => setDistrict(dist)}
