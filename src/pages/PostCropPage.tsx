@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Camera, Image, Send, AlertCircle } from "lucide-react";
+import { Camera, Image, Send, AlertCircle, Package, Store } from "lucide-react";
 import { useLocation as useGeoLocation } from "../contexts/LocationContext";
 import CameraCaptureModal from "../components/camera/CameraCaptureModal";
 import VoiceButton from "../components/voice/VoiceButton";
@@ -10,7 +10,8 @@ export default function PostCropPage() {
   const { city } = useGeoLocation();
   const [cropName, setCropName] = useState("Paddy");
   const [problem, setProblem] = useState("");
-  const [locationField, setLocationField] = useState(city ? `${city}, Odisha` : "Cuttack, Odisha");
+  const [locationField, setLocationField] = useState(city ? `${city}` : "Your location");
+  const [activeTab, setActiveTab] = useState<"issue" | "sell">("issue");
   const [imageData, setImageData] = useState<string | null>(null);
   const [cameraOpen, setCameraOpen] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -48,9 +49,19 @@ export default function PostCropPage() {
     <div className="min-h-screen bg-slate-50 py-8 px-4 sm:px-6 lg:px-8">
       <div className="max-w-2xl mx-auto">
         <div className="text-center mb-6">
-          <h1 className="text-2xl font-bold text-slate-900">Post Crop Issue to Local Dealers</h1>
+          <div className="inline-flex gap-1 p-1 rounded-xl bg-slate-100 mb-4">
+            <button onClick={() => setActiveTab("issue")} className={`px-4 py-2 rounded-lg text-xs font-semibold transition-all cursor-pointer ${activeTab === "issue" ? "bg-white shadow-sm text-slate-900" : "text-slate-500"}`}>
+              <span className="flex items-center gap-1.5"><AlertCircle className="w-3.5 h-3.5" /> Post Crop Issue</span>
+            </button>
+            <button onClick={() => setActiveTab("sell")} className={`px-4 py-2 rounded-lg text-xs font-semibold transition-all cursor-pointer ${activeTab === "sell" ? "bg-emerald-600 shadow-sm text-white" : "text-slate-500"}`}>
+              <span className="flex items-center gap-1.5"><Store className="w-3.5 h-3.5" /> Post Produce for Sale</span>
+            </button>
+          </div>
+          <h1 className="text-2xl font-bold text-slate-900">
+            {activeTab === "issue" ? "Post Crop Issue to Local Dealers" : "List Your Produce for Sale"}
+          </h1>
           <p className="text-xs text-slate-500 mt-1">
-            Verified agro-dealers in Odisha will review your photo and offer solutions
+            {activeTab === "issue" ? "Verified agro-dealers will review your photo and offer solutions" : "Connect directly with buyers and sell your harvest at the best price"}
           </p>
         </div>
 

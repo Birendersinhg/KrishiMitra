@@ -3,7 +3,7 @@ import { ShoppingBag, Search } from "lucide-react";
 import ProductCard from "../components/products/ProductCard";
 import api from "../services/api";
 
-const CATEGORIES = ["ALL", "FERTILIZER", "PESTICIDE", "ORGANIC", "SEEDS", "TOOLS"];
+const CATEGORIES = ["ALL", "FERTILIZER", "PESTICIDE", "ORGANIC", "SEEDS", "TOOLS", "STORAGE", "PACKAGING"];
 
 const FALLBACK_PRODUCTS = [
   {
@@ -83,6 +83,84 @@ const FALLBACK_PRODUCTS = [
     amazonUrl: "https://www.amazon.in/s?k=drip+irrigation+kit+vegetable+garden",
     flipkartUrl: "https://www.flipkart.com/search?q=drip+irrigation+kit+garden",
     suitableFor: "Vegetable Farming, Water Conservation, Drip Irrigation",
+  },
+  {
+    id: "p7",
+    name: "Hermetically Sealed Grain Storage Bag (50 Kg)",
+    brand: "PICS India",
+    category: "STORAGE",
+    description: "Triple-layer hermetic bag that protects stored grain from insects and moisture without chemicals.",
+    price: 180,
+    rating: 4.7,
+    imageUrl: "https://images.unsplash.com/photo-1586771107445-b3e06e40f91e?w=600&auto=format&fit=crop&q=80",
+    amazonUrl: "https://www.amazon.in/s?k=hermetic+grain+storage+bag",
+    flipkartUrl: "https://www.flipkart.com/search?q=grain+storage+bag+pics",
+    suitableFor: "Paddy, Wheat, Maize Storage, Post-Harvest Protection",
+  },
+  {
+    id: "p8",
+    name: "LDPE Grain Storage Bag - 200 Micron (100 Kg)",
+    brand: "UPL Agro",
+    category: "STORAGE",
+    description: "Heavy-duty UV-stabilized grain storage bag for outdoor and warehouse use.",
+    price: 95,
+    rating: 4.3,
+    imageUrl: "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=600&auto=format&fit=crop&q=80",
+    amazonUrl: "https://www.amazon.in/s?k=LDPE+grain+storage+bag",
+    flipkartUrl: "https://www.flipkart.com/search?q=LDPE+grain+bag",
+    suitableFor: "Bulk Grain Storage, Warehouse Use",
+  },
+  {
+    id: "p9",
+    name: "Corrugated Packaging Boxes for Produce (50 Pack)",
+    brand: "PackWell India",
+    category: "PACKAGING",
+    description: "Sturdy corrugated boxes ideal for transporting vegetables, fruits, and processed produce.",
+    price: 1200,
+    rating: 4.4,
+    imageUrl: "https://images.unsplash.com/photo-1607162974569-80d6f4a32e22?w=600&auto=format&fit=crop&q=80",
+    amazonUrl: "https://www.amazon.in/s?k=corrugated+boxes+vegetable+packaging",
+    flipkartUrl: "https://www.flipkart.com/search?q=corrugated+boxes+packaging",
+    suitableFor: "Vegetable Transport, Fruit Packaging, Market Delivery",
+  },
+  {
+    id: "p10",
+    name: "Stretch Film Wrap for Pallet Packaging (300m)",
+    brand: "ShrinkWrap Pro",
+    category: "PACKAGING",
+    description: "Transparent stretch wrap for securing and protecting stacked produce pallets during transport.",
+    price: 450,
+    rating: 4.2,
+    imageUrl: "https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=600&auto=format&fit=crop&q=80",
+    amazonUrl: "https://www.amazon.in/s?k=stretch+film+wrap+packaging",
+    flipkartUrl: "https://www.flipkart.com/search?q=stretch+film+wrap",
+    suitableFor: "Pallet Wrapping, Transport Security, Warehouse Stacking",
+  },
+  {
+    id: "p11",
+    name: "Portable Cold Room Panel Kit (Walk-in)",
+    brand: "Blue Star ColdChain",
+    category: "STORAGE",
+    description: "Modular insulated panel kit for setting up small-scale cold storage at farm level.",
+    price: 85000,
+    rating: 4.6,
+    imageUrl: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=600&auto=format&fit=crop&q=80",
+    amazonUrl: "https://www.amazon.in/s?k=cold+room+panel+portable",
+    flipkartUrl: "https://www.flipkart.com/search?q=cold+storage+panel",
+    suitableFor: "Cold Storage Setup, Perishable Produce, Farm-Level Cooling",
+  },
+  {
+    id: "p12",
+    name: "Vacuum Sealer Machine for Food Preservation",
+    brand: "SealFresh India",
+    category: "STORAGE",
+    description: "Desktop vacuum packing machine to extend shelf life of dried fruits, spices, and processed food.",
+    price: 3200,
+    rating: 4.5,
+    imageUrl: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=600&auto=format&fit=crop&q=80",
+    amazonUrl: "https://www.amazon.in/s?k=vacuum+sealer+food+preservation",
+    flipkartUrl: "https://www.flipkart.com/search?q=vacuum+sealer+machine",
+    suitableFor: "Spice Packaging, Dried Fruit Storage, Processed Food",
   },
 ];
 

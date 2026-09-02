@@ -58,7 +58,7 @@ export default function WhatIfSimulationPage() {
             Interactive "What-If" Predictive Crop Simulator
           </h1>
           <p className="text-xs sm:text-sm text-slate-500 mt-2">
-            Simulate future climate shocks (heatwaves, dry spells, flood deluges) to forecast yield deviation, 10cm soil moisture decay, and NDVI trajectories ahead of time.
+            Simulate climate shocks (heatwaves, dry spells, floods) or post-harvest storage conditions to forecast yield deviation, spoilage risk, and financial impact.
           </p>
         </div>
 
@@ -82,13 +82,18 @@ export default function WhatIfSimulationPage() {
           >
             🌱 Optimal Climate & Irrigation
           </button>
+          <button
+            onClick={() => applyPreset({ temp: 5, dry: 0, rain: 0, irrig: 0, pest: "Moderate" })}
+            className="px-3 py-1.5 rounded-xl bg-white border border-slate-200 hover:border-orange-500 text-xs font-semibold text-slate-700 shadow-xs cursor-pointer"
+          >
+            📦 Post-Harvest Storage Loss
+          </button>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-          <div className="lg:col-span-5 bg-white rounded-3xl p-6 sm:p-7 border border-slate-200/80 shadow-sm space-y-6">
-            <h3 className="text-sm font-extrabold text-slate-900 uppercase tracking-wider flex items-center gap-2">
+          <div className="lg:col-span-5 bg-white rounded-3xl p-6 sm:p-7 border border-slate-200/80 shadow-sm space-y-6">              <h3 className="text-sm font-extrabold text-slate-900 uppercase tracking-wider flex items-center gap-2">
               <Sliders className="w-4 h-4 text-amber-600" />
-              <span>Perturbation Parameters</span>
+              <span>{tempDelta >= 4 && irrigationPercent === 0 ? "Post-Harvest Storage Parameters" : "Perturbation Parameters"}</span>
             </h3>
 
             <div className="space-y-2">

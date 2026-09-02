@@ -15,7 +15,7 @@ export default function AIAssistantPage() {
   const { language } = useLanguage();
   const { speak, isSpeaking } = useSpeechSynthesis();
   const [messages, setMessages] = useState<Message[]>([
-    { role: "assistant", content: "Namaste! I am your AgriNexus farming assistant. Ask me anything about crop diseases, fertilizers, weather, or Odisha agricultural schemes." },
+    { role: "assistant", content: "Namaste! I am your AgriNexus farming assistant. Ask me anything about crop diseases, fertilizers, weather, mandi prices, storage tips, or post-harvest processing." },
   ]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
@@ -60,10 +60,10 @@ export default function AIAssistantPage() {
 
   const suggestions = [
     "How to control paddy blast disease?",
-    "Which fertilizer is best for tomato flowering?",
-    "What crops are suitable for Odisha rainy season?",
+    "What are today's mandi prices for paddy?",
+    "How to store harvested grain properly?",
     "How to use neem oil for pest control?",
-    "Government schemes for farmers?",
+    "How to process tomato into paste?",
     "How to set up drip irrigation?",
   ];
 

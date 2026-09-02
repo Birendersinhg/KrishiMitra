@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Layers, Activity, RefreshCw, Zap, TrendingUp, Droplet, Sun, Wind, Sprout, ShieldCheck, MapPin } from "lucide-react";
+import { Layers, Activity, RefreshCw, Zap, TrendingUp, Droplet, Sun, Wind, Sprout, ShieldCheck, MapPin, Package, AlertTriangle } from "lucide-react";
 import api from "../services/api";
 
 export default function DigitalTwinPage() {
@@ -65,7 +65,7 @@ export default function DigitalTwinPage() {
               <span>Real-Time Farm Digital Twin</span>
             </div>
             <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900">
-              {s.farmName || "Odisha Agro-Eco Plot #4"}
+              {s.farmName || "AgriNexus Farm Plot #4"}
             </h1>
             <p className="text-xs sm:text-sm text-slate-500 mt-1 flex items-center gap-1.5">
               <MapPin className="w-3.5 h-3.5 text-emerald-600" />
@@ -197,6 +197,47 @@ export default function DigitalTwinPage() {
                 </div>
               );
             })}
+          </div>
+        </div>
+
+        {/* Stored Produce Condition Tracking */}
+        <div className="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/80 shadow-sm space-y-5">
+          <div>
+            <h2 className="text-lg font-bold text-slate-900 flex items-center gap-2">
+              <Package className="w-5 h-5 text-amber-600" />
+              <span>Stored Produce Condition Monitor</span>
+            </h2>
+            <p className="text-xs text-slate-500 mt-1">Track temperature, humidity, and spoilage risk for your stored harvest</p>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div className="p-4 rounded-2xl bg-blue-50 border border-blue-200">
+              <p className="text-[10px] text-blue-600 font-semibold uppercase">Storage Temperature</p>
+              <p className="text-2xl font-extrabold text-blue-800 mt-1">26°C</p>
+              <p className="text-[10px] text-blue-500 mt-1">Optimal: 15-25°C for grains</p>
+              <div className="w-full h-1.5 bg-blue-200 rounded-full mt-2 overflow-hidden">
+                <div className="h-full bg-blue-500 rounded-full" style={{ width: "72%" }} />
+              </div>
+            </div>
+            <div className="p-4 rounded-2xl bg-amber-50 border border-amber-200">
+              <p className="text-[10px] text-amber-600 font-semibold uppercase">Relative Humidity</p>
+              <p className="text-2xl font-extrabold text-amber-800 mt-1">68%</p>
+              <p className="text-[10px] text-amber-500 mt-1">Optimal: &lt;65% for stored grain</p>
+              <div className="w-full h-1.5 bg-amber-200 rounded-full mt-2 overflow-hidden">
+                <div className="h-full bg-amber-500 rounded-full" style={{ width: "68%" }} />
+              </div>
+            </div>
+            <div className="p-4 rounded-2xl bg-emerald-50 border border-emerald-200">
+              <p className="text-[10px] text-emerald-600 font-semibold uppercase">Spoilage Risk</p>
+              <p className="text-2xl font-extrabold text-emerald-800 mt-1">Low</p>
+              <p className="text-[10px] text-emerald-500 mt-1">Grain moisture: 12.5%</p>
+              <div className="w-full h-1.5 bg-emerald-200 rounded-full mt-2 overflow-hidden">
+                <div className="h-full bg-emerald-500 rounded-full" style={{ width: "25%" }} />
+              </div>
+            </div>
+          </div>
+          <div className="p-3 rounded-xl bg-amber-50 border border-amber-200 flex items-start gap-2">
+            <AlertTriangle className="w-4 h-4 text-amber-600 mt-0.5 flex-shrink-0" />
+            <p className="text-[11px] text-amber-800"><span className="font-bold">Advisory:</span> Humidity is slightly above optimal. Consider increasing ventilation or using a dehumidifier to bring RH below 65% to prevent fungal growth.</p>
           </div>
         </div>
 
