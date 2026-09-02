@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Camera, Sprout, Sun, ShoppingBag, Users, ArrowRight, Sparkles } from "lucide-react";
+import { Camera, Sprout, Sun, ShoppingBag, Users, ArrowRight, Sparkles, Package, BarChart3 } from "lucide-react";
 import { useLanguage } from "../contexts/LanguageContext";
 import WeatherWidget from "../components/weather/WeatherWidget";
 import CameraCaptureModal from "../components/camera/CameraCaptureModal";
@@ -36,6 +36,20 @@ export default function LandingPage() {
       desc: t("feature2Desc") || "Pinpoint city weather with 5-day farming advisories.",
       icon: Sun,
       color: "bg-sky-500",
+    },
+    {
+      path: "/inventory",
+      title: "Post-Harvest Inventory",
+      desc: "Track harvested produce, storage locations, and set selling prices.",
+      icon: Package,
+      color: "bg-orange-500",
+    },
+    {
+      path: "/mandi-prices",
+      title: "Live Mandi Prices",
+      desc: "Real-time APMC prices with AI predictions and best-sell advisory.",
+      icon: BarChart3,
+      color: "bg-blue-600",
     },
     {
       path: "/products",
@@ -107,7 +121,7 @@ export default function LandingPage() {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {features.map((f, i) => (
             <Link
               key={i}

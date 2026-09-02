@@ -5,7 +5,7 @@ import bcrypt from "bcryptjs";
 const prisma = new PrismaClient();
 
 async function main() {
-  console.log("Seeding KrishiMitra AI database...");
+  console.log("Seeding AgriNexus AI database...");
 
   await prisma.notification.deleteMany();
   await prisma.message.deleteMany();
@@ -72,8 +72,8 @@ async function main() {
 
   await prisma.user.create({
     data: {
-      name: "KrishiMitra Admin",
-      email: "admin@krishimitra.ai",
+      name: "AgriNexus Admin",
+      email: "admin@agrinexus.ai",
       phone: "+919800000000",
       passwordHash: adminPasswordHash,
       role: "ADMIN",

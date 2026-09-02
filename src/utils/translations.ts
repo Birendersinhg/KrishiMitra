@@ -2,7 +2,7 @@ export type LanguageCode = "en" | "or" | "hi" | "bn" | "te" | "ta" | "kn" | "mr"
 
 const translations: Record<LanguageCode, Record<string, string>> = {
   en: {
-    appTitle: "KrishiMitra AI",
+    appTitle: "AgriNexus AI",
     tagline: "Your Smart Agricultural Companion for Healthier Crops",
     dashboard: "Dashboard",
     diagnosisTitle: "Crop Disease Diagnosis",
@@ -24,7 +24,7 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     selectCrop: "Select Crop Type",
   },
   or: {
-    appTitle: "KrishiMitra AI",
+    appTitle: "AgriNexus AI",
     tagline: "Krushi Sahara Paika Pain Smart Companion",
     dashboard: "Dashboard",
     diagnosisTitle: "Chasa Roga Chikitsa",
@@ -46,7 +46,7 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     selectCrop: "Chasa Chuna",
   },
   hi: {
-    appTitle: "KrishiMitra AI",
+    appTitle: "AgriNexus AI",
     tagline: "Swasth Fasal ke liye Aapka Smart Krushi Sahayak",
     dashboard: "Dashboard",
     diagnosisTitle: "Fasal Rog Nidan",
@@ -68,7 +68,7 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     selectCrop: "Fasal Chunein",
   },
   bn: {
-    appTitle: "KrishiMitra AI",
+    appTitle: "AgriNexus AI",
     tagline: "Swasthya Faser Jonyo Smart Krishi Sahayak",
     dashboard: "Dashboard",
     diagnosisTitle: "Faser Rog Nidan",
@@ -90,7 +90,7 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     selectCrop: "Faser Chenn",
   },
   te: {
-    appTitle: "KrishiMitra AI",
+    appTitle: "AgriNexus AI",
     tagline: "Arogya Karna kosam Smart Vyavasaya Sahayakudu",
     dashboard: "Dashboard",
     diagnosisTitle: "Karna Rog Nirdhanam",
@@ -112,7 +112,7 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     selectCrop: "Karna Endukondi",
   },
   ta: {
-    appTitle: "KrishiMitra AI",
+    appTitle: "AgriNexus AI",
     tagline: "Aarokkiya Vivasayamukku Smart Uzhavar Udhaviyan",
     dashboard: "Dashboard",
     diagnosisTitle: "Poona Rog Kandupidippu",
@@ -134,7 +134,7 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     selectCrop: "Poona Theterndhu Edungal",
   },
   kn: {
-    appTitle: "KrishiMitra AI",
+    appTitle: "AgriNexus AI",
     tagline: "Arogya Bheada Galaxy Smart Krushi Sahayak",
     dashboard: "Dashboard",
     diagnosisTitle: "Bheada Roga Pariharana",
@@ -156,7 +156,7 @@ const translations: Record<LanguageCode, Record<string, string>> = {
     selectCrop: "Bhedana Aayke Madi",
   },
   mr: {
-    appTitle: "KrishiMitra AI",
+    appTitle: "AgriNexus AI",
     tagline: "Nirogi Pikasathi Smart Sheti Sahayak",
     dashboard: "Dashboard",
     diagnosisTitle: "Pikavyadichi Olakh",

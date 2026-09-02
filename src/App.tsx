@@ -35,6 +35,10 @@ import WhatIfSimulationPage from "./pages/WhatIfSimulationPage";
 import AgronomyRAGPage from "./pages/AgronomyRAGPage";
 import FieldMappingPage from "./pages/FieldMappingPage";
 
+// Pillar 2: Post-Harvest & Market Features
+import InventoryPage from "./pages/InventoryPage";
+import MandiPricePage from "./pages/MandiPricePage";
+
 export default function App() {
   return (
     <BrowserRouter>
@@ -72,6 +76,10 @@ export default function App() {
                     <Route path="/what-if-simulation" element={<WhatIfSimulationPage />} />
                     <Route path="/agronomy-rag" element={<AgronomyRAGPage />} />
                     <Route path="/field-mapping" element={<FieldMappingPage />} />
+
+                    {/* Pillar 2: Post-Harvest & Market */}
+                    <Route path="/inventory" element={<InventoryPage />} />
+                    <Route path="/mandi-prices" element={<MandiPricePage />} />
                   </Routes>
                 </main>
                 <Footer />

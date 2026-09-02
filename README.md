@@ -1,4 +1,4 @@
-# ?? KrishiMitra AI ("Farmer's Friend")
+# ?? AgriNexus AI ("Smart Agriculture Platform")
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-emerald.svg)](https://opensource.org/licenses/MIT)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.7-blue.svg)](https://www.typescriptlang.org/)
@@ -7,7 +7,7 @@
 [![Leaflet](https://img.shields.io/badge/Leaflet-GIS-green.svg)](https://leafletjs.com/)
 [![Prisma](https://img.shields.io/badge/Prisma-SQLite-indigo.svg)](https://www.prisma.io/)
 
-> **KrishiMitra AI** is a production-grade, AI-powered agricultural intelligence platform designed primarily for farmers in **Odisha and across India**. It combines real-device computer vision disease diagnosis, real-time GPS pinpoint weather forecasting, direct marketplace purchasing (Amazon & Flipkart), verified agro-dealer communications, and 5 cutting-edge agricultural AI engines.
+> **AgriNexus AI** is a production-grade, AI-powered agricultural intelligence platform designed primarily for farmers in **Odisha and across India**. It combines real-device computer vision disease diagnosis, real-time GPS pinpoint weather forecasting, direct marketplace purchasing (Amazon & Flipkart), verified agro-dealer communications, and 5 cutting-edge agricultural AI engines.
 
 ---
 
@@ -82,8 +82,8 @@
 
 ### 1. Clone the Repository
 ```bash
-git clone https://github.com/TejPrakash-Vashishtha/KrishiMitra.git
-cd KrishiMitra
+git clone https://github.com/TejPrakash-Vashishtha/AgriNexus.git
+cd AgriNexus
 ```
 
 ### 2. Backend Setup
