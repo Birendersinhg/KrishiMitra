@@ -36,7 +36,7 @@ export const translations: Record<string, Record<string, string>> = {
   },
   hi: {
     appName: "AgriNexus",
-    tagline: "Kisaan ka Mitra",
+    tagline: "Smart Kheti",
     home: "Gahr,",
     diagnose: "Fasal Jaanch",
     soilAnalysis: "Mitti Jaanch",
@@ -57,7 +57,7 @@ export const translations: Record<string, Record<string, string>> = {
   },
   or: {
     appName: "AgriNexus",
-    tagline: "Khashata Saathi",
+    tagline: "Smart Krushi",
     home: "Mukhya Pustha",
     diagnose: "Fasala Niranjana",
     soilAnalysis: "Mati Jaancha",

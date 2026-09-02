@@ -18,71 +18,71 @@ export default function LandingPage() {
   const features = [
     {
       path: "/analyze",
-      title: t("feature1Title") || "AI Crop Diagnosis",
-      desc: t("feature1Desc") || "Snap a leaf photo for instant disease & pest detection.",
+      title: t("feature1Title"),
+      desc: t("feature1Desc"),
       icon: Camera,
       color: "bg-emerald-500",
     },
     {
       path: "/soil-analysis",
-      title: "Soil Health Assessment",
-      desc: "Analyze soil texture, NPK deficiencies, and suitable crops.",
+      title: t("feature2Title"),
+      desc: t("feature2Desc"),
       icon: Sprout,
       color: "bg-amber-500",
     },
     {
       path: "/weather",
-      title: t("feature2Title") || "Local Weather & Advisory",
-      desc: t("feature2Desc") || "Pinpoint city weather with 5-day farming advisories.",
+      title: t("feature3Title"),
+      desc: t("feature3Desc"),
       icon: Sun,
       color: "bg-sky-500",
     },
     {
       path: "/inventory",
-      title: "Post-Harvest Inventory",
-      desc: "Track harvested produce, storage locations, and set selling prices.",
+      title: t("feature4Title"),
+      desc: t("feature4Desc"),
       icon: Package,
       color: "bg-orange-500",
     },
     {
       path: "/mandi-prices",
-      title: "Live Mandi Prices",
-      desc: "Real-time APMC prices with AI predictions and best-sell advisory.",
+      title: t("feature5Title"),
+      desc: t("feature5Desc"),
       icon: BarChart3,
       color: "bg-blue-600",
     },
     {
       path: "/products",
-      title: t("feature3Title") || "Agriculture Inventory",
-      desc: t("feature3Desc") || "Buy fertilizers directly from Amazon & Flipkart.",
+      title: t("feature6Title"),
+      desc: t("feature6Desc"),
       icon: ShoppingBag,
       color: "bg-violet-500",
     },
     {
       path: "/dealers",
-      title: t("feature4Title") || "Local Dealer Connect",
-      desc: t("feature4Desc") || "Call or WhatsApp verified dealers in your district.",
+      title: t("feature7Title"),
+      desc: t("feature7Desc"),
       icon: Users,
       color: "bg-teal-500",
     },
     {
       path: "/marketplace",
-      title: "Produce Marketplace",
-      desc: "Buy and sell harvested produce directly with verified buyers.",
+      title: t("feature8Title"),
+      desc: t("feature8Desc"),
       icon: Store,
       color: "bg-violet-600",
     },
     {
       path: "/supply-chain",
-      title: "Supply Chain Tracker",
-      desc: "Track produce from farm to fork with QR verification.",
+      title: t("feature9Title"),
+      desc: t("feature9Desc"),
       icon: Truck,
       color: "bg-indigo-600",
     },
     {
       path: "/assistant",
-      title: "AI Chat Assistant",
-      desc: "Speak or type in your language for expert guidance.",
+      title: t("feature10Title"),
+      desc: t("feature10Desc"),
       icon: Sparkles,
       color: "bg-green-600",
     },
@@ -96,16 +96,15 @@ export default function LandingPage() {
             <div className="lg:col-span-7 space-y-6">
               <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-xs font-semibold text-emerald-200">
                 <Sparkles className="w-3.5 h-3.5" />
-                <span>Powered by Agricultural AI & LMMs</span>
+                <span>{t("heroTagline") || "Powered by AI for Indian Farmers"}</span>
               </div>
 
               <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight leading-tight">
-                Your Smart Agricultural{" "}
-                <span className="text-emerald-300">Companion</span> for Healthier Crops
+                {t("heroTitle1")} <span className="text-emerald-300">{t("heroTitle2")}</span>
               </h1>
 
               <p className="text-base sm:text-lg text-emerald-100 max-w-2xl">
-                Instantly diagnose crop diseases, get pinpoint local weather advisories, track your harvest inventory, check live mandi prices, and connect with verified dealers across India.
+                {t("heroSubtitle")}
               </p>
 
               <div className="flex flex-wrap items-center gap-3.5">
@@ -121,7 +120,7 @@ export default function LandingPage() {
                   to="/assistant"
                   className="flex items-center gap-2 px-5 py-3.5 rounded-xl bg-white/10 hover:bg-white/20 border border-white/20 text-white font-semibold text-base transition-colors"
                 >
-                  <span>{t("assistant") || "AI Chat"}</span>
+                  <span>{t("aiAssistant")}</span>
                   <ArrowRight className="w-4 h-4" />
                 </Link>
               </div>
@@ -152,7 +151,7 @@ export default function LandingPage() {
                 <p className="text-sm text-slate-600">{f.desc}</p>
               </div>
               <div className="flex items-center gap-1.5 text-xs font-semibold text-emerald-600 mt-4">
-                <span>Explore</span>
+                <span>{t("explore")}</span>
                 <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
               </div>
             </Link>

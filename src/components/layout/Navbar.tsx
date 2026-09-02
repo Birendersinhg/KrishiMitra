@@ -22,46 +22,46 @@ export default function Navbar() {
             </div>
             <div>
               <span className="font-extrabold text-lg tracking-tight text-slate-900">AgriNexus</span>
-              <span className="block text-[9px] font-semibold text-slate-400 tracking-wider uppercase">Smart Agriculture</span>
+              <span className="block text-[9px] font-semibold text-slate-400 tracking-wider uppercase">{t("smartAgriculture") || "Smart Agriculture"}</span>
             </div>
           </Link>
 
           <nav className="hidden lg:flex items-center gap-1">
             <Link to="/dashboard" className="px-3 py-2 rounded-xl text-xs font-semibold text-slate-600 hover:text-emerald-700 hover:bg-emerald-50/60 transition-colors">
-              {t("dashboard") || "Dashboard"}
+              {t("dashboard")}
             </Link>
             <Link to="/analyze" className="px-3 py-2 rounded-xl text-xs font-semibold text-slate-600 hover:text-emerald-700 hover:bg-emerald-50/60 transition-colors">
-              {t("diagnosisTitle") || "Crop Doctor"}
+              {t("cropCheckup")}
             </Link>
             <Link to="/weather" className="px-3 py-2 rounded-xl text-xs font-semibold text-slate-600 hover:text-emerald-700 hover:bg-emerald-50/60 transition-colors">
-              {t("weatherTitle") || "Weather"}
+              {t("weather")}
             </Link>
             <Link to="/products" className="px-3 py-2 rounded-xl text-xs font-semibold text-slate-600 hover:text-emerald-700 hover:bg-emerald-50/60 transition-colors">
-              Store
+              {t("store")}
             </Link>
             <Link to="/dealers" className="px-3 py-2 rounded-xl text-xs font-semibold text-slate-600 hover:text-emerald-700 hover:bg-emerald-50/60 transition-colors">
-              Dealers
+              {t("dealers")}
             </Link>
             <Link to="/inventory" className="px-3 py-2 rounded-xl text-xs font-semibold text-amber-700 hover:text-amber-800 bg-amber-50 hover:bg-amber-100 transition-colors">
-              Inventory
+              {t("fasalStock")}
             </Link>
             <Link to="/mandi-prices" className="px-3 py-2 rounded-xl text-xs font-semibold text-blue-700 hover:text-blue-800 bg-blue-50 hover:bg-blue-100 transition-colors">
-              Mandi Prices
+              {t("mandiBhaav")}
             </Link>
             <Link to="/marketplace" className="px-3 py-2 rounded-xl text-xs font-semibold text-violet-700 hover:text-violet-800 bg-violet-50 hover:bg-violet-100 transition-colors">
-              Marketplace
+              {t("kisaanBazaar")}
             </Link>
             <Link to="/supply-chain" className="px-3 py-2 rounded-xl text-xs font-semibold text-indigo-700 hover:text-indigo-800 bg-indigo-50 hover:bg-indigo-100 transition-colors">
-              Supply Chain
+              {t("maalKhed")}
             </Link>
 
-            {/* AI Engines Dropdown */}
+            {/* AI Seva Dropdown */}
             <div className="relative">
               <button
                 onClick={() => setAiMenuOpen(!aiMenuOpen)}
                 className="flex items-center gap-1 px-3 py-2 rounded-xl text-xs font-bold text-emerald-800 bg-emerald-50 hover:bg-emerald-100 transition-colors cursor-pointer"
               >
-                <span>AI Engines</span>
+                <span>{t("aiSeva")}</span>
                 <ChevronDown className="w-3.5 h-3.5" />
               </button>
 
@@ -74,40 +74,40 @@ export default function Navbar() {
                       onClick={() => setAiMenuOpen(false)}
                       className="block p-2.5 rounded-xl hover:bg-emerald-50 text-xs transition-colors"
                     >
-                      <span className="font-bold text-slate-900 block">🖥️ Digital Twin Engine</span>
-                      <span className="text-[11px] text-slate-500">Dynamic farm state & soil strata</span>
+                      <span className="font-bold text-slate-900 block">🖥️ {t("khetKaNaksha")}</span>
+                      <span className="text-[11px] text-slate-500">{t("khetKaNakshaDesc")}</span>
                     </Link>
                     <Link
                       to="/consensus-engine"
                       onClick={() => setAiMenuOpen(false)}
                       className="block p-2.5 rounded-xl hover:bg-violet-50 text-xs transition-colors"
                     >
-                      <span className="font-bold text-slate-900 block">🤖 Multi-Agent Consensus</span>
-                      <span className="text-[11px] text-slate-500">LangGraph / CrewAI debate theater</span>
+                      <span className="font-bold text-slate-900 block">🤖 {t("aiSalahkar")}</span>
+                      <span className="text-[11px] text-slate-500">{t("aiSalahkarDesc")}</span>
                     </Link>
                     <Link
                       to="/what-if-simulation"
                       onClick={() => setAiMenuOpen(false)}
                       className="block p-2.5 rounded-xl hover:bg-amber-50 text-xs transition-colors"
                     >
-                      <span className="font-bold text-slate-900 block">🔮 "What-If" Simulation</span>
-                      <span className="text-[11px] text-slate-500">Climate perturbation & yield curves</span>
+                      <span className="font-bold text-slate-900 block">🔮 {t("kyaHogaAgar")}</span>
+                      <span className="text-[11px] text-slate-500">{t("kyaHogaAgarDesc")}</span>
                     </Link>
                     <Link
                       to="/agronomy-rag"
                       onClick={() => setAiMenuOpen(false)}
                       className="block p-2.5 rounded-xl hover:bg-teal-50 text-xs transition-colors"
                     >
-                      <span className="font-bold text-slate-900 block">📚 Agronomy RAG & Guardrails</span>
-                      <span className="text-[11px] text-slate-500">ICAR / OUAT verified vector store</span>
+                      <span className="font-bold text-slate-900 block">📚 {t("fasalSalah")}</span>
+                      <span className="text-[11px] text-slate-500">{t("fasalSalahDesc")}</span>
                     </Link>
                     <Link
                       to="/field-mapping"
                       onClick={() => setAiMenuOpen(false)}
                       className="block p-2.5 rounded-xl hover:bg-blue-50 text-xs transition-colors"
                     >
-                      <span className="font-bold text-slate-900 block">🗺️ GIS Field Polygon Mapping</span>
-                      <span className="text-[11px] text-slate-500">Satellite spectral NDVI overlays</span>
+                      <span className="font-bold text-slate-900 block">🗺️ {t("khetKiNaksha")}</span>
+                      <span className="text-[11px] text-slate-500">{t("khetKiNakshaDesc")}</span>
                     </Link>
                   </div>
                 </>
@@ -118,30 +118,19 @@ export default function Navbar() {
           <div className="flex items-center gap-2.5">
             <LanguageSelector />
             <NotificationBell />
-
             {user ? (
               <div className="flex items-center gap-2">
-                <Link
-                  to="/profile"
-                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-100 hover:bg-slate-200 text-xs font-semibold text-slate-800"
-                >
-                  <User className="w-3.5 h-3.5 text-emerald-600" />
-                  <span className="max-w-[100px] truncate">{user.name}</span>
+                <Link to="/profile" className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 transition-colors text-xs font-semibold text-slate-700">
+                  <User className="w-3.5 h-3.5" />
+                  <span className="hidden sm:inline truncate max-w-[100px]">{user.name}</span>
                 </Link>
-                <button
-                  onClick={() => { logout(); navigate("/"); }}
-                  className="p-1.5 rounded-full hover:bg-rose-50 text-slate-400 hover:text-rose-600 cursor-pointer"
-                  title="Sign Out"
-                >
+                <button onClick={logout} className="p-2 rounded-xl hover:bg-slate-100 transition-colors text-slate-500 hover:text-red-600 cursor-pointer">
                   <LogOut className="w-4 h-4" />
                 </button>
               </div>
             ) : (
-              <Link
-                to="/dashboard"
-                className="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-xs shadow-sm transition-colors"
-              >
-                Sign In
+              <Link to="/login" className="px-4 py-2 rounded-xl bg-emerald-600 text-white text-xs font-semibold hover:bg-emerald-700 transition-colors">
+                {t("login")}
               </Link>
             )}
           </div>
