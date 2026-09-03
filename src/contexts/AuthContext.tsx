@@ -102,7 +102,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     if (!isSupabaseConfigured() || !supabase) return;
 
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
+    try {
+      const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
       if (event === "SIGNED_IN" && session?.user) {
         // Fetch profile from farmers table
         const { data: profile } = await supabase
@@ -134,7 +135,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       }
     });
 
-    return () => subscription.unsubscribe();
+      return () => subscription.unsubscribe();
+    } catch (err) {
+      console.warn("[AgriNexus] Supabase auth listener failed, using local mode:", err);
+    }
   }, []);
 
   // ---- Send OTP ----

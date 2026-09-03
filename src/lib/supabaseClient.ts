@@ -1,23 +1,31 @@
-import { createClient } from "@supabase/supabase-js";
+import { createClient, SupabaseClient } from "@supabase/supabase-js";
 
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL as string;
-const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY as string;
+let supabase: SupabaseClient | null = null;
 
-if (!supabaseUrl || !supabaseAnonKey) {
-  console.warn(
-    "[AgriNexus] Supabase credentials not configured. Set VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY in your .env.local file."
-  );
-}
+try {
+  const supabaseUrl = import.meta.env.VITE_SUPABASE_URL as string;
+  const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY as string;
 
-export const supabase = supabaseUrl && supabaseAnonKey
-  ? createClient(supabaseUrl, supabaseAnonKey, {
+  if (!supabaseUrl || !supabaseAnonKey) {
+    console.warn(
+      "[AgriNexus] Supabase credentials not configured. Using localStorage fallback."
+    );
+  } else {
+    supabase = createClient(supabaseUrl, supabaseAnonKey, {
       auth: {
         autoRefreshToken: true,
         persistSession: true,
         detectSessionInUrl: false,
       },
-    })
-  : null;
+    });
+    console.log("[AgriNexus] Supabase connected successfully.");
+  }
+} catch (err) {
+  console.error("[AgriNexus] Failed to initialize Supabase, using localStorage fallback:", err);
+  supabase = null;
+}
+
+export { supabase };
 
 // Helper to check if Supabase is configured
 export function isSupabaseConfigured(): boolean {
