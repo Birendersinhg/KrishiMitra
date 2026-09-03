@@ -29,7 +29,7 @@ CREATE TABLE IF NOT EXISTS otp_codes (
   created_at TIMESTAMP WITH TIME ZONE DEFAULT TIMEZONE('utc'::text, NOW()) NOT NULL
 );
 
--- 3. Search history table (track what farmers search)
+-- 3. Search history table
 CREATE TABLE IF NOT EXISTS search_history (
   id BIGSERIAL PRIMARY KEY,
   farmer_id UUID REFERENCES farmers(id) ON DELETE CASCADE,
@@ -80,7 +80,7 @@ CREATE TABLE IF NOT EXISTS marketplace_listings (
 );
 
 -- =====================================================
--- INDEXES for performance
+-- INDEXES
 -- =====================================================
 CREATE INDEX IF NOT EXISTS idx_farmers_phone ON farmers(phone);
 CREATE INDEX IF NOT EXISTS idx_otp_phone ON otp_codes(phone);
@@ -91,10 +91,11 @@ CREATE INDEX IF NOT EXISTS idx_inventory_farmer ON farmer_inventory(farmer_id);
 CREATE INDEX IF NOT EXISTS idx_marketplace_farmer ON marketplace_listings(farmer_id);
 
 -- =====================================================
--- ROW LEVEL SECURITY (RLS)
+-- ROW LEVEL SECURITY
+-- Permissive policies for our custom OTP auth system
+-- (not using Supabase Auth, so policies allow anon key access)
 -- =====================================================
 
--- Enable RLS on all tables
 ALTER TABLE farmers ENABLE ROW LEVEL SECURITY;
 ALTER TABLE otp_codes ENABLE ROW LEVEL SECURITY;
 ALTER TABLE search_history ENABLE ROW LEVEL SECURITY;
@@ -102,37 +103,10 @@ ALTER TABLE activity_log ENABLE ROW LEVEL SECURITY;
 ALTER TABLE farmer_inventory ENABLE ROW LEVEL SECURITY;
 ALTER TABLE marketplace_listings ENABLE ROW LEVEL SECURITY;
 
--- Farmers policies
-CREATE POLICY "Farmers can view own profile" ON farmers
-  FOR SELECT USING (auth.uid() = id);
-
-CREATE POLICY "Farmers can update own profile" ON farmers
-  FOR UPDATE USING (auth.uid() = id);
-
-CREATE POLICY "Anyone can register" ON farmers
-  FOR INSERT WITH CHECK (true);
-
--- Search history policies
-CREATE POLICY "Farmers can view own search history" ON search_history
-  FOR SELECT USING (auth.uid() = farmer_id);
-
-CREATE POLICY "Farmers can insert own search history" ON search_history
-  FOR INSERT WITH CHECK (auth.uid() = farmer_id);
-
--- Activity log policies
-CREATE POLICY "Farmers can view own activity" ON activity_log
-  FOR SELECT USING (auth.uid() = farmer_id);
-
-CREATE POLICY "Farmers can insert own activity" ON activity_log
-  FOR INSERT WITH CHECK (auth.uid() = farmer_id);
-
--- Inventory policies
-CREATE POLICY "Farmers can manage own inventory" ON farmer_inventory
-  FOR ALL USING (auth.uid() = farmer_id);
-
--- Marketplace policies (public read, owner write)
-CREATE POLICY "Anyone can view active listings" ON marketplace_listings
-  FOR SELECT USING (status = 'active');
-
-CREATE POLICY "Farmers can manage own listings" ON marketplace_listings
-  FOR ALL USING (auth.uid() = farmer_id);
+-- Allow all operations via anon key (our app handles auth logic)
+CREATE POLICY "allow_all_farmers" ON farmers FOR ALL USING (true) WITH CHECK (true);
+CREATE POLICY "allow_all_otp" ON otp_codes FOR ALL USING (true) WITH CHECK (true);
+CREATE POLICY "allow_all_search" ON search_history FOR ALL USING (true) WITH CHECK (true);
+CREATE POLICY "allow_all_activity" ON activity_log FOR ALL USING (true) WITH CHECK (true);
+CREATE POLICY "allow_all_inventory" ON farmer_inventory FOR ALL USING (true) WITH CHECK (true);
+CREATE POLICY "allow_all_marketplace" ON marketplace_listings FOR ALL USING (true) WITH CHECK (true);
