@@ -14,9 +14,9 @@ interface LocationContextType {
 const LocationContext = createContext<LocationContextType>({
   latitude: null,
   longitude: null,
-  city: "Cuttack",
-  district: "Cuttack",
-  state: "Odisha",
+  city: "Delhi",
+  district: "New Delhi",
+  state: "Delhi",
   loading: true,
   error: null,
   refreshLocation: () => {},
@@ -26,7 +26,7 @@ async function reverseGeocode(lat: number, lon: number): Promise<{ city: string;
   try {
     const res = await fetch(
       `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}`,
-      { headers: { "User-Agent": "KrishiMitra-Agriculture-AI/1.0" } }
+      { headers: { "User-Agent": "AgriNexus-Agriculture-AI/1.0" } }
     );
     const data = await res.json();
     if (data && data.address) {
@@ -38,15 +38,15 @@ async function reverseGeocode(lat: number, lon: number): Promise<{ city: string;
   } catch (err) {
     console.warn("Reverse geocode failed, using defaults");
   }
-  return { city: "Cuttack", district: "Cuttack", state: "Odisha" };
+  return { city: "Delhi", district: "New Delhi", state: "Delhi" };
 }
 
 export function LocationProvider({ children }: { children: React.ReactNode }) {
   const [latitude, setLatitude] = useState<number | null>(null);
   const [longitude, setLongitude] = useState<number | null>(null);
-  const [city, setCity] = useState("Cuttack");
-  const [district, setDistrict] = useState("Cuttack");
-  const [state, setState] = useState("Odisha");
+  const [city, setCity] = useState("Delhi");
+  const [district, setDistrict] = useState("New Delhi");
+  const [state, setState] = useState("Delhi");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -75,12 +75,12 @@ export function LocationProvider({ children }: { children: React.ReactNode }) {
       },
       (err) => {
         console.warn("Geolocation permission denied, using defaults:", err.message);
-        // Use Odisha defaults when location permission is denied
-        setLatitude(20.4625);
-        setLongitude(85.8828);
-        setCity("Cuttack");
-        setDistrict("Cuttack");
-        setState("Odisha");
+        // Use Delhi defaults when location permission is denied
+        setLatitude(28.6139);
+        setLongitude(77.2090);
+        setCity("Delhi");
+        setDistrict("New Delhi");
+        setState("Delhi");
         setLoading(false);
       },
       { timeout: 10000, enableHighAccuracy: false }
