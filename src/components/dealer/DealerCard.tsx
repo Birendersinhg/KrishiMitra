@@ -17,7 +17,7 @@ interface DealerCardProps {
 
 export default function DealerCard({ dealer }: DealerCardProps) {
   const cleanPhone = (dealer.whatsappNumber || dealer.phone).replace(/[^0-9]/g, "");
-  const whatsappUrl = `https://wa.me/${cleanPhone}?text=${encodeURIComponent("Namaste! I am a farmer on KrishiMitra AI and need advice on fertilizers/products for my crops.")}`;
+  const whatsappUrl = `https://wa.me/${cleanPhone}?text=${encodeURIComponent("Namaste! I am a farmer on AgriNexus and need advice on fertilizers/products for my crops.")}`;
 
   return (
     <div className="bg-white rounded-2xl border border-slate-200/80 p-5 shadow-sm hover:shadow-md transition-all flex flex-col justify-between">

@@ -50,7 +50,7 @@ export default function RegisterPage() {
     }
   }, []);
 
-  const handleRegister = (e: React.FormEvent) => {
+  const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
 
@@ -61,9 +61,9 @@ export default function RegisterPage() {
     if (!city.trim()) { setError("Please enter your city"); return; }
 
     setLoading(true);
-    setTimeout(() => {
+    try {
       const fullPhone = clean.length === 10 ? `+91${clean}` : phone;
-      const result = register({
+      const result = await register({
         name: name.trim(),
         phone: fullPhone,
         village: village.trim(),
@@ -80,8 +80,10 @@ export default function RegisterPage() {
       } else {
         setError(result.error || "Registration failed");
       }
-      setLoading(false);
-    }, 500);
+    } catch {
+      setError("Registration failed. Please try again.");
+    }
+    setLoading(false);
   };
 
   return (

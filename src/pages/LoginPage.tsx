@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Sprout, LogIn, AlertCircle, Phone, KeyRound, ArrowLeft, CheckCircle } from "lucide-react";
+import { Sprout, AlertCircle, Phone, KeyRound, ArrowLeft, CheckCircle } from "lucide-react";
 import { useAuth } from "../contexts/AuthContext";
 
 export default function LoginPage() {
@@ -10,10 +10,10 @@ export default function LoginPage() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [otpSent, setOtpSent] = useState(false);
-  const { sendOTP, verifyOTP, user } = useAuth();
+  const { sendOTP, verifyOTP } = useAuth();
   const navigate = useNavigate();
 
-  const handleSendOTP = (e: React.FormEvent) => {
+  const handleSendOTP = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
     const clean = phone.replace(/\D/g, "");
@@ -22,16 +22,18 @@ export default function LoginPage() {
       return;
     }
     setLoading(true);
-    setTimeout(() => {
+    try {
       const fullPhone = clean.length === 10 ? `+91${clean}` : phone;
-      sendOTP(fullPhone);
+      await sendOTP(fullPhone);
       setOtpSent(true);
       setStep("otp");
-      setLoading(false);
-    }, 800);
+    } catch {
+      setError("Failed to send OTP. Please try again.");
+    }
+    setLoading(false);
   };
 
-  const handleVerifyOTP = (e: React.FormEvent) => {
+  const handleVerifyOTP = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
     if (otp.length !== 6) {
@@ -39,17 +41,19 @@ export default function LoginPage() {
       return;
     }
     setLoading(true);
-    setTimeout(() => {
+    try {
       const clean = phone.replace(/\D/g, "");
       const fullPhone = clean.length === 10 ? `+91${clean}` : phone;
-      const success = verifyOTP(fullPhone, otp);
+      const success = await verifyOTP(fullPhone, otp);
       if (success) {
         navigate("/dashboard");
       } else {
-        setError("Invalid or expired OTP. Please try again.");
+        setError("Account not found. Please register first, or check your OTP.");
       }
-      setLoading(false);
-    }, 500);
+    } catch {
+      setError("Verification failed. Please try again.");
+    }
+    setLoading(false);
   };
 
   return (

@@ -5,7 +5,7 @@ const STEPS = [
   { icon: Microscope, text: "Scanning leaf texture and coloration..." },
   { icon: Sprout, text: "Consulting Gemini AI Agricultural Knowledge Base..." },
   { icon: ShieldCheck, text: "Generating organic and chemical treatment plans..." },
-  { icon: Sparkles, text: "Finding verified Odisha agro-dealers and fertilizers..." },
+  { icon: Sparkles, text: "Finding verified agro-dealers and fertilizers..." },
 ];
 
 export default function AnalysisLoadingAnimation() {
@@ -32,7 +32,7 @@ export default function AnalysisLoadingAnimation() {
 
         <div>
           <h2 className="text-xl font-extrabold text-slate-900">AI Plant Doctor Analyzing</h2>
-          <p className="text-xs text-slate-500 mt-1">Please hold on while KrishiMitra AI processes your crop image</p>
+          <p className="text-xs text-slate-500 mt-1">Please hold on while AgriNexus processes your crop image</p>
         </div>
 
         <div className="p-4 rounded-2xl bg-emerald-50 border border-emerald-100 text-xs font-semibold text-emerald-900 transition-all">

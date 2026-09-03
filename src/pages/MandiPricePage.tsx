@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { TrendingUp, TrendingDown, MapPin, Sparkles, RefreshCw, ArrowUp, ArrowDown, BarChart3, Clock, Navigation, Search, X } from "lucide-react";
+import { logSearch } from "../contexts/AuthContext";
+import { useAuth } from "../contexts/AuthContext";
 
 interface MandiPrice {
   id: string;
@@ -285,6 +287,9 @@ export default function MandiPricePage() {
     setSelectedLocation({ city: loc.city, state: loc.state, district: loc.district });
     setSearchQuery(`${loc.city} — ${loc.district}, ${loc.state}`);
     setShowSuggestions(false);
+    // Log search to database
+    const userId = JSON.parse(localStorage.getItem("agn_current_user") || "null")?.id;
+    logSearch(userId, "mandi_price", `${loc.city}, ${loc.district}, ${loc.state}`, { state: loc.state, district: loc.district }, `${loc.city}, ${loc.state}`);
   };
 
   const clearLocation = () => {
