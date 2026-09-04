@@ -555,7 +555,7 @@ export default function WeatherWidget({ showForecast = true }: WeatherWidgetProp
 
   if (loading) {
     return (
-      <div className="bg-gradient-to-br from-emerald-800/90 to-teal-900/90 backdrop-blur-md rounded-2xl p-6 border border-white/20 text-white flex items-center justify-center min-h-[160px]">
+      <div className="bg-gradient-to-br from-sky-500 via-blue-500 to-blue-600 backdrop-blur-md rounded-2xl p-6 border border-white/20 text-white flex items-center justify-center min-h-[160px]">
         <RefreshCw className="w-6 h-6 animate-spin text-emerald-300" />
       </div>
     );
@@ -577,20 +577,37 @@ export default function WeatherWidget({ showForecast = true }: WeatherWidgetProp
   const advisory = weather?.advisory || "";
   const conditionLabel = getConditionLabel(current.condition, t);
 
+  // Dynamic background color based on weather condition
+  const condLower = current.condition.toLowerCase();
+  let bgClass = "bg-gradient-to-br from-sky-500 via-blue-500 to-blue-600"; // default: clear sky blue
+  if (condLower.includes("clear") || condLower.includes("sunny")) {
+    bgClass = "bg-gradient-to-br from-sky-400 via-blue-400 to-blue-500";
+  } else if (condLower.includes("thunder")) {
+    bgClass = "bg-gradient-to-br from-slate-800 via-purple-900 to-slate-900";
+  } else if (condLower.includes("rain") || condLower.includes("drizzle")) {
+    bgClass = "bg-gradient-to-br from-slate-600 via-slate-700 to-blue-800";
+  } else if (condLower.includes("cloud") && condLower.includes("part")) {
+    bgClass = "bg-gradient-to-br from-sky-500 via-blue-500 to-slate-500";
+  } else if (condLower.includes("cloud") || condLower.includes("fog")) {
+    bgClass = "bg-gradient-to-br from-slate-500 via-slate-600 to-slate-700";
+  } else if (condLower.includes("snow")) {
+    bgClass = "bg-gradient-to-br from-slate-400 via-blue-300 to-slate-500";
+  }
+
   return (
-    <div className="bg-gradient-to-br from-emerald-800/90 to-teal-900/90 backdrop-blur-md rounded-3xl p-6 text-white border border-white/20 shadow-xl space-y-5 relative overflow-hidden">
+    <div className={`${bgClass} backdrop-blur-md rounded-3xl p-6 text-white border border-white/20 shadow-xl space-y-5 relative overflow-hidden`}>
       {/* LIVE weather animation based on real condition */}
       <WeatherAnimation condition={current.condition} />
 
       {/* Location header */}
       <div className="flex items-center justify-between border-b border-white/10 pb-4 relative z-10">
         <div className="flex items-center gap-2">
-          <div className="p-2 rounded-full bg-white/10 text-emerald-300">
+          <div className="p-2 rounded-full bg-white/15 text-white">
             <MapPin className="w-4 h-4" />
           </div>
           <div>
             <h3 className="text-base font-bold text-white leading-tight">{resolvedCity}, {resolvedState}</h3>
-            <p className="text-[11px] text-emerald-200 font-medium">{t("district")}: {resolvedDistrict}</p>
+            <p className="text-[11px] text-white/70 font-medium">{t("district")}: {resolvedDistrict}</p>
           </div>
         </div>
         <button
@@ -606,7 +623,7 @@ export default function WeatherWidget({ showForecast = true }: WeatherWidgetProp
       <div className="flex items-center justify-between relative z-10">
         <div>
           <div className="text-4xl font-extrabold tracking-tight">{current.temp}&deg;C</div>
-          <div className="text-xs font-semibold text-emerald-200 mt-1">{conditionLabel}</div>
+          <div className="text-xs font-semibold text-white/80 mt-1">{conditionLabel}</div>
         </div>
         <WeatherIcon condition={current.condition} />
       </div>
@@ -614,25 +631,25 @@ export default function WeatherWidget({ showForecast = true }: WeatherWidgetProp
       {/* Stats */}
       <div className="grid grid-cols-3 gap-2 py-3 px-3 rounded-2xl bg-black/20 text-center text-xs relative z-10">
         <div>
-          <span className="text-[10px] text-emerald-300 block">{t("humidityLabel")}</span>
+          <span className="text-[10px] text-white/60 block">{t("humidityLabel")}</span>
           <span className="font-bold">{current.humidity}%</span>
         </div>
         <div className="border-x border-white/10">
-          <span className="text-[10px] text-emerald-300 block">{t("windLabel")}</span>
+          <span className="text-[10px] text-white/60 block">{t("windLabel")}</span>
           <span className="font-bold">{current.windSpeed} km/h</span>
         </div>
         <div>
-          <span className="text-[10px] text-emerald-300 block">{t("rainChanceLabel")}</span>
+          <span className="text-[10px] text-white/60 block">{t("rainChanceLabel")}</span>
           <span className="font-bold">{current.rainfallChance}%</span>
         </div>
       </div>
 
       {/* Advisory */}
       {advisory && (
-        <div className="p-3.5 rounded-2xl bg-emerald-500/20 border border-emerald-400/30 text-xs leading-relaxed text-emerald-100 flex items-start gap-2 relative z-10">
+        <div className="p-3.5 rounded-2xl bg-white/15 border border-white/20 text-xs leading-relaxed text-white/90 flex items-start gap-2 relative z-10">
           <AlertTriangle className="w-4 h-4 text-amber-300 flex-shrink-0 mt-0.5" />
           <div>
-            <span className="font-bold text-white">{t("farmerAdvisory")}: </span>
+            <span className="font-bold">{t("farmerAdvisory")}: </span>
             <span>{advisory}</span>
           </div>
         </div>
@@ -641,7 +658,7 @@ export default function WeatherWidget({ showForecast = true }: WeatherWidgetProp
       {/* 5-Day Forecast */}
       {showForecast && forecast.length > 0 && (
         <div className="border-t border-white/10 pt-4 space-y-2 relative z-10">
-          <h4 className="text-xs font-bold text-emerald-200">{t("forecast5DayTitle")}</h4>
+          <h4 className="text-xs font-bold text-white/80">{t("forecast5DayTitle")}</h4>
           <div className="grid grid-cols-5 gap-2 text-center text-[10px]">
             {forecast.map((day: any, i: number) => {
               const dayCondLabel = getConditionLabel(day.condition, t);
@@ -650,7 +667,7 @@ export default function WeatherWidget({ showForecast = true }: WeatherWidgetProp
                   <span className="font-semibold text-slate-300">{day.day}</span>
                   <WeatherIcon condition={day.condition} />
                   <span className="text-xs font-bold text-white">{day.temp}&deg;</span>
-                  <span className="text-[9px] text-emerald-300 truncate w-full">{dayCondLabel}</span>
+                  <span className="text-[9px] text-white/60 truncate w-full">{dayCondLabel}</span>
                   <span className="text-[9px] text-blue-300">{t("rainLabel")} {day.rain}%</span>
                 </div>
               );
