@@ -126,16 +126,16 @@ function WeatherAnimation({ condition }: { condition: string }) {
           }
         `}</style>
         {/* Dark storm clouds at top */}
-        <div className="absolute -top-4 -left-6" style={{ animation: "darkCloudDrift1 8s ease-in-out infinite" }}>
-          <svg width="220" height="70" viewBox="0 0 220 70" style={{ opacity: 0.7 }}>
-            <path d="M20,55 Q20,35 45,33 Q50,18 80,15 Q100,2 125,18 Q140,10 160,25 Q178,18 195,32 Q215,30 220,45 Q220,55 210,55 Z" fill="rgba(30,41,59,0.85)" />
-            <path d="M30,55 Q30,38 52,36 Q58,22 85,18 Q102,8 125,22 Q138,14 155,28 Q172,22 188,36 Q208,34 215,48 Q215,55 205,55 Z" fill="rgba(51,65,85,0.6)" />
+        <div className="absolute -top-2 left-[-5px]" style={{ animation: "darkCloudDrift1 8s ease-in-out infinite" }}>
+          <svg width="230" height="80" viewBox="0 0 230 80" style={{ opacity: 0.7 }}>
+            <path d="M25,68 C8,68 3,56 16,52 C6,44 16,26 34,28 C38,12 62,8 78,22 C86,12 108,12 118,24 C128,16 148,22 152,36 C164,30 176,40 172,52 C186,54 186,68 172,68 Z" fill="rgba(30,41,59,0.88)" />
+            <path d="M35,65 C20,65 16,55 27,52 C18,44 28,28 42,30 C46,16 66,12 80,24 C88,16 106,16 115,26 C124,20 140,24 144,36 C154,32 162,40 158,50 C168,52 168,65 156,65 Z" fill="rgba(51,65,85,0.55)" />
           </svg>
         </div>
-        <div className="absolute top-[10px] right-[-20px]" style={{ animation: "darkCloudDrift2 10s ease-in-out infinite" }}>
-          <svg width="180" height="60" viewBox="0 0 180 60" style={{ opacity: 0.6 }}>
-            <path d="M15,48 Q15,30 38,28 Q42,16 68,14 Q82,4 102,16 Q115,10 130,22 Q148,16 162,30 Q175,28 180,40 Q180,48 170,48 Z" fill="rgba(30,41,59,0.8)" />
-            <path d="M25,48 Q25,34 45,32 Q50,22 72,18 Q85,10 105,20 Q116,14 128,26 Q144,20 158,34 Q172,32 176,42 Q176,48 168,48 Z" fill="rgba(51,65,85,0.6)" />
+        <div className="absolute top-[12px] right-[-15px]" style={{ animation: "darkCloudDrift2 10s ease-in-out infinite" }}>
+          <svg width="190" height="70" viewBox="0 0 190 70" style={{ opacity: 0.6 }}>
+            <path d="M18,60 C4,60 0,50 12,47 C4,40 12,24 26,26 C30,14 48,10 60,20 C66,13 82,13 90,22 C98,17 112,22 114,32 C124,28 134,36 130,46 C140,48 140,60 130,60 Z" fill="rgba(30,41,59,0.82)" />
+            <path d="M28,57 C16,57 12,49 22,47 C14,40 22,26 34,28 C38,18 52,14 62,22 C68,16 82,16 88,24 C95,20 106,24 108,32 C116,30 122,36 119,44 C126,46 126,57 118,57 Z" fill="rgba(51,65,85,0.5)" />
           </svg>
         </div>
         {/* HEAVY rain streaks — thick, bright, fast */}
@@ -232,16 +232,16 @@ function WeatherAnimation({ condition }: { condition: string }) {
         {/* Very dark storm overlay */}
         <div className="absolute inset-0 bg-gradient-to-b from-purple-950/60 via-slate-900/50 to-purple-950/70 rounded-3xl" />
         {/* MASSIVE dark storm clouds */}
-        <div className="absolute -top-4 -left-4" style={{ animation: "stormCloudDrift 6s ease-in-out infinite" }}>
+        <div className="absolute -top-2 left-[-5px]" style={{ animation: "stormCloudDrift 6s ease-in-out infinite" }}>
           <svg width="280" height="90" viewBox="0 0 280 90" style={{ opacity: 0.85 }}>
-            <path d="M15,70 Q15,42 48,40 Q52,18 95,14 Q120,-2 155,18 Q175,6 200,25 Q225,14 250,35 Q275,30 280,52 Q280,70 265,70 Z" fill="rgba(15,23,42,0.92)" />
-            <path d="M30,70 Q30,48 58,45 Q65,24 102,18 Q125,4 155,22 Q172,12 195,30 Q218,20 240,38 Q262,34 270,55 Q270,70 255,70 Z" fill="rgba(30,41,59,0.7)" />
+            <path d="M20,78 C0,78 -5,62 14,56 C2,46 14,24 36,27 C40,8 72,2 92,20 C102,8 130,6 144,22 C158,12 182,18 188,36 C204,28 222,40 216,56 C232,58 234,78 214,78 Z" fill="rgba(15,23,42,0.92)" />
+            <path d="M35,75 C18,75 14,62 28,58 C18,50 28,32 46,34 C50,18 76,14 92,28 C100,18 124,18 136,30 C146,22 166,28 170,42 C182,36 196,44 192,56 C204,58 204,75 190,75 Z" fill="rgba(30,41,59,0.65)" />
           </svg>
         </div>
-        <div className="absolute top-[8px] right-[-30px]" style={{ animation: "stormCloudDrift2 7s ease-in-out infinite" }}>
-          <svg width="200" height="75" viewBox="0 0 200 75" style={{ opacity: 0.8 }}>
-            <path d="M10,60 Q10,38 38,36 Q42,18 75,14 Q95,2 118,18 Q132,10 150,24 Q168,16 185,32 Q198,30 200,45 Q200,60 188,60 Z" fill="rgba(15,23,42,0.88)" />
-            <path d="M20,60 Q20,42 45,40 Q50,24 78,18 Q96,8 118,22 Q132,14 148,28 Q165,20 180,36 Q195,34 198,48 Q198,60 185,60 Z" fill="rgba(30,41,59,0.65)" />
+        <div className="absolute top-[10px] right-[-25px]" style={{ animation: "stormCloudDrift2 7s ease-in-out infinite" }}>
+          <svg width="210" height="80" viewBox="0 0 210 80" style={{ opacity: 0.8 }}>
+            <path d="M12,68 C-2,68 -6,56 8,52 C0,44 8,26 24,28 C28,14 50,10 64,22 C72,14 90,14 100,24 C108,18 124,22 128,34 C140,28 152,38 148,50 C160,52 160,68 146,68 Z" fill="rgba(15,23,42,0.88)" />
+            <path d="M24,65 C10,65 6,55 18,52 C10,45 18,30 32,32 C35,20 52,16 64,26 C70,20 86,20 94,28 C100,24 114,28 116,38 C126,34 134,42 130,52 C140,54 140,65 130,65 Z" fill="rgba(30,41,59,0.6)" />
           </svg>
         </div>
         {/* BOLTS — large, bright, dramatic SVG lightning */}
@@ -287,6 +287,9 @@ function WeatherAnimation({ condition }: { condition: string }) {
 
   // --- CLOUDY / FOGGY ---
   if (condLower.includes("cloud") || condLower.includes("fog")) {
+    // Classic cartoon cloud path: round bumps on top, flat bottom
+    const cloudPath1 = "M30,75 C10,75 5,60 20,55 C10,45 20,25 40,28 C45,10 75,5 90,20 C100,8 125,8 135,22 C150,12 175,18 180,35 C195,30 210,42 205,55 C220,58 220,75 200,75 Z";
+    const cloudPath2 = "M20,65 C5,65 0,52 15,48 C8,38 18,22 35,24 C40,10 62,6 75,18 C82,10 105,10 112,22 C125,14 145,20 148,34 C160,30 170,40 165,52 C178,54 178,65 162,65 Z";
     return (
       <div className="absolute inset-0 pointer-events-none overflow-hidden rounded-3xl">
         <style>{`
@@ -311,32 +314,32 @@ function WeatherAnimation({ condition }: { condition: string }) {
             100% { transform: translateX(10px) translateY(-2px); }
           }
         `}</style>
-        {/* Cloud 1 — top left, biggest, proper cloud shape */}
-        <div className="absolute top-[-8px] left-[-10px]" style={{ animation: "bigCloudDrift1 10s ease-in-out infinite" }}>
-          <svg width="260" height="100" viewBox="0 0 260 100" style={{ opacity: 0.55 }}>
-            <path d="M40,80 Q40,55 65,55 Q65,30 100,30 Q125,10 155,30 Q175,20 195,35 Q220,25 235,45 Q260,45 260,65 Q260,80 240,80 Z" fill="rgba(30,58,95,0.8)" />
-            <path d="M50,80 Q50,60 75,58 Q80,38 110,35 Q130,20 155,35 Q170,28 185,40 Q200,32 215,48 Q235,48 240,65 Q240,80 225,80 Z" fill="rgba(44,82,130,0.6)" />
+        {/* Cloud 1 — big, top left */}
+        <div className="absolute top-[-2px] left-[-5px]" style={{ animation: "bigCloudDrift1 10s ease-in-out infinite" }}>
+          <svg width="230" height="90" viewBox="0 0 230 90" style={{ opacity: 0.55 }}>
+            <path d="M30,75 C10,75 5,60 20,55 C10,45 20,25 40,28 C45,10 75,5 90,20 C100,8 125,8 135,22 C150,12 175,18 180,35 C195,30 210,42 205,55 C220,58 220,75 200,75 Z" fill="rgba(30,58,95,0.8)" />
+            <path d="M40,72 C22,72 18,60 30,56 C22,48 30,32 46,34 C50,20 74,16 86,26 C94,18 114,18 122,28 C132,22 150,26 152,38 C162,34 172,42 168,52 C178,54 178,72 165,72 Z" fill="rgba(44,82,130,0.5)" />
           </svg>
         </div>
-        {/* Cloud 2 — upper right, proper cloud shape */}
-        <div className="absolute top-[15px] right-[-15px]" style={{ animation: "bigCloudDrift2 12s ease-in-out infinite" }}>
-          <svg width="220" height="85" viewBox="0 0 220 85" style={{ opacity: 0.45 }}>
-            <path d="M30,70 Q30,48 55,48 Q58,28 90,25 Q110,8 135,25 Q155,15 175,30 Q195,22 210,40 Q220,40 220,58 Q220,70 205,70 Z" fill="rgba(30,58,95,0.75)" />
-            <path d="M40,70 Q40,52 60,50 Q65,32 95,28 Q112,15 135,30 Q150,22 168,34 Q185,28 200,44 Q215,44 215,58 Q215,70 200,70 Z" fill="rgba(44,82,130,0.55)" />
+        {/* Cloud 2 — upper right */}
+        <div className="absolute top-[20px] right-[-10px]" style={{ animation: "bigCloudDrift2 12s ease-in-out infinite" }}>
+          <svg width="200" height="80" viewBox="0 0 200 80" style={{ opacity: 0.45 }}>
+            <path d="M25,65 C8,65 3,54 16,50 C8,42 16,26 32,28 C36,14 58,10 70,20 C78,12 98,12 106,22 C116,16 132,22 135,34 C146,30 156,40 152,50 C164,52 164,65 150,65 Z" fill="rgba(30,58,95,0.75)" />
+            <path d="M35,62 C20,62 16,52 27,49 C20,42 28,28 40,30 C44,18 62,14 72,22 C78,16 95,16 102,24 C110,20 124,24 126,34 C135,31 142,38 139,48 C148,50 148,62 138,62 Z" fill="rgba(44,82,130,0.45)" />
           </svg>
         </div>
-        {/* Cloud 3 — lower left, proper cloud shape */}
-        <div className="absolute bottom-[30px] left-[10px]" style={{ animation: "bigCloudDrift3 14s ease-in-out infinite" }}>
-          <svg width="180" height="70" viewBox="0 0 180 70" style={{ opacity: 0.38 }}>
-            <path d="M25,60 Q25,40 50,38 Q55,22 85,20 Q100,8 120,20 Q135,14 150,28 Q165,22 175,38 Q180,38 180,52 Q180,60 170,60 Z" fill="rgba(30,58,95,0.7)" />
-            <path d="M35,60 Q35,44 55,42 Q60,28 88,24 Q102,14 122,26 Q135,20 148,32 Q160,26 170,40 Q178,40 178,52 Q178,60 165,60 Z" fill="rgba(44,82,130,0.5)" />
+        {/* Cloud 3 — lower left, smaller */}
+        <div className="absolute bottom-[35px] left-[10px]" style={{ animation: "bigCloudDrift3 14s ease-in-out infinite" }}>
+          <svg width="160" height="65" viewBox="0 0 160 65" style={{ opacity: 0.38 }}>
+            <path d="M20,55 C6,55 2,46 12,43 C6,36 14,22 28,24 C32,12 50,9 60,18 C66,11 82,11 88,20 C96,15 110,20 112,30 C122,27 130,35 126,44 C136,46 136,55 126,55 Z" fill="rgba(30,58,95,0.7)" />
+            <path d="M28,52 C16,52 12,44 22,42 C16,36 22,24 34,26 C37,16 52,13 60,20 C66,14 80,14 85,22 C92,18 104,22 106,30 C114,28 120,34 117,42 C124,44 124,52 116,52 Z" fill="rgba(44,82,130,0.45)" />
           </svg>
         </div>
-        {/* Cloud 4 — center, smaller */}
-        <div className="absolute top-[40px] left-[35%]" style={{ animation: "bigCloudDrift4 11s ease-in-out infinite" }}>
-          <svg width="150" height="60" viewBox="0 0 150 60" style={{ opacity: 0.35 }}>
-            <path d="M20,50 Q20,32 42,30 Q45,16 72,14 Q88,4 108,16 Q120,10 135,22 Q148,20 150,35 Q150,50 140,50 Z" fill="rgba(44,82,130,0.65)" />
-            <path d="M28,50 Q28,36 48,34 Q52,22 75,18 Q90,10 108,22 Q118,16 130,28 Q142,26 145,38 Q145,50 135,50 Z" fill="rgba(30,58,95,0.55)" />
+        {/* Cloud 4 — center */}
+        <div className="absolute top-[45px] left-[30%]" style={{ animation: "bigCloudDrift4 11s ease-in-out infinite" }}>
+          <svg width="130" height="55" viewBox="0 0 130 55" style={{ opacity: 0.35 }}>
+            <path d="M15,45 C4,45 0,38 10,35 C4,30 12,18 24,20 C27,10 42,7 52,15 C57,9 70,9 76,16 C83,12 95,16 97,24 C105,22 112,28 108,36 C116,38 116,45 108,45 Z" fill="rgba(44,82,130,0.65)" />
+            <path d="M22,43 C12,43 9,37 18,35 C12,30 19,20 28,22 C32,14 44,11 52,17 C57,12 68,12 73,18 C79,15 90,18 92,25 C98,23 104,28 101,35 C108,37 108,43 100,43 Z" fill="rgba(30,58,95,0.5)" />
           </svg>
         </div>
       </div>
@@ -368,21 +371,21 @@ function WeatherAnimation({ condition }: { condition: string }) {
           style={{ animation: "partlySunPulse 4s ease-in-out infinite", filter: "blur(2px)" }}
         />
         {/* Large cloud drifting over sun */}
-        <div className="absolute top-0 right-[-5px]"
+        <div className="absolute top-[5px] right-[-5px]"
           style={{ animation: "partlyCloudDrift1 9s ease-in-out infinite" }}
         >
-          <svg width="160" height="65" viewBox="0 0 160 65" style={{ opacity: 0.6 }}>
-            <path d="M15,52 Q15,34 38,32 Q42,18 72,15 Q88,4 108,18 Q122,10 138,24 Q152,18 160,34 Q160,52 148,52 Z" fill="rgba(30,58,95,0.7)" />
-            <path d="M25,52 Q25,38 45,36 Q50,24 75,20 Q90,12 108,24 Q120,16 135,28 Q148,22 156,36 Q156,52 145,52 Z" fill="rgba(44,82,130,0.5)" />
+          <svg width="170" height="70" viewBox="0 0 170 70" style={{ opacity: 0.6 }}>
+            <path d="M18,58 C4,58 0,48 12,45 C4,38 12,22 26,24 C30,12 50,8 62,18 C68,11 84,11 92,20 C100,15 114,20 116,30 C126,26 136,34 132,44 C142,46 142,58 132,58 Z" fill="rgba(30,58,95,0.7)" />
+            <path d="M26,55 C14,55 10,47 20,44 C12,38 20,24 32,26 C36,16 52,12 62,20 C68,14 82,14 88,22 C95,18 106,22 108,30 C116,28 122,34 120,42 C128,44 128,55 120,55 Z" fill="rgba(44,82,130,0.45)" />
           </svg>
         </div>
         {/* Second cloud lower left */}
-        <div className="absolute bottom-14 left-0"
+        <div className="absolute bottom-[40px] left-[5px]"
           style={{ animation: "partlyCloudDrift2 12s ease-in-out infinite" }}
         >
-          <svg width="130" height="50" viewBox="0 0 130 50" style={{ opacity: 0.4 }}>
-            <path d="M10,40 Q10,26 30,24 Q34,14 58,12 Q70,4 88,14 Q98,8 112,18 Q125,16 130,28 Q130,40 120,40 Z" fill="rgba(30,58,95,0.6)" />
-            <path d="M18,40 Q18,28 35,26 Q40,18 60,14 Q72,8 88,18 Q98,12 110,22 Q122,20 128,30 Q128,40 118,40 Z" fill="rgba(44,82,130,0.45)" />
+          <svg width="140" height="55" viewBox="0 0 140 55" style={{ opacity: 0.4 }}>
+            <path d="M12,45 C2,45 -1,38 9,35 C2,30 9,18 22,20 C25,10 40,7 50,15 C55,9 68,9 74,16 C80,12 92,16 94,24 C102,21 110,28 106,36 C114,38 114,45 106,45 Z" fill="rgba(30,58,95,0.6)" />
+            <path d="M20,43 C10,43 8,37 16,35 C10,30 16,20 26,22 C30,14 42,11 50,18 C55,13 66,13 72,18 C78,15 88,18 90,25 C96,23 102,28 99,35 C106,37 106,43 98,43 Z" fill="rgba(44,82,130,0.4)" />
           </svg>
         </div>
       </div>
