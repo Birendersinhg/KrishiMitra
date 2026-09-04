@@ -4,6 +4,7 @@ import { Camera, Sprout, Sun, ShoppingBag, Users, ArrowRight, Sparkles, Package,
 import { useLanguage } from "../contexts/LanguageContext";
 import WeatherWidget from "../components/weather/WeatherWidget";
 import CameraCaptureModal from "../components/camera/CameraCaptureModal";
+import MandiPricesBar from "../components/MandiPricesBar";
 
 export default function LandingPage() {
   const { t } = useLanguage();
@@ -94,11 +95,7 @@ export default function LandingPage() {
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             <div className="lg:col-span-7 space-y-6">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-xs font-semibold text-emerald-200">
-                <Sparkles className="w-3.5 h-3.5" />
-                <span>{t("heroTagline") || "Powered by AI for Indian Farmers"}</span>
-              </div>
-
+              {/* Hero text moved to TOP — removed the "Powered by AI" badge */}
               <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight leading-tight">
                 {t("heroTitle1")} <span className="text-emerald-300">{t("heroTitle2")}</span>
               </h1>
@@ -124,6 +121,9 @@ export default function LandingPage() {
                   <ArrowRight className="w-4 h-4" />
                 </Link>
               </div>
+
+              {/* Mandi Prices Bar — below buttons */}
+              <MandiPricesBar />
             </div>
 
             <div className="lg:col-span-5">
