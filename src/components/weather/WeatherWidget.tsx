@@ -128,16 +128,14 @@ function WeatherAnimation({ condition }: { condition: string }) {
         {/* Dark storm clouds at top */}
         <div className="absolute -top-4 -left-6" style={{ animation: "darkCloudDrift1 8s ease-in-out infinite" }}>
           <svg width="220" height="70" viewBox="0 0 220 70" style={{ opacity: 0.7 }}>
-            <ellipse cx="110" cy="45" rx="100" ry="25" fill="rgba(30,41,59,0.8)" />
-            <ellipse cx="70" cy="35" rx="55" ry="28" fill="rgba(30,41,59,0.9)" />
-            <ellipse cx="150" cy="38" rx="50" ry="22" fill="rgba(30,41,59,0.7)" />
-            <ellipse cx="100" cy="30" rx="40" ry="20" fill="rgba(51,65,85,0.6)" />
+            <path d="M20,55 Q20,35 45,33 Q50,18 80,15 Q100,2 125,18 Q140,10 160,25 Q178,18 195,32 Q215,30 220,45 Q220,55 210,55 Z" fill="rgba(30,41,59,0.85)" />
+            <path d="M30,55 Q30,38 52,36 Q58,22 85,18 Q102,8 125,22 Q138,14 155,28 Q172,22 188,36 Q208,34 215,48 Q215,55 205,55 Z" fill="rgba(51,65,85,0.6)" />
           </svg>
         </div>
-        <div className="absolute -top-2 right-[-20px]" style={{ animation: "darkCloudDrift2 10s ease-in-out infinite" }}>
+        <div className="absolute top-[10px] right-[-20px]" style={{ animation: "darkCloudDrift2 10s ease-in-out infinite" }}>
           <svg width="180" height="60" viewBox="0 0 180 60" style={{ opacity: 0.6 }}>
-            <ellipse cx="90" cy="38" rx="80" ry="22" fill="rgba(30,41,59,0.8)" />
-            <ellipse cx="60" cy="30" rx="45" ry="20" fill="rgba(51,65,85,0.7)" />
+            <path d="M15,48 Q15,30 38,28 Q42,16 68,14 Q82,4 102,16 Q115,10 130,22 Q148,16 162,30 Q175,28 180,40 Q180,48 170,48 Z" fill="rgba(30,41,59,0.8)" />
+            <path d="M25,48 Q25,34 45,32 Q50,22 72,18 Q85,10 105,20 Q116,14 128,26 Q144,20 158,34 Q172,32 176,42 Q176,48 168,48 Z" fill="rgba(51,65,85,0.6)" />
           </svg>
         </div>
         {/* HEAVY rain streaks — thick, bright, fast */}
@@ -235,17 +233,15 @@ function WeatherAnimation({ condition }: { condition: string }) {
         <div className="absolute inset-0 bg-gradient-to-b from-purple-950/60 via-slate-900/50 to-purple-950/70 rounded-3xl" />
         {/* MASSIVE dark storm clouds */}
         <div className="absolute -top-4 -left-4" style={{ animation: "stormCloudDrift 6s ease-in-out infinite" }}>
-          <svg width="280" height="80" viewBox="0 0 280 80" style={{ opacity: 0.85 }}>
-            <ellipse cx="140" cy="50" rx="130" ry="28" fill="rgba(15,23,42,0.9)" />
-            <ellipse cx="90" cy="40" rx="70" ry="30" fill="rgba(15,23,42,0.95)" />
-            <ellipse cx="200" cy="42" rx="60" ry="25" fill="rgba(30,41,59,0.85)" />
-            <ellipse cx="130" cy="35" rx="50" ry="22" fill="rgba(51,65,85,0.6)" />
+          <svg width="280" height="90" viewBox="0 0 280 90" style={{ opacity: 0.85 }}>
+            <path d="M15,70 Q15,42 48,40 Q52,18 95,14 Q120,-2 155,18 Q175,6 200,25 Q225,14 250,35 Q275,30 280,52 Q280,70 265,70 Z" fill="rgba(15,23,42,0.92)" />
+            <path d="M30,70 Q30,48 58,45 Q65,24 102,18 Q125,4 155,22 Q172,12 195,30 Q218,20 240,38 Q262,34 270,55 Q270,70 255,70 Z" fill="rgba(30,41,59,0.7)" />
           </svg>
         </div>
-        <div className="absolute -top-2 right-[-30px]" style={{ animation: "stormCloudDrift2 7s ease-in-out infinite" }}>
-          <svg width="200" height="65" viewBox="0 0 200 65" style={{ opacity: 0.8 }}>
-            <ellipse cx="100" cy="42" rx="90" ry="22" fill="rgba(15,23,42,0.85)" />
-            <ellipse cx="70" cy="35" rx="50" ry="24" fill="rgba(30,41,59,0.8)" />
+        <div className="absolute top-[8px] right-[-30px]" style={{ animation: "stormCloudDrift2 7s ease-in-out infinite" }}>
+          <svg width="200" height="75" viewBox="0 0 200 75" style={{ opacity: 0.8 }}>
+            <path d="M10,60 Q10,38 38,36 Q42,18 75,14 Q95,2 118,18 Q132,10 150,24 Q168,16 185,32 Q198,30 200,45 Q200,60 188,60 Z" fill="rgba(15,23,42,0.88)" />
+            <path d="M20,60 Q20,42 45,40 Q50,24 78,18 Q96,8 118,22 Q132,14 148,28 Q165,20 180,36 Q195,34 198,48 Q198,60 185,60 Z" fill="rgba(30,41,59,0.65)" />
           </svg>
         </div>
         {/* BOLTS — large, bright, dramatic SVG lightning */}
@@ -315,35 +311,32 @@ function WeatherAnimation({ condition }: { condition: string }) {
             100% { transform: translateX(10px) translateY(-2px); }
           }
         `}</style>
-        {/* MASSIVE dark cloud 1 — top left, biggest */}
-        <div className="absolute -top-6 -left-8" style={{ animation: "bigCloudDrift1 10s ease-in-out infinite" }}>
-          <svg width="260" height="90" viewBox="0 0 260 90" style={{ opacity: 0.5 }}>
-            <ellipse cx="130" cy="55" rx="120" ry="30" fill="rgba(30,58,95,0.7)" />
-            <ellipse cx="80" cy="42" rx="65" ry="32" fill="rgba(30,58,95,0.8)" />
-            <ellipse cx="170" cy="48" rx="55" ry="26" fill="rgba(44,82,130,0.6)" />
-            <ellipse cx="120" cy="38" rx="45" ry="22" fill="rgba(59,96,149,0.5)" />
+        {/* Cloud 1 — top left, biggest, proper cloud shape */}
+        <div className="absolute top-[-8px] left-[-10px]" style={{ animation: "bigCloudDrift1 10s ease-in-out infinite" }}>
+          <svg width="260" height="100" viewBox="0 0 260 100" style={{ opacity: 0.55 }}>
+            <path d="M40,80 Q40,55 65,55 Q65,30 100,30 Q125,10 155,30 Q175,20 195,35 Q220,25 235,45 Q260,45 260,65 Q260,80 240,80 Z" fill="rgba(30,58,95,0.8)" />
+            <path d="M50,80 Q50,60 75,58 Q80,38 110,35 Q130,20 155,35 Q170,28 185,40 Q200,32 215,48 Q235,48 240,65 Q240,80 225,80 Z" fill="rgba(44,82,130,0.6)" />
           </svg>
         </div>
-        {/* MASSIVE dark cloud 2 — middle right */}
-        <div className="absolute top-4 right-[-20px]" style={{ animation: "bigCloudDrift2 12s ease-in-out infinite" }}>
-          <svg width="220" height="80" viewBox="0 0 220 80" style={{ opacity: 0.45 }}>
-            <ellipse cx="110" cy="50" rx="100" ry="28" fill="rgba(30,58,95,0.75)" />
-            <ellipse cx="70" cy="40" rx="55" ry="28" fill="rgba(44,82,130,0.65)" />
-            <ellipse cx="150" cy="44" rx="45" ry="22" fill="rgba(30,58,95,0.6)" />
+        {/* Cloud 2 — upper right, proper cloud shape */}
+        <div className="absolute top-[15px] right-[-15px]" style={{ animation: "bigCloudDrift2 12s ease-in-out infinite" }}>
+          <svg width="220" height="85" viewBox="0 0 220 85" style={{ opacity: 0.45 }}>
+            <path d="M30,70 Q30,48 55,48 Q58,28 90,25 Q110,8 135,25 Q155,15 175,30 Q195,22 210,40 Q220,40 220,58 Q220,70 205,70 Z" fill="rgba(30,58,95,0.75)" />
+            <path d="M40,70 Q40,52 60,50 Q65,32 95,28 Q112,15 135,30 Q150,22 168,34 Q185,28 200,44 Q215,44 215,58 Q215,70 200,70 Z" fill="rgba(44,82,130,0.55)" />
           </svg>
         </div>
-        {/* Medium dark cloud 3 — bottom left */}
-        <div className="absolute bottom-8 left-4" style={{ animation: "bigCloudDrift3 14s ease-in-out infinite" }}>
-          <svg width="180" height="65" viewBox="0 0 180 65" style={{ opacity: 0.4 }}>
-            <ellipse cx="90" cy="40" rx="80" ry="24" fill="rgba(30,58,95,0.7)" />
-            <ellipse cx="55" cy="32" rx="45" ry="22" fill="rgba(44,82,130,0.6)" />
+        {/* Cloud 3 — lower left, proper cloud shape */}
+        <div className="absolute bottom-[30px] left-[10px]" style={{ animation: "bigCloudDrift3 14s ease-in-out infinite" }}>
+          <svg width="180" height="70" viewBox="0 0 180 70" style={{ opacity: 0.38 }}>
+            <path d="M25,60 Q25,40 50,38 Q55,22 85,20 Q100,8 120,20 Q135,14 150,28 Q165,22 175,38 Q180,38 180,52 Q180,60 170,60 Z" fill="rgba(30,58,95,0.7)" />
+            <path d="M35,60 Q35,44 55,42 Q60,28 88,24 Q102,14 122,26 Q135,20 148,32 Q160,26 170,40 Q178,40 178,52 Q178,60 165,60 Z" fill="rgba(44,82,130,0.5)" />
           </svg>
         </div>
-        {/* Smaller dark cloud 4 — top center */}
-        <div className="absolute top-10 left-1/3" style={{ animation: "bigCloudDrift4 11s ease-in-out infinite" }}>
-          <svg width="140" height="50" viewBox="0 0 140 50" style={{ opacity: 0.35 }}>
-            <ellipse cx="70" cy="30" rx="60" ry="18" fill="rgba(44,82,130,0.65)" />
-            <ellipse cx="45" cy="24" rx="35" ry="16" fill="rgba(30,58,95,0.55)" />
+        {/* Cloud 4 — center, smaller */}
+        <div className="absolute top-[40px] left-[35%]" style={{ animation: "bigCloudDrift4 11s ease-in-out infinite" }}>
+          <svg width="150" height="60" viewBox="0 0 150 60" style={{ opacity: 0.35 }}>
+            <path d="M20,50 Q20,32 42,30 Q45,16 72,14 Q88,4 108,16 Q120,10 135,22 Q148,20 150,35 Q150,50 140,50 Z" fill="rgba(44,82,130,0.65)" />
+            <path d="M28,50 Q28,36 48,34 Q52,22 75,18 Q90,10 108,22 Q118,16 130,28 Q142,26 145,38 Q145,50 135,50 Z" fill="rgba(30,58,95,0.55)" />
           </svg>
         </div>
       </div>
@@ -379,9 +372,8 @@ function WeatherAnimation({ condition }: { condition: string }) {
           style={{ animation: "partlyCloudDrift1 9s ease-in-out infinite" }}
         >
           <svg width="160" height="65" viewBox="0 0 160 65" style={{ opacity: 0.6 }}>
-            <ellipse cx="80" cy="38" rx="72" ry="22" fill="rgba(30,58,95,0.65)" />
-            <ellipse cx="55" cy="30" rx="42" ry="20" fill="rgba(44,82,130,0.55)" />
-            <ellipse cx="110" cy="34" rx="35" ry="18" fill="rgba(30,58,95,0.5)" />
+            <path d="M15,52 Q15,34 38,32 Q42,18 72,15 Q88,4 108,18 Q122,10 138,24 Q152,18 160,34 Q160,52 148,52 Z" fill="rgba(30,58,95,0.7)" />
+            <path d="M25,52 Q25,38 45,36 Q50,24 75,20 Q90,12 108,24 Q120,16 135,28 Q148,22 156,36 Q156,52 145,52 Z" fill="rgba(44,82,130,0.5)" />
           </svg>
         </div>
         {/* Second cloud lower left */}
@@ -389,8 +381,8 @@ function WeatherAnimation({ condition }: { condition: string }) {
           style={{ animation: "partlyCloudDrift2 12s ease-in-out infinite" }}
         >
           <svg width="130" height="50" viewBox="0 0 130 50" style={{ opacity: 0.4 }}>
-            <ellipse cx="65" cy="30" rx="58" ry="18" fill="rgba(30,58,95,0.6)" />
-            <ellipse cx="42" cy="24" rx="35" ry="16" fill="rgba(44,82,130,0.5)" />
+            <path d="M10,40 Q10,26 30,24 Q34,14 58,12 Q70,4 88,14 Q98,8 112,18 Q125,16 130,28 Q130,40 120,40 Z" fill="rgba(30,58,95,0.6)" />
+            <path d="M18,40 Q18,28 35,26 Q40,18 60,14 Q72,8 88,18 Q98,12 110,22 Q122,20 128,30 Q128,40 118,40 Z" fill="rgba(44,82,130,0.45)" />
           </svg>
         </div>
       </div>
