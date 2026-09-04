@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Users, Search, MapPin } from "lucide-react";
 import DealerCard from "../components/dealers/DealerCard";
 import api from "../services/api";
+import { useLanguage } from "../contexts/LanguageContext";
 
 const INDIAN_STATES = ["ALL", "Maharashtra", "Punjab", "Uttar Pradesh", "Karnataka", "Tamil Nadu", "Gujarat", "Rajasthan"];
 
@@ -69,6 +70,7 @@ const FALLBACK_DEALERS = [
 ];
 
 export default function DealersPage() {
+  const { t } = useLanguage();
   const [dealers, setDealers] = useState<any[]>([]);
   const [district, setDistrict] = useState("ALL");
   const [search, setSearch] = useState("");
@@ -101,13 +103,13 @@ export default function DealersPage() {
         <div className="text-center mb-8">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-teal-100 text-teal-800 text-xs font-semibold mb-3">
             <Users className="w-3.5 h-3.5" />
-            <span>Direct Call & WhatsApp</span>
+            <span>{t("directCallWhatsapp")}</span>
           </div>
           <h1 className="text-2xl sm:text-4xl font-bold text-slate-900">
-            Verified Agro Dealers Near You
+            {t("verifiedDealersNear")}
           </h1>
           <p className="text-xs sm:text-sm text-slate-500 max-w-xl mx-auto mt-2">
-            Contact local certified dealers directly via phone call, WhatsApp chat with pre-filled messages, or start an in-app chat.
+            {t("contactDealersDesc")}
           </p>
         </div>
 
@@ -118,7 +120,7 @@ export default function DealersPage() {
               type="text"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              placeholder="Search by dealer name, shop name, or location..."
+              placeholder={t("searchDealers")}
               className="w-full pl-10 pr-4 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-teal-500"
             />
           </div>
@@ -141,7 +143,7 @@ export default function DealersPage() {
         </div>
 
         {loading ? (
-          <div className="py-16 text-center text-slate-400">Loading verified dealers...</div>
+          <div className="py-16 text-center text-slate-400">{t("loading")}</div>
         ) : filtered.length === 0 ? (
           <div className="py-16 text-center text-slate-500 bg-white rounded-2xl border border-slate-200 p-8">
             No dealers found in this location.

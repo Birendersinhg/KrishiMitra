@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { Sun, Cloud, CloudRain, CloudSun, MapPin, RefreshCw, AlertTriangle } from "lucide-react";
 import { useLocation } from "../../contexts/LocationContext";
+import { useLanguage } from "../../contexts/LanguageContext";
 import api from "../../services/api";
 
 interface WeatherWidgetProps {
@@ -47,6 +48,7 @@ function generateLocalForecast(city: string) {
 
 export default function WeatherWidget({ showForecast = true }: WeatherWidgetProps) {
   const { city, district, state, latitude, longitude, refreshLocation } = useLocation();
+  const { t } = useLanguage();
   const [weather, setWeather] = useState<any | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -106,7 +108,7 @@ export default function WeatherWidget({ showForecast = true }: WeatherWidgetProp
           </div>
           <div>
             <h3 className="text-base font-bold text-white leading-tight">{resolvedCity}, {resolvedState}</h3>
-            <p className="text-[11px] text-emerald-200 font-medium">District: {resolvedDistrict}</p>
+            <p className="text-[11px] text-emerald-200 font-medium">{t("district")}: {resolvedDistrict}</p>
           </div>
         </div>
 
@@ -133,15 +135,15 @@ export default function WeatherWidget({ showForecast = true }: WeatherWidgetProp
       {/* Stats */}
       <div className="grid grid-cols-3 gap-2 py-3 px-3 rounded-2xl bg-black/20 text-center text-xs">
         <div>
-          <span className="text-[10px] text-emerald-300 block">Humidity</span>
+          <span className="text-[10px] text-emerald-300 block">{t("humidityLabel")}</span>
           <span className="font-bold">{current.humidity}%</span>
         </div>
         <div className="border-x border-white/10">
-          <span className="text-[10px] text-emerald-300 block">Wind</span>
+          <span className="text-[10px] text-emerald-300 block">{t("windLabel")}</span>
           <span className="font-bold">{current.windSpeed} km/h</span>
         </div>
         <div>
-          <span className="text-[10px] text-emerald-300 block">Rain Chance</span>
+          <span className="text-[10px] text-emerald-300 block">{t("rainChanceLabel")}</span>
           <span className="font-bold">{current.rainfallChance}%</span>
         </div>
       </div>
@@ -150,7 +152,7 @@ export default function WeatherWidget({ showForecast = true }: WeatherWidgetProp
       <div className="p-3.5 rounded-2xl bg-emerald-500/20 border border-emerald-400/30 text-xs leading-relaxed text-emerald-100 flex items-start gap-2">
         <AlertTriangle className="w-4 h-4 text-amber-300 flex-shrink-0 mt-0.5" />
         <div>
-          <span className="font-bold text-white">Farmer Advisory: </span>
+          <span className="font-bold text-white">{t("farmerAdvisory")}: </span>
           <span>{advisory}</span>
         </div>
       </div>
@@ -158,7 +160,7 @@ export default function WeatherWidget({ showForecast = true }: WeatherWidgetProp
       {/* 5-Day Forecast */}
       {showForecast && (
         <div className="border-t border-white/10 pt-4 space-y-2">
-          <h4 className="text-xs font-bold text-emerald-200">5-Day Weather Forecast & Farming Plan</h4>
+          <h4 className="text-xs font-bold text-emerald-200">{t("forecast5DayTitle")}</h4>
           <div className="grid grid-cols-5 gap-2 text-center text-[10px]">
             {forecast.map((day: any, i: number) => {
               const IconComp = getWeatherIcon(day.condition);
@@ -168,7 +170,7 @@ export default function WeatherWidget({ showForecast = true }: WeatherWidgetProp
                   <IconComp className="w-4 h-4 text-amber-300" />
                   <span className="text-xs font-bold text-white">{day.temp}&deg;</span>
                   <span className="text-[9px] text-emerald-300 truncate w-full">{day.condition}</span>
-                  <span className="text-[9px] text-blue-300">Rain: {day.rain}%</span>
+                  <span className="text-[9px] text-blue-300">{t("rainLabel")} {day.rain}%</span>
                 </div>
               );
             })}

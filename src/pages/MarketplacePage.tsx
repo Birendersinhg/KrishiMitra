@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Store, Search, Camera, Image, MapPin, Star, MessageCircle, Package, ArrowRight, X, Send, Filter } from "lucide-react";
+import { useLanguage } from "../contexts/LanguageContext";
 
 interface ProduceListing {
   id: string;
@@ -40,6 +41,7 @@ const GRADE_COLORS: Record<string, string> = { A: "bg-emerald-100 text-emerald-8
 const CROPS = ["All", "Paddy", "Tomato", "Mustard", "Potato", "Maize", "Brinjal"];
 
 export default function MarketplacePage() {
+  const { t } = useLanguage();
   const [listings] = useState<ProduceListing[]>(MOCK_LISTINGS);
   const [filter, setFilter] = useState("All");
   const [search, setSearch] = useState("");

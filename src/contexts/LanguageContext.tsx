@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 import { translations, LanguageCode } from "../utils/translations";
+import { EXTRA_KEYS } from "../utils/translations.extra";
 
 interface LanguageContextType {
   language: LanguageCode;
@@ -25,8 +26,23 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
   };
 
   const t = (key: string): string => {
+    // Check main translations first
     const langDict = translations[language] || translations.en;
-    return (langDict as any)[key] || (translations.en as any)[key] || key;
+    let val = (langDict as any)[key];
+    if (val !== undefined) return val;
+
+    // Check extra translations
+    const extraDict = EXTRA_KEYS[language] || EXTRA_KEYS.en;
+    val = (extraDict as any)[key];
+    if (val !== undefined) return val;
+
+    // Fallback to English extra
+    const enExtra = EXTRA_KEYS.en;
+    val = (enExtra as any)[key];
+    if (val !== undefined) return val;
+
+    // Final fallback: English main
+    return (translations.en as any)[key] || key;
   };
 
   return (

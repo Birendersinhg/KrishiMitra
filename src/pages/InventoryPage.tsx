@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Package, Plus, Trash2, TrendingUp, MapPin, Calendar, Scale, AlertTriangle, Sparkles, X } from "lucide-react";
+import { useLanguage } from "../contexts/LanguageContext";
 
 interface InventoryItem {
   id: string;
@@ -14,10 +15,11 @@ interface InventoryItem {
   notes: string;
 }
 
-const STORAGE_LABELS: Record<string, { label: string; icon: string; color: string }> = {
-  home: { label: "Home Storage", icon: "🏠", color: "bg-amber-50 text-amber-800 border-amber-200" },
-  warehouse: { label: "Co-op Warehouse", icon: "🏭", color: "bg-blue-50 text-blue-800 border-blue-200" },
-  "cold-storage": { label: "Cold Storage", icon: "❄️", color: "bg-cyan-50 text-cyan-800 border-cyan-200" },
+// STORAGE_KEYS are now translation keys (uses labelKey for t())
+const STORAGE_KEYS: Record<string, { labelKey: string; icon: string; color: string }> = {
+  home: { labelKey: "homeStorage", icon: "🏠", color: "bg-amber-50 text-amber-800 border-amber-200" },
+  warehouse: { labelKey: "coOpWarehouse", icon: "🏭", color: "bg-blue-50 text-blue-800 border-blue-200" },
+  "cold-storage": { labelKey: "coldStorage", icon: "❄️", color: "bg-cyan-50 text-cyan-800 border-cyan-200" },
 };
 
 const GRADE_COLORS: Record<string, string> = {
@@ -35,6 +37,7 @@ const MOCK_INVENTORY: InventoryItem[] = [
 ];
 
 export default function InventoryPage() {
+  const { t } = useLanguage();
   const [inventory, setInventory] = useState<InventoryItem[]>(MOCK_INVENTORY);
   const [showAddForm, setShowAddForm] = useState(false);
   const [filter, setFilter] = useState<"all" | "available" | "listed" | "sold">("all");
@@ -207,7 +210,7 @@ export default function InventoryPage() {
                 </thead>
                 <tbody className="divide-y divide-slate-100">
                   {filtered.map((item) => {
-                    const storage = STORAGE_LABELS[item.storageLocation];
+                    const storage = STORAGE_KEYS[item.storageLocation];
                     const suggested = priceSuggestion(item.cropName, item.grade);
                     const priceDiff = item.pricePerKg > 0 ? ((item.pricePerKg - suggested) / suggested) * 100 : 0;
                     return (
@@ -230,7 +233,7 @@ export default function InventoryPage() {
                         <td className="px-5 py-4">
                           <span className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold border ${storage.color}`}>
                             <span>{storage.icon}</span>
-                            <span>{storage.label}</span>
+                            <span>{t(storage.labelKey)}</span>
                           </span>
                         </td>
                         <td className="px-5 py-4">
@@ -334,11 +337,11 @@ export default function InventoryPage() {
                 <label className="block text-xs font-semibold text-slate-700 mb-1.5">Storage Location</label>
                 <div className="grid grid-cols-3 gap-2">
                   {(["home", "warehouse", "cold-storage"] as const).map((loc) => {
-                    const s = STORAGE_LABELS[loc];
+                    const s = STORAGE_KEYS[loc];
                     return (
                       <button key={loc} onClick={() => setNewItem({ ...newItem, storageLocation: loc })} className={`py-3 rounded-xl text-xs font-semibold transition-all cursor-pointer border ${newItem.storageLocation === loc ? "bg-emerald-600 text-white border-emerald-600" : `${s.color} border-current`}`}>
                         <span className="block text-base mb-0.5">{s.icon}</span>
-                        <span className="block text-[10px]">{s.label}</span>
+                        <span className="block text-[10px]">{t(s.labelKey)}</span>
                       </button>
                     );
                   })}
