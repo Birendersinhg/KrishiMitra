@@ -98,94 +98,98 @@ function WeatherAnimation({ condition }: { condition: string }) {
     return (
       <div className="absolute inset-0 pointer-events-none overflow-hidden rounded-3xl">
         <style>{`
-          @keyframes rainFall {
-            0% { transform: translateY(-20px) rotate(15deg); opacity: 0; }
+          @keyframes heavyRain {
+            0% { transform: translateY(-30px) translateX(0); opacity: 0; }
             10% { opacity: 1; }
-            90% { opacity: 1; }
-            100% { transform: translateY(250px) rotate(15deg); opacity: 0; }
+            90% { opacity: 0.9; }
+            100% { transform: translateY(320px) translateX(-15px); opacity: 0; }
           }
-          @keyframes rainFall2 {
-            0% { transform: translateY(-10px) rotate(12deg); opacity: 0; }
-            15% { opacity: 0.8; }
-            85% { opacity: 0.8; }
-            100% { transform: translateY(230px) rotate(12deg); opacity: 0; }
+          @keyframes dropSlide {
+            0% { transform: translateY(0) scaleY(1); opacity: 0; }
+            20% { opacity: 0.9; }
+            80% { opacity: 0.7; }
+            100% { transform: translateY(90px) scaleY(1.4); opacity: 0; }
           }
-          @keyframes dropletSlide {
-            0% { transform: translateY(0) scale(1); opacity: 0.7; }
-            50% { transform: translateY(40px) scale(0.9); opacity: 0.9; }
-            100% { transform: translateY(80px) scale(0.7); opacity: 0; }
+          @keyframes ripple {
+            0% { transform: scale(0); opacity: 0.6; border-width: 2px; }
+            100% { transform: scale(4); opacity: 0; border-width: 0.5px; }
           }
-          @keyframes rainSplash {
-            0% { transform: scale(0); opacity: 0.8; }
-            100% { transform: scale(2.5); opacity: 0; }
+          @keyframes darkCloudDrift1 {
+            0% { transform: translateX(-20px); }
+            50% { transform: translateX(15px); }
+            100% { transform: translateX(-20px); }
+          }
+          @keyframes darkCloudDrift2 {
+            0% { transform: translateX(10px); }
+            50% { transform: translateX(-15px); }
+            100% { transform: translateX(10px); }
           }
         `}</style>
-        {/* Rain streaks — fast falling lines */}
-        {Array.from({ length: 20 }).map((_, i) => (
+        {/* Dark storm clouds at top */}
+        <div className="absolute -top-4 -left-6" style={{ animation: "darkCloudDrift1 8s ease-in-out infinite" }}>
+          <svg width="220" height="70" viewBox="0 0 220 70" style={{ opacity: 0.7 }}>
+            <ellipse cx="110" cy="45" rx="100" ry="25" fill="rgba(30,41,59,0.8)" />
+            <ellipse cx="70" cy="35" rx="55" ry="28" fill="rgba(30,41,59,0.9)" />
+            <ellipse cx="150" cy="38" rx="50" ry="22" fill="rgba(30,41,59,0.7)" />
+            <ellipse cx="100" cy="30" rx="40" ry="20" fill="rgba(51,65,85,0.6)" />
+          </svg>
+        </div>
+        <div className="absolute -top-2 right-[-20px]" style={{ animation: "darkCloudDrift2 10s ease-in-out infinite" }}>
+          <svg width="180" height="60" viewBox="0 0 180 60" style={{ opacity: 0.6 }}>
+            <ellipse cx="90" cy="38" rx="80" ry="22" fill="rgba(30,41,59,0.8)" />
+            <ellipse cx="60" cy="30" rx="45" ry="20" fill="rgba(51,65,85,0.7)" />
+          </svg>
+        </div>
+        {/* HEAVY rain streaks — thick, bright, fast */}
+        {Array.from({ length: 35 }).map((_, i) => (
           <div
             key={`rain-${i}`}
             className="absolute rounded-full"
             style={{
-              left: `${3 + (i * 5) % 94}%`,
-              top: "-5%",
-              width: "1.5px",
-              height: `${16 + (i % 4) * 6}px`,
-              background: `linear-gradient(to bottom, transparent, rgba(147,197,253,${0.3 + (i % 3) * 0.15}))`,
-              animation: `rainFall ${0.7 + (i % 5) * 0.15}s linear infinite`,
-              animationDelay: `${(i * 0.09) % 1.2}s`,
+              left: `${(i * 2.8) % 98}%`,
+              top: "-8%",
+              width: `${1.5 + (i % 3) * 0.5}px`,
+              height: `${22 + (i % 5) * 10}px`,
+              background: `linear-gradient(to bottom, transparent 0%, rgba(147,197,253,0.6) 40%, rgba(96,165,250,0.8) 100%)`,
+              animation: `heavyRain ${0.45 + (i % 6) * 0.08}s linear infinite`,
+              animationDelay: `${(i * 0.04) % 0.8}s`,
             }}
           />
         ))}
-        {/* Secondary rain layer — slower, thicker */}
-        {Array.from({ length: 10 }).map((_, i) => (
-          <div
-            key={`rain2-${i}`}
-            className="absolute rounded-full"
-            style={{
-              left: `${5 + (i * 10) % 90}%`,
-              top: "-3%",
-              width: "2px",
-              height: `${20 + (i % 3) * 8}px`,
-              background: `linear-gradient(to bottom, transparent, rgba(96,165,250,0.4))`,
-              animation: `rainFall2 ${0.9 + (i % 3) * 0.2}s linear infinite`,
-              animationDelay: `${(i * 0.13) % 1.5}s`,
-            }}
-          />
-        ))}
-        {/* Water droplets on glass */}
-        {Array.from({ length: 8 }).map((_, i) => (
+        {/* Water droplets sliding on glass — big and visible */}
+        {Array.from({ length: 12 }).map((_, i) => (
           <div
             key={`drop-${i}`}
-            className="absolute rounded-full"
+            className="absolute"
             style={{
-              left: `${10 + (i * 12) % 80}%`,
-              top: `${15 + (i * 11) % 50}%`,
-              width: `${4 + (i % 3) * 2}px`,
-              height: `${5 + (i % 3) * 3}px`,
-              background: "radial-gradient(ellipse at 30% 30%, rgba(255,255,255,0.5), rgba(147,197,253,0.3))",
-              borderRadius: "50% 50% 50% 50% / 60% 60% 40% 40%",
-              animation: `dropletSlide ${2 + (i % 3) * 0.8}s ease-in infinite`,
-              animationDelay: `${i * 0.4}s`,
+              left: `${5 + (i * 8) % 88}%`,
+              top: `${10 + (i * 7) % 55}%`,
+              width: `${6 + (i % 4) * 3}px`,
+              height: `${8 + (i % 4) * 4}px`,
+              background: "radial-gradient(ellipse at 35% 25%, rgba(255,255,255,0.7), rgba(147,197,253,0.5) 60%, transparent)",
+              borderRadius: "40% 40% 50% 50% / 50% 50% 60% 60%",
+              animation: `dropSlide ${1.8 + (i % 4) * 0.6}s ease-in infinite`,
+              animationDelay: `${i * 0.35}s`,
             }}
           />
         ))}
-        {/* Splash rings at bottom */}
-        {Array.from({ length: 5 }).map((_, i) => (
+        {/* Splash ripples at bottom */}
+        {Array.from({ length: 8 }).map((_, i) => (
           <div
-            key={`splash-${i}`}
-            className="absolute rounded-full border border-blue-300/20"
+            key={`ripple-${i}`}
+            className="absolute rounded-full border border-blue-300/40"
             style={{
-              left: `${10 + (i * 18) % 80}%`,
-              bottom: "8%",
-              width: "12px",
-              height: "6px",
-              animation: `rainSplash ${1.5 + (i % 3) * 0.5}s ease-out infinite`,
-              animationDelay: `${i * 0.3}s`,
+              left: `${5 + (i * 12) % 90}%`,
+              bottom: `${2 + (i * 3) % 12}%`,
+              width: "8px",
+              height: "8px",
+              animation: `ripple ${1.2 + (i % 3) * 0.4}s ease-out infinite`,
+              animationDelay: `${i * 0.25}s`,
             }}
           />
         ))}
-        {/* Blue-tinted overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-blue-900/15 via-blue-800/10 to-blue-900/20 rounded-3xl" />
+        {/* Dark rain overlay */}
+        <div className="absolute inset-0 bg-gradient-to-b from-slate-800/30 via-blue-900/20 to-slate-900/30 rounded-3xl" />
       </div>
     );
   }
@@ -195,73 +199,89 @@ function WeatherAnimation({ condition }: { condition: string }) {
     return (
       <div className="absolute inset-0 pointer-events-none overflow-hidden rounded-3xl">
         <style>{`
-          @keyframes lightningFlash {
+          @keyframes boltFlash1 {
             0%, 100% { opacity: 0; }
+            3% { opacity: 1; }
+            4% { opacity: 0.1; }
             5% { opacity: 0.9; }
-            6% { opacity: 0.1; }
-            7% { opacity: 0.7; }
-            8% { opacity: 0; }
-            50% { opacity: 0; }
-            52% { opacity: 0.5; }
-            53% { opacity: 0; }
+            7% { opacity: 0; }
+            40% { opacity: 0; }
+            41% { opacity: 0.7; }
+            42% { opacity: 0; }
           }
-          @keyframes lightningBolt1 {
-            0%, 100% { opacity: 0; clip-path: polygon(50% 0%, 45% 30%, 55% 30%, 48% 60%, 56% 60%, 42% 100%); }
-            4% { opacity: 1; }
-            6% { opacity: 0.2; }
-            8% { opacity: 0.8; }
-            10% { opacity: 0; }
-            50% { opacity: 0; }
-            51% { opacity: 0.6; }
-            52% { opacity: 0; }
+          @keyframes boltFlash2 {
+            0%, 100% { opacity: 0; }
+            20% { opacity: 0; }
+            21% { opacity: 1; }
+            23% { opacity: 0.2; }
+            24% { opacity: 0.8; }
+            26% { opacity: 0; }
           }
-          @keyframes thunderRainFall {
-            0% { transform: translateY(-15px) rotate(20deg); opacity: 0; }
-            10% { opacity: 0.7; }
-            100% { transform: translateY(250px) rotate(20deg); opacity: 0; }
+          @keyframes stormRain {
+            0% { transform: translateY(-25px) translateX(0); opacity: 0; }
+            8% { opacity: 1; }
+            100% { transform: translateY(320px) translateX(-20px); opacity: 0; }
           }
           @keyframes stormCloudDrift {
             0%, 100% { transform: translateX(0); }
-            50% { transform: translateX(8px); }
+            50% { transform: translateX(12px); }
+          }
+          @keyframes stormCloudDrift2 {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(-10px); }
           }
         `}</style>
-        {/* Dark storm overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-purple-950/40 via-slate-900/30 to-purple-950/50 rounded-3xl" />
-        {/* Lightning bolt 1 */}
-        <div className="absolute top-0 left-1/3 w-16 h-full opacity-0"
-          style={{ animation: "lightningBolt1 6s ease infinite" }}
-        >
-          <svg viewBox="0 0 60 200" className="w-full h-full" style={{ filter: "drop-shadow(0 0 15px rgba(251,191,36,0.8))" }}>
-            <polygon points="30,0 22,60 38,55 18,130 42,120 25,200 45,110 20,115 40,50 18,55 35,0"
-              fill="rgba(251,191,36,0.9)" stroke="rgba(255,255,255,0.6)" strokeWidth="1" />
+        {/* Very dark storm overlay */}
+        <div className="absolute inset-0 bg-gradient-to-b from-purple-950/60 via-slate-900/50 to-purple-950/70 rounded-3xl" />
+        {/* MASSIVE dark storm clouds */}
+        <div className="absolute -top-4 -left-4" style={{ animation: "stormCloudDrift 6s ease-in-out infinite" }}>
+          <svg width="280" height="80" viewBox="0 0 280 80" style={{ opacity: 0.85 }}>
+            <ellipse cx="140" cy="50" rx="130" ry="28" fill="rgba(15,23,42,0.9)" />
+            <ellipse cx="90" cy="40" rx="70" ry="30" fill="rgba(15,23,42,0.95)" />
+            <ellipse cx="200" cy="42" rx="60" ry="25" fill="rgba(30,41,59,0.85)" />
+            <ellipse cx="130" cy="35" rx="50" ry="22" fill="rgba(51,65,85,0.6)" />
           </svg>
         </div>
-        {/* Lightning bolt 2 */}
-        <div className="absolute top-0 right-1/4 w-12 h-3/4 opacity-0"
-          style={{ animation: "lightningBolt1 6s ease 0.5s infinite", animationDelay: "3s" }}
-        >
-          <svg viewBox="0 0 40 180" className="w-full h-full" style={{ filter: "drop-shadow(0 0 10px rgba(251,191,36,0.6))" }}>
-            <polygon points="20,0 14,50 28,45 10,120 30,110 18,180"
-              fill="rgba(251,191,36,0.7)" stroke="rgba(255,255,255,0.4)" strokeWidth="0.5" />
+        <div className="absolute -top-2 right-[-30px]" style={{ animation: "stormCloudDrift2 7s ease-in-out infinite" }}>
+          <svg width="200" height="65" viewBox="0 0 200 65" style={{ opacity: 0.8 }}>
+            <ellipse cx="100" cy="42" rx="90" ry="22" fill="rgba(15,23,42,0.85)" />
+            <ellipse cx="70" cy="35" rx="50" ry="24" fill="rgba(30,41,59,0.8)" />
           </svg>
         </div>
-        {/* Screen flash */}
+        {/* BOLTS — large, bright, dramatic SVG lightning */}
+        <div className="absolute top-0 left-[28%] w-20 h-full opacity-0"
+          style={{ animation: "boltFlash1 5s ease infinite" }}
+        >
+          <svg viewBox="0 0 70 250" className="w-full h-full" style={{ filter: "drop-shadow(0 0 20px rgba(251,191,36,0.9)) drop-shadow(0 0 40px rgba(255,255,255,0.4))" }}>
+            <polygon points="35,0 28,55 42,48 20,120 48,108 25,180 50,165 18,250 55,155 22,160 45,95 25,100 40,45 22,50 38,0"
+              fill="rgba(255,255,200,0.95)" stroke="rgba(255,255,255,0.8)" strokeWidth="1" />
+          </svg>
+        </div>
+        <div className="absolute top-0 right-[18%] w-14 h-[85%] opacity-0"
+          style={{ animation: "boltFlash2 5s ease infinite" }}
+        >
+          <svg viewBox="0 0 50 220" className="w-full h-full" style={{ filter: "drop-shadow(0 0 15px rgba(251,191,36,0.8))" }}>
+            <polygon points="25,0 18,45 32,40 12,100 35,88 20,155 38,145 15,220"
+              fill="rgba(255,255,200,0.9)" stroke="rgba(255,255,255,0.6)" strokeWidth="0.5" />
+          </svg>
+        </div>
+        {/* Whole-screen white flash on lightning */}
         <div className="absolute inset-0 bg-white/0 rounded-3xl"
-          style={{ animation: "lightningFlash 6s ease infinite" }}
+          style={{ animation: "boltFlash1 5s ease infinite" }}
         />
-        {/* Storm rain — heavier, angled */}
-        {Array.from({ length: 18 }).map((_, i) => (
+        {/* HEAVY storm rain — thick, angled, fast */}
+        {Array.from({ length: 40 }).map((_, i) => (
           <div
             key={`tRain-${i}`}
             className="absolute rounded-full"
             style={{
-              left: `${2 + (i * 5.5) % 96}%`,
-              top: "-5%",
-              width: "2px",
-              height: `${18 + (i % 4) * 5}px`,
-              background: `linear-gradient(to bottom, transparent, rgba(147,197,253,${0.25 + (i % 3) * 0.1}))`,
-              animation: `thunderRainFall ${0.6 + (i % 4) * 0.1}s linear infinite`,
-              animationDelay: `${(i * 0.07) % 1}s`,
+              left: `${(i * 2.5) % 98}%`,
+              top: "-8%",
+              width: `${2 + (i % 3) * 0.5}px`,
+              height: `${20 + (i % 5) * 8}px`,
+              background: `linear-gradient(to bottom, transparent 0%, rgba(147,197,253,0.5) 30%, rgba(96,165,250,0.7) 100%)`,
+              animation: `stormRain ${0.35 + (i % 6) * 0.06}s linear infinite`,
+              animationDelay: `${(i * 0.03) % 0.6}s`,
             }}
           />
         ))}
@@ -274,45 +294,56 @@ function WeatherAnimation({ condition }: { condition: string }) {
     return (
       <div className="absolute inset-0 pointer-events-none overflow-hidden rounded-3xl">
         <style>{`
-          @keyframes cloudFloat1 {
-            0%, 100% { transform: translateX(-15px) translateY(0); }
-            50% { transform: translateX(15px) translateY(-3px); }
+          @keyframes bigCloudDrift1 {
+            0% { transform: translateX(-30px); }
+            50% { transform: translateX(25px); }
+            100% { transform: translateX(-30px); }
           }
-          @keyframes cloudFloat2 {
-            0%, 100% { transform: translateX(10px) translateY(0); }
-            50% { transform: translateX(-12px) translateY(2px); }
+          @keyframes bigCloudDrift2 {
+            0% { transform: translateX(20px); }
+            50% { transform: translateX(-25px); }
+            100% { transform: translateX(20px); }
           }
-          @keyframes cloudFloat3 {
-            0%, 100% { transform: translateX(-8px) translateY(2px); }
-            50% { transform: translateX(10px) translateY(-2px); }
+          @keyframes bigCloudDrift3 {
+            0% { transform: translateX(-15px) translateY(3px); }
+            50% { transform: translateX(20px) translateY(-2px); }
+            100% { transform: translateX(-15px) translateY(3px); }
+          }
+          @keyframes bigCloudDrift4 {
+            0% { transform: translateX(10px) translateY(-2px); }
+            50% { transform: translateX(-18px) translateY(3px); }
+            100% { transform: translateX(10px) translateY(-2px); }
           }
         `}</style>
-        {/* Large drifting cloud */}
-        <div className="absolute top-2 left-[-10px] text-white/15"
-          style={{ animation: "cloudFloat1 12s ease-in-out infinite" }}
-        >
-          <svg width="120" height="60" viewBox="0 0 120 60">
-            <ellipse cx="60" cy="35" rx="55" ry="20" fill="rgba(255,255,255,0.12)" />
-            <ellipse cx="40" cy="28" rx="30" ry="18" fill="rgba(255,255,255,0.1)" />
-            <ellipse cx="75" cy="30" rx="25" ry="15" fill="rgba(255,255,255,0.08)" />
+        {/* MASSIVE dark cloud 1 — top left, biggest */}
+        <div className="absolute -top-6 -left-8" style={{ animation: "bigCloudDrift1 10s ease-in-out infinite" }}>
+          <svg width="260" height="90" viewBox="0 0 260 90" style={{ opacity: 0.5 }}>
+            <ellipse cx="130" cy="55" rx="120" ry="30" fill="rgba(30,58,95,0.7)" />
+            <ellipse cx="80" cy="42" rx="65" ry="32" fill="rgba(30,58,95,0.8)" />
+            <ellipse cx="170" cy="48" rx="55" ry="26" fill="rgba(44,82,130,0.6)" />
+            <ellipse cx="120" cy="38" rx="45" ry="22" fill="rgba(59,96,149,0.5)" />
           </svg>
         </div>
-        {/* Medium cloud */}
-        <div className="absolute bottom-16 right-[-5px] text-white/10"
-          style={{ animation: "cloudFloat2 16s ease-in-out infinite" }}
-        >
-          <svg width="100" height="50" viewBox="0 0 100 50">
-            <ellipse cx="50" cy="28" rx="45" ry="18" fill="rgba(255,255,255,0.1)" />
-            <ellipse cx="35" cy="22" rx="25" ry="15" fill="rgba(255,255,255,0.08)" />
+        {/* MASSIVE dark cloud 2 — middle right */}
+        <div className="absolute top-4 right-[-20px]" style={{ animation: "bigCloudDrift2 12s ease-in-out infinite" }}>
+          <svg width="220" height="80" viewBox="0 0 220 80" style={{ opacity: 0.45 }}>
+            <ellipse cx="110" cy="50" rx="100" ry="28" fill="rgba(30,58,95,0.75)" />
+            <ellipse cx="70" cy="40" rx="55" ry="28" fill="rgba(44,82,130,0.65)" />
+            <ellipse cx="150" cy="44" rx="45" ry="22" fill="rgba(30,58,95,0.6)" />
           </svg>
         </div>
-        {/* Small cloud */}
-        <div className="absolute top-12 right-10 text-white/8"
-          style={{ animation: "cloudFloat3 14s ease-in-out infinite" }}
-        >
-          <svg width="70" height="35" viewBox="0 0 70 35">
-            <ellipse cx="35" cy="20" rx="30" ry="13" fill="rgba(255,255,255,0.08)" />
-            <ellipse cx="25" cy="16" rx="18" ry="10" fill="rgba(255,255,255,0.06)" />
+        {/* Medium dark cloud 3 — bottom left */}
+        <div className="absolute bottom-8 left-4" style={{ animation: "bigCloudDrift3 14s ease-in-out infinite" }}>
+          <svg width="180" height="65" viewBox="0 0 180 65" style={{ opacity: 0.4 }}>
+            <ellipse cx="90" cy="40" rx="80" ry="24" fill="rgba(30,58,95,0.7)" />
+            <ellipse cx="55" cy="32" rx="45" ry="22" fill="rgba(44,82,130,0.6)" />
+          </svg>
+        </div>
+        {/* Smaller dark cloud 4 — top center */}
+        <div className="absolute top-10 left-1/3" style={{ animation: "bigCloudDrift4 11s ease-in-out infinite" }}>
+          <svg width="140" height="50" viewBox="0 0 140 50" style={{ opacity: 0.35 }}>
+            <ellipse cx="70" cy="30" rx="60" ry="18" fill="rgba(44,82,130,0.65)" />
+            <ellipse cx="45" cy="24" rx="35" ry="16" fill="rgba(30,58,95,0.55)" />
           </svg>
         </div>
       </div>
@@ -325,33 +356,41 @@ function WeatherAnimation({ condition }: { condition: string }) {
       <div className="absolute inset-0 pointer-events-none overflow-hidden rounded-3xl">
         <style>{`
           @keyframes partlySunPulse {
-            0%, 100% { box-shadow: 0 0 25px 8px rgba(251,191,36,0.2); transform: scale(1); }
-            50% { box-shadow: 0 0 40px 15px rgba(251,191,36,0.35); transform: scale(1.05); }
+            0%, 100% { box-shadow: 0 0 30px 10px rgba(251,191,36,0.25); transform: scale(1); }
+            50% { box-shadow: 0 0 50px 20px rgba(251,191,36,0.4); transform: scale(1.08); }
           }
-          @keyframes partlyCloudDrift {
-            0%, 100% { transform: translateX(-10px); }
-            50% { transform: translateX(10px); }
+          @keyframes partlyCloudDrift1 {
+            0% { transform: translateX(-20px); }
+            50% { transform: translateX(15px); }
+            100% { transform: translateX(-20px); }
+          }
+          @keyframes partlyCloudDrift2 {
+            0% { transform: translateX(15px); }
+            50% { transform: translateX(-18px); }
+            100% { transform: translateX(15px); }
           }
         `}</style>
         {/* Sun behind clouds */}
-        <div className="absolute -top-3 -right-3 w-16 h-16 rounded-full bg-gradient-to-br from-amber-300 via-yellow-400 to-orange-400"
+        <div className="absolute -top-4 -right-2 w-20 h-20 rounded-full bg-gradient-to-br from-amber-300 via-yellow-400 to-orange-400"
           style={{ animation: "partlySunPulse 4s ease-in-out infinite", filter: "blur(2px)" }}
         />
-        {/* Cloud overlay drifting */}
-        <div className="absolute top-0 right-0"
-          style={{ animation: "partlyCloudDrift 10s ease-in-out infinite" }}
+        {/* Large cloud drifting over sun */}
+        <div className="absolute top-0 right-[-5px]"
+          style={{ animation: "partlyCloudDrift1 9s ease-in-out infinite" }}
         >
-          <svg width="100" height="55" viewBox="0 0 100 55">
-            <ellipse cx="55" cy="32" rx="45" ry="18" fill="rgba(255,255,255,0.12)" />
-            <ellipse cx="38" cy="25" rx="28" ry="16" fill="rgba(255,255,255,0.1)" />
+          <svg width="160" height="65" viewBox="0 0 160 65" style={{ opacity: 0.6 }}>
+            <ellipse cx="80" cy="38" rx="72" ry="22" fill="rgba(30,58,95,0.65)" />
+            <ellipse cx="55" cy="30" rx="42" ry="20" fill="rgba(44,82,130,0.55)" />
+            <ellipse cx="110" cy="34" rx="35" ry="18" fill="rgba(30,58,95,0.5)" />
           </svg>
         </div>
-        {/* Small drifting cloud */}
-        <div className="absolute bottom-20 left-4"
-          style={{ animation: "partlyCloudDrift 14s ease-in-out infinite reverse" }}
+        {/* Second cloud lower left */}
+        <div className="absolute bottom-14 left-0"
+          style={{ animation: "partlyCloudDrift2 12s ease-in-out infinite" }}
         >
-          <svg width="65" height="30" viewBox="0 0 65 30">
-            <ellipse cx="32" cy="18" rx="28" ry="11" fill="rgba(255,255,255,0.08)" />
+          <svg width="130" height="50" viewBox="0 0 130 50" style={{ opacity: 0.4 }}>
+            <ellipse cx="65" cy="30" rx="58" ry="18" fill="rgba(30,58,95,0.6)" />
+            <ellipse cx="42" cy="24" rx="35" ry="16" fill="rgba(44,82,130,0.5)" />
           </svg>
         </div>
       </div>
@@ -579,19 +618,19 @@ export default function WeatherWidget({ showForecast = true }: WeatherWidgetProp
 
   // Dynamic background color based on weather condition
   const condLower = current.condition.toLowerCase();
-  let bgClass = "bg-gradient-to-br from-sky-500 via-blue-500 to-blue-600"; // default: clear sky blue
+  let bgClass = "bg-gradient-to-br from-sky-400 via-blue-500 to-blue-600"; // default: bright sky blue
   if (condLower.includes("clear") || condLower.includes("sunny")) {
     bgClass = "bg-gradient-to-br from-sky-400 via-blue-400 to-blue-500";
   } else if (condLower.includes("thunder")) {
-    bgClass = "bg-gradient-to-br from-slate-800 via-purple-900 to-slate-900";
+    bgClass = "bg-gradient-to-br from-slate-800 via-purple-950 to-slate-900";
   } else if (condLower.includes("rain") || condLower.includes("drizzle")) {
-    bgClass = "bg-gradient-to-br from-slate-600 via-slate-700 to-blue-800";
+    bgClass = "bg-gradient-to-br from-slate-600 via-blue-800 to-slate-800";
   } else if (condLower.includes("cloud") && condLower.includes("part")) {
-    bgClass = "bg-gradient-to-br from-sky-500 via-blue-500 to-slate-500";
+    bgClass = "bg-gradient-to-br from-blue-500 via-blue-600 to-blue-700";
   } else if (condLower.includes("cloud") || condLower.includes("fog")) {
-    bgClass = "bg-gradient-to-br from-slate-500 via-slate-600 to-slate-700";
+    bgClass = "bg-gradient-to-br from-blue-700 via-blue-800 to-slate-800";
   } else if (condLower.includes("snow")) {
-    bgClass = "bg-gradient-to-br from-slate-400 via-blue-300 to-slate-500";
+    bgClass = "bg-gradient-to-br from-blue-400 via-blue-500 to-slate-500";
   }
 
   return (
