@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { TrendingUp, TrendingDown, MapPin, Sparkles, RefreshCw, ArrowUp, ArrowDown, BarChart3, Clock, Navigation, Search, X } from "lucide-react";
 import { logSearch } from "../contexts/AuthContext";
 import { useAuth } from "../contexts/AuthContext";
+import { useLanguage } from "../contexts/LanguageContext";
 
 interface MandiPrice {
   id: string;
@@ -224,6 +225,7 @@ const PREDICTIONS: Record<string, { date: string; predicted: number; confidence:
 const CROPS = ["Paddy", "Tomato", "Mustard", "Potato", "Maize"];
 
 export default function MandiPricePage() {
+  const { t } = useLanguage();
   const [selectedCrop, setSelectedCrop] = useState("Paddy");
   const [searchQuery, setSearchQuery] = useState("");
   const [searchSuggestions, setSearchSuggestions] = useState<typeof MANDI_LOCATIONS>([]);
@@ -357,19 +359,19 @@ export default function MandiPricePage() {
           <div>
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-100 text-blue-800 text-xs font-semibold mb-2">
               <BarChart3 className="w-3.5 h-3.5" />
-              <span>Live APMC Mandi Prices</span>
+              <span>{t("liveApmc")}</span>
             </div>
-            <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900">Mandi Price Dashboard</h1>
+            <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900">{t("mandiDashboard")}</h1>
             <p className="text-xs sm:text-sm text-slate-500 mt-1 flex items-center gap-1.5">
               <Navigation className="w-3.5 h-3.5 text-emerald-600" />
-              {locationLoading ? "Detecting location..." : selectedLocation ? `Showing mandis near ${selectedLocation.city}, ${selectedLocation.district}` : `Showing mandis near ${displayLocation.city || "you"} (${displayState})`}
+              {locationLoading ? t("detectingLocation") : selectedLocation ? `${t("showingMandisNear")} ${selectedLocation.city}, ${selectedLocation.district}` : `${t("showingMandisNear")} ${displayLocation.city || ""} (${displayState})`}
             </p>
           </div>
         </div>
 
         {/* Location Search */}
         <div className="bg-white rounded-2xl border border-slate-200/80 p-4 shadow-sm">
-          <label className="block text-xs font-bold text-slate-700 mb-2">Search any city, district or mandi across India</label>
+          <label className="block text-xs font-bold text-slate-700 mb-2">{t("searchAnyCity")}</label>
           <div className="relative" ref={searchRef}>
             <Search className="absolute left-3.5 top-3 w-4 h-4 text-slate-400" />
             <input
@@ -377,7 +379,7 @@ export default function MandiPricePage() {
               value={searchQuery}
               onChange={(e) => handleSearch(e.target.value)}
               onFocus={() => searchQuery.length >= 2 && searchSuggestions.length > 0 && setShowSuggestions(true)}
-              placeholder="Type city name (e.g. Mumbai, Lucknow, Indore, Patna...)"
+              placeholder={t("typeCityName")}
               className="w-full pl-10 pr-10 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"
             />
             {searchQuery && (
@@ -400,7 +402,7 @@ export default function MandiPricePage() {
               </div>
             )}
           </div>
-          <p className="text-[10px] text-slate-400 mt-2">Search any city in India — Mumbai, Delhi, Chennai, Kolkata, Hyderabad, or any town with a mandi</p>
+          <p className="text-[10px] text-slate-400 mt-2">{t("searchCityHint")}</p>
         </div>
 
         {/* Crop Selector */}
@@ -415,24 +417,24 @@ export default function MandiPricePage() {
         {/* Summary Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">
           <div className="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-sm">
-            <p className="text-[10px] text-slate-400 font-semibold uppercase">Average Price</p>
+            <p className="text-[10px] text-slate-400 font-semibold uppercase">{t("averagePrice")}</p>
             <p className="text-xl font-extrabold text-slate-900 mt-1">₹{avgPrice.toLocaleString()}</p>
-            <p className="text-[10px] text-slate-400">per quintal</p>
+            <p className="text-[10px] text-slate-400">{t("perQuintal")}</p>
           </div>
           <div className="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-sm">
-            <p className="text-[10px] text-emerald-500 font-semibold uppercase">Best Mandi</p>
+            <p className="text-[10px] text-emerald-500 font-semibold uppercase">{t("bestMandi")}</p>
             <p className="text-sm font-bold text-emerald-700 mt-1">{bestMandi?.mandi || "N/A"}</p>
             <p className="text-[10px] text-emerald-600 font-bold">₹{bestMandi?.price.toLocaleString()}/q</p>
           </div>
           <div className="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-sm">
-            <p className="text-[10px] text-rose-500 font-semibold uppercase">Lowest Price</p>
+            <p className="text-[10px] text-rose-500 font-semibold uppercase">{t("lowestPrice")}</p>
             <p className="text-sm font-bold text-rose-700 mt-1">{worstMandi?.mandi || "N/A"}</p>
             <p className="text-[10px] text-rose-600 font-bold">₹{worstMandi?.price.toLocaleString()}/q</p>
           </div>
           <div className="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-sm">
-            <p className="text-[10px] text-violet-500 font-semibold uppercase">Price Spread</p>
+            <p className="text-[10px] text-violet-500 font-semibold uppercase">{t("priceSpread")}</p>
             <p className="text-xl font-extrabold text-slate-900 mt-1">₹{bestMandi && worstMandi ? (bestMandi.price - worstMandi.price).toLocaleString() : 0}</p>
-            <p className="text-[10px] text-slate-400">max difference</p>
+            <p className="text-[10px] text-slate-400">{t("maxDifference")}</p>
           </div>
         </div>
 
@@ -441,12 +443,12 @@ export default function MandiPricePage() {
           <div className="lg:col-span-5 space-y-6">
             <div className="bg-white rounded-2xl border border-slate-200/80 shadow-sm overflow-hidden">
               <div className="px-5 py-3 border-b border-slate-100 flex items-center justify-between">
-                <h3 className="text-xs font-bold text-slate-900">Nearby Mandi Prices</h3>
-                <span className="text-[10px] text-slate-400 flex items-center gap-1"><Clock className="w-3 h-3" /> Live</span>
+                <h3 className="text-xs font-bold text-slate-900">{t("nearbyMandiPrices")}</h3>
+                <span className="text-[10px] text-slate-400 flex items-center gap-1"><Clock className="w-3 h-3" /> {t("live")}</span>
               </div>
               <div className="divide-y divide-slate-100">
                 {mandis.length === 0 ? (
-                  <div className="py-8 text-center text-xs text-slate-400">No mandi prices for {selectedCrop} in this area</div>
+                  <div className="py-8 text-center text-xs text-slate-400">{t("noMandiPrices")} {selectedCrop}</div>
                 ) : (
                   mandis.map((p) => (
                     <div key={p.id} className="px-5 py-3 flex items-center justify-between hover:bg-slate-50/50 transition-colors">
@@ -472,15 +474,15 @@ export default function MandiPricePage() {
               <div className="bg-gradient-to-br from-emerald-600 to-teal-700 rounded-2xl p-5 text-white shadow-lg">
                 <div className="flex items-center gap-2 mb-3">
                   <Sparkles className="w-4 h-4 text-emerald-200" />
-                  <h3 className="text-xs font-bold">AI Best Day to Sell Advisory</h3>
+                  <h3 className="text-xs font-bold">{t("aiBestDayAdvisory")}</h3>
                 </div>
                 <p className="text-sm font-semibold mb-2">
                   Sell <span className="font-extrabold">{selectedCrop}</span> at <span className="font-extrabold">{bestMandi.mandi}</span>
                 </p>
                 <div className="bg-white/15 rounded-xl p-3 space-y-1.5">
-                  <p className="text-xs">Best price: <span className="font-bold">₹{bestMandi.price.toLocaleString()}/quintal</span></p>
-                  <p className="text-xs">7-day outlook: <span className="font-bold">Prices expected to rise</span></p>
-                  <p className="text-xs">Recommendation: <span className="font-bold">Hold for 2-3 days for better price</span></p>
+                  <p className="text-xs">{t("bestPrice")} <span className="font-bold">₹{bestMandi.price.toLocaleString()}/{t("perQuintal")}</span></p>
+                  <p className="text-xs">{t("sevenDayOutlook")} <span className="font-bold">{t("pricesRise")}</span></p>
+                  <p className="text-xs">{t("recommendation")} <span className="font-bold">{t("holdForBetterPrice")}</span></p>
                 </div>
               </div>
             )}
@@ -490,7 +492,7 @@ export default function MandiPricePage() {
           <div className="lg:col-span-7 space-y-6">
             {/* Price Trend */}
             <div className="bg-white rounded-2xl border border-slate-200/80 shadow-sm p-5">
-              <h3 className="text-xs font-bold text-slate-900 mb-4">📈 14-Day Price Trend — {selectedCrop}</h3>
+              <h3 className="text-xs font-bold text-slate-900 mb-4">📈 {t("priceTrend14Day")} — {selectedCrop}</h3>
               <div className="flex items-end gap-1 h-40">
                 {history.map((h, i) => {
                   const range = Math.max(...history.map((x) => x.price)) - Math.min(...history.map((x) => x.price)) || 1;
@@ -508,15 +510,15 @@ export default function MandiPricePage() {
 
             {/* Price Predictions */}
             <div className="bg-white rounded-2xl border border-slate-200/80 shadow-sm p-5">
-              <h3 className="text-xs font-bold text-slate-900 mb-4">🔮 AI Price Prediction (7 Days)</h3>
+              <h3 className="text-xs font-bold text-slate-900 mb-4">🔮 {t("aiPricePrediction")}</h3>
               <div className="overflow-x-auto">
                 <table className="w-full text-xs">
                   <thead>
                     <tr className="text-slate-400 border-b border-slate-100">
-                      <th className="text-left py-2 font-semibold">Date</th>
-                      <th className="text-right py-2 font-semibold">Predicted</th>
-                      <th className="text-right py-2 font-semibold">Confidence</th>
-                      <th className="text-right py-2 font-semibold">Trend</th>
+                      <th className="text-left py-2 font-semibold">{t("date")}</th>
+                      <th className="text-right py-2 font-semibold">{t("predicted")}</th>
+                      <th className="text-right py-2 font-semibold">{t("confidence")}</th>
+                      <th className="text-right py-2 font-semibold">{t("trend")}</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -543,7 +545,7 @@ export default function MandiPricePage() {
 
             {/* Price Comparison Bar */}
             <div className="bg-white rounded-2xl border border-slate-200/80 shadow-sm p-5">
-              <h3 className="text-xs font-bold text-slate-900 mb-4">📊 Mandi Price Comparison — {selectedCrop}</h3>
+              <h3 className="text-xs font-bold text-slate-900 mb-4">📊 {t("mandiComparison")} — {selectedCrop}</h3>
               <div className="space-y-3">
                 {mandis.sort((a, b) => b.price - a.price).slice(0, 5).map((p) => {
                   const maxP = Math.max(...mandis.map((m) => m.price));

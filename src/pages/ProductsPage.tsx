@@ -2,8 +2,10 @@ import React, { useState, useEffect } from "react";
 import { ShoppingBag, Search } from "lucide-react";
 import ProductCard from "../components/products/ProductCard";
 import api from "../services/api";
+import { useLanguage } from "../contexts/LanguageContext";
 
-const CATEGORIES = ["ALL", "FERTILIZER", "PESTICIDE", "ORGANIC", "SEEDS", "TOOLS", "STORAGE", "PACKAGING"];
+const CATEGORIES_KEYS = ["categoryAll", "categoryFertilizer", "categoryPesticide", "categoryOrganic", "categorySeeds", "categoryTools", "categoryStorage", "categoryPackaging"];
+const CATEGORIES_API = ["ALL", "FERTILIZER", "PESTICIDE", "ORGANIC", "SEEDS", "TOOLS", "STORAGE", "PACKAGING"];
 
 const FALLBACK_PRODUCTS = [
   {
@@ -165,6 +167,7 @@ const FALLBACK_PRODUCTS = [
 ];
 
 export default function ProductsPage() {
+  const { t } = useLanguage();
   const [products, setProducts] = useState<any[]>([]);
   const [category, setCategory] = useState("ALL");
   const [search, setSearch] = useState("");
@@ -197,13 +200,13 @@ export default function ProductsPage() {
         <div className="text-center mb-8">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-100 text-emerald-800 text-xs font-semibold mb-3">
             <ShoppingBag className="w-3.5 h-3.5" />
-            <span>Marketplace & Direct Links</span>
+            <span>{t("marketplaceDirectLinks")}</span>
           </div>
           <h1 className="text-2xl sm:text-4xl font-bold text-slate-900">
-            Agricultural Inventory & Fertilizers
+            {t("agriInventoryFertilizers")}
           </h1>
           <p className="text-xs sm:text-sm text-slate-500 max-w-xl mx-auto mt-2">
-            Clicking "Buy on Amazon" or "Buy on Flipkart" directly opens official store pages with current prices and delivery to your village.
+            {t("buyAmazonFlipkart")}
           </p>
         </div>
 
@@ -214,30 +217,30 @@ export default function ProductsPage() {
               type="text"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              placeholder="Search fertilizers, bio-fungicides, neem oil, seeds, drip irrigation..."
+              placeholder={t("searchProducts")}
               className="w-full pl-10 pr-4 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"
             />
           </div>
 
           <div className="flex flex-wrap gap-2 pt-1 border-t border-slate-100">
-            {CATEGORIES.map((cat) => (
+            {CATEGORIES_KEYS.map((catKey, idx) => (
               <button
-                key={cat}
-                onClick={() => setCategory(cat)}
+                key={catKey}
+                onClick={() => setCategory(CATEGORIES_API[idx])}
                 className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
-                  category === cat
+                  category === CATEGORIES_API[idx]
                     ? "bg-emerald-600 text-white shadow-sm"
                     : "bg-slate-100 text-slate-600 hover:bg-slate-200"
                 }`}
               >
-                {cat}
+                {t(catKey)}
               </button>
             ))}
           </div>
         </div>
 
         {loading ? (
-          <div className="py-16 text-center text-slate-400">Loading products...</div>
+          <div className="py-16 text-center text-slate-400">{t("loading")}</div>
         ) : filtered.length === 0 ? (
           <div className="py-16 text-center text-slate-500 bg-white rounded-2xl border border-slate-200 p-8">
             No products found matching your search.

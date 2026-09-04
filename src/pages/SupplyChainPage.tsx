@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Truck, QrCode, MapPin, Clock, CheckCircle2, Circle, Package, ArrowRight, Search, Plus, Eye } from "lucide-react";
+import { useLanguage } from "../contexts/LanguageContext";
 
 interface SupplyBatch {
   id: string;
@@ -70,15 +71,17 @@ const MOCK_BATCHES: SupplyBatch[] = [
   },
 ];
 
+// STATUS_MAP labels are now translation keys
 const STATUS_MAP = {
-  "harvested": { label: "Harvested", color: "bg-amber-100 text-amber-800", icon: "🌾" },
-  "in-transit": { label: "In Transit", color: "bg-blue-100 text-blue-800", icon: "🚛" },
-  "at-mandi": { label: "At Mandi", color: "bg-violet-100 text-violet-800", icon: "🏪" },
-  "processing": { label: "Processing", color: "bg-orange-100 text-orange-800", icon: "🏭" },
-  "delivered": { label: "Delivered", color: "bg-emerald-100 text-emerald-800", icon: "✅" },
+  "harvested": { labelKey: "harvested", color: "bg-amber-100 text-amber-800", icon: "🌾" },
+  "in-transit": { labelKey: "inTransit", color: "bg-blue-100 text-blue-800", icon: "🚛" },
+  "at-mandi": { labelKey: "atMandi", color: "bg-violet-100 text-violet-800", icon: "🏪" },
+  "processing": { labelKey: "processing", color: "bg-orange-100 text-orange-800", icon: "🏭" },
+  "delivered": { labelKey: "delivered", color: "bg-emerald-100 text-emerald-800", icon: "✅" },
 };
 
 export default function SupplyChainPage() {
+  const { t } = useLanguage();
   const [batches] = useState<SupplyBatch[]>(MOCK_BATCHES);
   const [selectedBatch, setSelectedBatch] = useState<SupplyBatch | null>(null);
   const [showQR, setShowQR] = useState<string | null>(null);
@@ -94,14 +97,14 @@ export default function SupplyChainPage() {
           <div>
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-100 text-blue-800 text-xs font-semibold mb-2">
               <Truck className="w-3.5 h-3.5" />
-              <span>End-to-End Supply Chain Visibility</span>
+              <span>{t("supplyChainTracker")}</span>
             </div>
-            <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900">Supply Chain Tracker</h1>
-            <p className="text-xs sm:text-sm text-slate-500 mt-1">Track your produce from farm to fork with QR verification</p>
+            <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900">{t("supplyChainTracker")}</h1>
+            <p className="text-xs sm:text-sm text-slate-500 mt-1">{t("trackProduceFork")}</p>
           </div>
           <button className="flex items-center gap-2 px-5 py-2.5 rounded-2xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-bold text-xs shadow-md transition-all cursor-pointer">
             <Plus className="w-4 h-4" />
-            <span>New Shipment</span>
+            <span>{t("postProduce")}</span>
           </button>
         </div>
 
@@ -114,7 +117,7 @@ export default function SupplyChainPage() {
               <div key={status} className="bg-white rounded-2xl p-4 border border-slate-200/80 shadow-sm text-center">
                 <span className="text-lg">{info.icon}</span>
                 <p className="text-lg font-extrabold text-slate-900 mt-1">{count}</p>
-                <p className="text-[10px] text-slate-400 font-semibold">{info.label}</p>
+                <p className="text-[10px] text-slate-400 font-semibold">{t(info.labelKey)}</p>
               </div>
             );
           })}
@@ -124,7 +127,7 @@ export default function SupplyChainPage() {
         <div className="bg-white rounded-2xl p-4 border border-slate-200/80 shadow-sm">
           <div className="relative">
             <Search className="absolute left-3.5 top-3 w-4 h-4 text-slate-400" />
-            <input type="text" value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Search by batch ID, crop, or farmer name..." className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 text-xs focus:outline-none focus:ring-2 focus:ring-blue-500" />
+            <input type="text" value={search} onChange={(e) => setSearch(e.target.value)} placeholder={t("searchBatch")} className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 text-xs focus:outline-none focus:ring-2 focus:ring-blue-500" />
           </div>
         </div>
 
@@ -141,17 +144,17 @@ export default function SupplyChainPage() {
                     <div>
                       <div className="flex items-center gap-2">
                         <h3 className="text-sm font-bold text-slate-900">{batch.crop}</h3>
-                        <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold ${info.color}`}>{info.label}</span>
+                        <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold ${info.color}`}>{t(info.labelKey)}</span>
                       </div>
                       <p className="text-[10px] text-slate-400">{batch.batchId} &bull; {batch.farmer} &bull; {batch.quantity}</p>
                     </div>
                   </div>
                   <div className="flex items-center gap-2">
                     <button onClick={() => setShowQR(batch.id)} className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-[10px] font-semibold text-slate-700 cursor-pointer">
-                      <QrCode className="w-3.5 h-3.5" /> QR Code
+                      <QrCode className="w-3.5 h-3.5" /> {t("qrCode")}
                     </button>
                     <button onClick={() => setSelectedBatch(selectedBatch?.id === batch.id ? null : batch)} className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-[10px] font-semibold cursor-pointer">
-                      <Eye className="w-3.5 h-3.5" /> Track
+                      <Eye className="w-3.5 h-3.5" /> {t("track")}
                     </button>
                   </div>
                 </div>
@@ -164,7 +167,7 @@ export default function SupplyChainPage() {
                     </div>
                   ))}
                 </div>
-                <p className="text-[10px] text-slate-400">{completedStages}/{batch.stages.length} stages completed &bull; {batch.origin} → {batch.destination}</p>
+                <p className="text-[10px] text-slate-400">{completedStages}/{batch.stages.length} {t("stagesCompleted")} &bull; {batch.origin} → {batch.destination}</p>
 
                 {/* Expanded Timeline */}
                 {selectedBatch?.id === batch.id && (
@@ -203,7 +206,7 @@ export default function SupplyChainPage() {
       {showQR && (
         <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
           <div className="w-full max-w-sm bg-white rounded-3xl p-6 shadow-2xl text-center space-y-4">
-            <h3 className="text-base font-bold text-slate-900">Batch QR Code</h3>
+            <h3 className="text-base font-bold text-slate-900">{t("qrCode")}</h3>
             <div className="w-48 h-48 mx-auto bg-slate-100 rounded-2xl flex items-center justify-center border-2 border-dashed border-slate-300">
               <div className="text-center">
                 <QrCode className="w-16 h-16 text-slate-400 mx-auto mb-2" />
@@ -215,7 +218,7 @@ export default function SupplyChainPage() {
               <p className="text-[10px] text-slate-400 mb-1">Batch Data:</p>
               <p className="text-[10px] font-mono text-slate-600 break-all">{batches.find((b) => b.id === showQR)?.qrData}</p>
             </div>
-            <button onClick={() => setShowQR(null)} className="w-full py-2.5 rounded-xl bg-slate-900 text-white text-xs font-bold cursor-pointer">Close</button>
+            <button onClick={() => setShowQR(null)} className="w-full py-2.5 rounded-xl bg-slate-900 text-white text-xs font-bold cursor-pointer">{t("cancel")}</button>
           </div>
         </div>
       )}
