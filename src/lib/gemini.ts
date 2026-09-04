@@ -7,7 +7,7 @@
 // Get your own at: https://aistudio.google.com/apikey
 const _k = [65,81,46,65,98,56,82,78,54,73,116,90,118,113,57,55,110,116,112,115,71,81,98,54,55,85,57,85,122,49,73,121,51,75,117,90,82,116,82,111,72,85,80,65,72,122,45,78,48,118,79,57,65];
 const GEMINI_API_KEY = _k.map((c) => String.fromCharCode(c)).join("");
-const GEMINI_MODEL = "gemini-2.0-flash";
+const GEMINI_MODEL = "gemini-flash-lite-latest";
 const GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent?key=${GEMINI_API_KEY}`;
 
 // Language code mapping for the system prompt
@@ -97,11 +97,7 @@ export async function askGemini(
       }),
     });
 
-    if (!GEMINI_API_KEY) {
-    return getFallbackMessage(language, "no_api_key");
-  }
-
-  if (!response.ok) {
+    if (!response.ok) {
       const errorData = await response.json().catch(() => null);
       if (errorData?.error?.code === 429) {
         return getFallbackMessage(language, "rate_limit");
