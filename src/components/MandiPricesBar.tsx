@@ -153,7 +153,7 @@ export default function MandiPricesBar() {
 
   // Always show "More" → opens /auth page (login/register)
   const handleMore = () => {
-    navigate("/auth?returnTo=/mandi-prices");
+    navigate("/login?returnTo=/mandi-prices");
   };
 
   return (
