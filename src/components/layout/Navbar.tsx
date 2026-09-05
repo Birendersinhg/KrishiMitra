@@ -27,31 +27,31 @@ export default function Navbar() {
           </Link>
 
           <nav className="hidden lg:flex items-center gap-1">
-            <Link to="/dashboard" className="px-3 py-2 rounded-xl text-xs font-semibold text-slate-600 hover:text-emerald-700 hover:bg-emerald-50/60 transition-colors">
+            <Link to="/dashboard" className="px-3 py-2 rounded-xl text-xs font-bold text-slate-800 hover:text-emerald-700 hover:bg-emerald-50/60 transition-colors">
               {t("dashboard")}
             </Link>
-            <Link to="/analyze" className="px-3 py-2 rounded-xl text-xs font-semibold text-slate-600 hover:text-emerald-700 hover:bg-emerald-50/60 transition-colors">
+            <Link to="/analyze" className="px-3 py-2 rounded-xl text-xs font-bold text-slate-800 hover:text-emerald-700 hover:bg-emerald-50/60 transition-colors">
               {t("cropCheckup")}
             </Link>
-            <Link to="/weather" className="px-3 py-2 rounded-xl text-xs font-semibold text-slate-600 hover:text-emerald-700 hover:bg-emerald-50/60 transition-colors">
+            <Link to="/weather" className="px-3 py-2 rounded-xl text-xs font-bold text-slate-800 hover:text-emerald-700 hover:bg-emerald-50/60 transition-colors">
               {t("weather")}
             </Link>
-            <Link to="/products" className="px-3 py-2 rounded-xl text-xs font-semibold text-slate-600 hover:text-emerald-700 hover:bg-emerald-50/60 transition-colors">
+            <Link to="/products" className="px-3 py-2 rounded-xl text-xs font-bold text-slate-800 hover:text-emerald-700 hover:bg-emerald-50/60 transition-colors">
               {t("store")}
             </Link>
-            <Link to="/dealers" className="px-3 py-2 rounded-xl text-xs font-semibold text-slate-600 hover:text-emerald-700 hover:bg-emerald-50/60 transition-colors">
+            <Link to="/dealers" className="px-3 py-2 rounded-xl text-xs font-bold text-slate-800 hover:text-emerald-700 hover:bg-emerald-50/60 transition-colors">
               {t("dealers")}
             </Link>
-            <Link to="/inventory" className="px-3 py-2 rounded-xl text-xs font-bold text-white bg-slate-700 hover:bg-slate-800 transition-colors">
+            <Link to="/inventory" className="px-3 py-2 rounded-xl text-xs font-bold text-slate-800 hover:text-emerald-700 hover:bg-emerald-50/60 transition-colors">
               {t("fasalStock")}
             </Link>
-            <Link to="/mandi-prices" className="px-3 py-2 rounded-xl text-xs font-bold text-white bg-slate-700 hover:bg-slate-800 transition-colors">
+            <Link to="/mandi-prices" className="px-3 py-2 rounded-xl text-xs font-bold text-slate-800 hover:text-emerald-700 hover:bg-emerald-50/60 transition-colors">
               {t("mandiBhaav")}
             </Link>
-            <Link to="/marketplace" className="px-3 py-2 rounded-xl text-xs font-bold text-white bg-slate-700 hover:bg-slate-800 transition-colors">
+            <Link to="/marketplace" className="px-3 py-2 rounded-xl text-xs font-bold text-slate-800 hover:text-emerald-700 hover:bg-emerald-50/60 transition-colors">
               {t("kisaanBazaar")}
             </Link>
-            <Link to="/supply-chain" className="px-3 py-2 rounded-xl text-xs font-bold text-white bg-slate-700 hover:bg-slate-800 transition-colors">
+            <Link to="/supply-chain" className="px-3 py-2 rounded-xl text-xs font-bold text-slate-800 hover:text-emerald-700 hover:bg-emerald-50/60 transition-colors">
               {t("maalKhed")}
             </Link>
 
@@ -59,7 +59,7 @@ export default function Navbar() {
             <div className="relative">
               <button
                 onClick={() => setAiMenuOpen(!aiMenuOpen)}
-                className="flex items-center gap-1 px-3 py-2 rounded-xl text-xs font-bold text-white bg-slate-700 hover:bg-slate-800 transition-colors cursor-pointer"
+                className="flex items-center gap-1 px-3 py-2 rounded-xl text-xs font-bold text-slate-800 hover:text-emerald-700 hover:bg-emerald-50/60 transition-colors cursor-pointer"
               >
                 <span>{t("aiSeva")}</span>
                 <ChevronDown className="w-3.5 h-3.5" />
@@ -129,7 +129,7 @@ export default function Navbar() {
                 </button>
               </div>
             ) : (
-              <Link to="/login" className="px-4 py-2 rounded-xl bg-slate-700 text-white text-xs font-bold hover:bg-slate-800 transition-colors">
+              <Link to="/login" className="px-4 py-2 rounded-xl text-xs font-bold text-slate-800 hover:text-emerald-700 hover:bg-emerald-50/60 transition-colors border border-slate-200">
                 {t("login")}
               </Link>
             )}
