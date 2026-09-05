@@ -4,7 +4,6 @@ import { Camera, Plus, ArrowRight, Package, TrendingUp, ShoppingCart, Warehouse,
 import { useAuth } from "../contexts/AuthContext";
 import { useLocation as useGeoLocation } from "../contexts/LocationContext";
 import { useLanguage } from "../contexts/LanguageContext";
-import WeatherWidget from "../components/weather/WeatherWidget";
 import CameraCaptureModal from "../components/camera/CameraCaptureModal";
 import api from "../services/api";
 
@@ -160,12 +159,8 @@ export default function FarmerDashboard() {
           </div>
         </div>
 
-        {/* Weather & Recent Diagnoses */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          <div className="lg:col-span-2">
-            <WeatherWidget showForecast={true} />
-          </div>
-
+        {/* Recent Diagnoses */}
+        <div>
           <div className="bg-white rounded-2xl border border-slate-200/80 p-5 shadow-sm">
             <div className="flex items-center justify-between mb-4">
               <h2 className="text-base font-bold text-slate-900">{t("recentDiagnoses")}</h2>

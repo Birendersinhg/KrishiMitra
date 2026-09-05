@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Camera, Sprout, Sun, ShoppingBag, Users, ArrowRight, Sparkles, Package, BarChart3, Store, Truck } from "lucide-react";
 import { useLanguage } from "../contexts/LanguageContext";
+import WeatherWidget from "../components/weather/WeatherWidget";
 import CameraCaptureModal from "../components/camera/CameraCaptureModal";
 import MandiPricesBar from "../components/MandiPricesBar";
 
@@ -92,7 +93,8 @@ export default function LandingPage() {
     <div className="min-h-screen bg-slate-50">
       <div className="relative overflow-hidden bg-gradient-to-b from-emerald-900 via-emerald-800 to-green-900 text-white pt-8 pb-20 px-4">
         <div className="max-w-7xl mx-auto">
-          <div className="space-y-4">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            <div className="lg:col-span-7 space-y-4">
             <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight leading-tight">
               {t("heroTitle1")} <span className="text-emerald-300">{t("heroTitle2")}</span>
             </h1>
@@ -120,6 +122,11 @@ export default function LandingPage() {
             </div>
 
             <MandiPricesBar />
+            </div>
+
+            <div className="lg:col-span-5">
+              <WeatherWidget showForecast={true} />
+            </div>
           </div>
         </div>
       </div>
