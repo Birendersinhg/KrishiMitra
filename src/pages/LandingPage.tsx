@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Camera, Sprout, Sun, ShoppingBag, Users, ArrowRight, Sparkles, Package, BarChart3, Store, Truck } from "lucide-react";
 import { useLanguage } from "../contexts/LanguageContext";
-import WeatherWidget from "../components/weather/WeatherWidget";
 import CameraCaptureModal from "../components/camera/CameraCaptureModal";
 import MandiPricesBar from "../components/MandiPricesBar";
 
@@ -93,42 +92,34 @@ export default function LandingPage() {
     <div className="min-h-screen bg-slate-50">
       <div className="relative overflow-hidden bg-gradient-to-b from-emerald-900 via-emerald-800 to-green-900 text-white pt-16 pb-24 px-4">
         <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-            <div className="lg:col-span-7 space-y-6">
-              {/* Hero text moved to TOP — removed the "Powered by AI" badge */}
-              <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight leading-tight">
-                {t("heroTitle1")} <span className="text-emerald-300">{t("heroTitle2")}</span>
-              </h1>
+          <div className="space-y-6">
+            <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight leading-tight">
+              {t("heroTitle1")} <span className="text-emerald-300">{t("heroTitle2")}</span>
+            </h1>
 
-              <p className="text-base sm:text-lg text-emerald-100 max-w-2xl">
-                {t("heroSubtitle")}
-              </p>
+            <p className="text-base sm:text-lg text-emerald-100 max-w-2xl">
+              {t("heroSubtitle")}
+            </p>
 
-              <div className="flex flex-wrap items-center gap-3.5">
-                <button
-                  onClick={() => setCameraOpen(true)}
-                  className="flex items-center gap-2.5 px-6 py-3.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-900 font-bold text-base shadow-lg shadow-emerald-900/40 transition-all cursor-pointer"
-                >
-                  <Camera className="w-5 h-5" />
-                  <span>{t("openCamera") || "Open Camera"}</span>
-                </button>
+            <div className="flex flex-wrap items-center gap-3.5">
+              <button
+                onClick={() => setCameraOpen(true)}
+                className="flex items-center gap-2.5 px-6 py-3.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-900 font-bold text-base shadow-lg shadow-emerald-900/40 transition-all cursor-pointer"
+              >
+                <Camera className="w-5 h-5" />
+                <span>{t("openCamera") || "Open Camera"}</span>
+              </button>
 
-                <Link
-                  to="/assistant"
-                  className="flex items-center gap-2 px-5 py-3.5 rounded-xl bg-white/10 hover:bg-white/20 border border-white/20 text-white font-semibold text-base transition-colors"
-                >
-                  <span>{t("aiAssistant")}</span>
-                  <ArrowRight className="w-4 h-4" />
-                </Link>
-              </div>
-
-              {/* Mandi Prices Bar — below buttons */}
-              <MandiPricesBar />
+              <Link
+                to="/assistant"
+                className="flex items-center gap-2 px-5 py-3.5 rounded-xl bg-white/10 hover:bg-white/20 border border-white/20 text-white font-semibold text-base transition-colors"
+              >
+                <span>{t("aiAssistant")}</span>
+                <ArrowRight className="w-4 h-4" />
+              </Link>
             </div>
 
-            <div className="lg:col-span-5">
-              <WeatherWidget showForecast={true} />
-            </div>
+            <MandiPricesBar />
           </div>
         </div>
       </div>
