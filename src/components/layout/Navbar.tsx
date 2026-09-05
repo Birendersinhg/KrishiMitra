@@ -42,16 +42,16 @@ export default function Navbar() {
             <Link to="/dealers" className="px-3 py-2 rounded-xl text-xs font-semibold text-slate-600 hover:text-emerald-700 hover:bg-emerald-50/60 transition-colors">
               {t("dealers")}
             </Link>
-            <Link to="/inventory" className="px-3 py-2 rounded-xl text-xs font-semibold text-amber-700 hover:text-amber-800 bg-amber-50 hover:bg-amber-100 transition-colors">
+            <Link to="/inventory" className="px-3 py-2 rounded-xl text-xs font-bold text-white bg-slate-700 hover:bg-slate-800 transition-colors">
               {t("fasalStock")}
             </Link>
-            <Link to="/mandi-prices" className="px-3 py-2 rounded-xl text-xs font-semibold text-blue-700 hover:text-blue-800 bg-blue-50 hover:bg-blue-100 transition-colors">
+            <Link to="/mandi-prices" className="px-3 py-2 rounded-xl text-xs font-bold text-white bg-slate-700 hover:bg-slate-800 transition-colors">
               {t("mandiBhaav")}
             </Link>
-            <Link to="/marketplace" className="px-3 py-2 rounded-xl text-xs font-semibold text-violet-700 hover:text-violet-800 bg-violet-50 hover:bg-violet-100 transition-colors">
+            <Link to="/marketplace" className="px-3 py-2 rounded-xl text-xs font-bold text-white bg-slate-700 hover:bg-slate-800 transition-colors">
               {t("kisaanBazaar")}
             </Link>
-            <Link to="/supply-chain" className="px-3 py-2 rounded-xl text-xs font-semibold text-indigo-700 hover:text-indigo-800 bg-indigo-50 hover:bg-indigo-100 transition-colors">
+            <Link to="/supply-chain" className="px-3 py-2 rounded-xl text-xs font-bold text-white bg-slate-700 hover:bg-slate-800 transition-colors">
               {t("maalKhed")}
             </Link>
 
@@ -59,7 +59,7 @@ export default function Navbar() {
             <div className="relative">
               <button
                 onClick={() => setAiMenuOpen(!aiMenuOpen)}
-                className="flex items-center gap-1 px-3 py-2 rounded-xl text-xs font-bold text-emerald-800 bg-emerald-50 hover:bg-emerald-100 transition-colors cursor-pointer"
+                className="flex items-center gap-1 px-3 py-2 rounded-xl text-xs font-bold text-white bg-slate-700 hover:bg-slate-800 transition-colors cursor-pointer"
               >
                 <span>{t("aiSeva")}</span>
                 <ChevronDown className="w-3.5 h-3.5" />
@@ -74,7 +74,7 @@ export default function Navbar() {
                       onClick={() => setAiMenuOpen(false)}
                       className="block p-2.5 rounded-xl hover:bg-emerald-50 text-xs transition-colors"
                     >
-                      <span className="font-bold text-slate-900 block">🖥️ {t("khetKaNaksha")}</span>
+                      <span className="font-bold text-slate-900 block">{t("khetKaNaksha")}</span>
                       <span className="text-[11px] text-slate-500">{t("khetKaNakshaDesc")}</span>
                     </Link>
                     <Link
@@ -82,7 +82,7 @@ export default function Navbar() {
                       onClick={() => setAiMenuOpen(false)}
                       className="block p-2.5 rounded-xl hover:bg-violet-50 text-xs transition-colors"
                     >
-                      <span className="font-bold text-slate-900 block">🤖 {t("aiSalahkar")}</span>
+                      <span className="font-bold text-slate-900 block">{t("aiSalahkar")}</span>
                       <span className="text-[11px] text-slate-500">{t("aiSalahkarDesc")}</span>
                     </Link>
                     <Link
@@ -90,7 +90,7 @@ export default function Navbar() {
                       onClick={() => setAiMenuOpen(false)}
                       className="block p-2.5 rounded-xl hover:bg-amber-50 text-xs transition-colors"
                     >
-                      <span className="font-bold text-slate-900 block">🔮 {t("kyaHogaAgar")}</span>
+                      <span className="font-bold text-slate-900 block">{t("kyaHogaAgar")}</span>
                       <span className="text-[11px] text-slate-500">{t("kyaHogaAgarDesc")}</span>
                     </Link>
                     <Link
@@ -98,7 +98,7 @@ export default function Navbar() {
                       onClick={() => setAiMenuOpen(false)}
                       className="block p-2.5 rounded-xl hover:bg-teal-50 text-xs transition-colors"
                     >
-                      <span className="font-bold text-slate-900 block">📚 {t("fasalSalah")}</span>
+                      <span className="font-bold text-slate-900 block">{t("fasalSalah")}</span>
                       <span className="text-[11px] text-slate-500">{t("fasalSalahDesc")}</span>
                     </Link>
                     <Link
@@ -106,7 +106,7 @@ export default function Navbar() {
                       onClick={() => setAiMenuOpen(false)}
                       className="block p-2.5 rounded-xl hover:bg-blue-50 text-xs transition-colors"
                     >
-                      <span className="font-bold text-slate-900 block">🗺️ {t("khetKiNaksha")}</span>
+                      <span className="font-bold text-slate-900 block">{t("khetKiNaksha")}</span>
                       <span className="text-[11px] text-slate-500">{t("khetKiNakshaDesc")}</span>
                     </Link>
                   </div>
@@ -129,7 +129,7 @@ export default function Navbar() {
                 </button>
               </div>
             ) : (
-              <Link to="/login" className="px-4 py-2 rounded-xl bg-emerald-600 text-white text-xs font-semibold hover:bg-emerald-700 transition-colors">
+              <Link to="/login" className="px-4 py-2 rounded-xl bg-slate-700 text-white text-xs font-bold hover:bg-slate-800 transition-colors">
                 {t("login")}
               </Link>
             )}
