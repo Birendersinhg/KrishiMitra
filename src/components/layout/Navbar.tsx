@@ -32,10 +32,10 @@ export default function Navbar() {
 
           {/* LEFT: Ministry emblem + AgriNexus with Hindi tagline */}
           <Link to="/" className="flex items-center gap-2.5 shrink-0">
-            <span className="hidden sm:inline-flex">
-              <MinistryLogo className="h-7 w-auto" />
+            <span className="inline-flex">
+              <MinistryLogo className="h-11 w-auto" />
             </span>
-            <span className="w-px self-stretch my-2 bg-slate-200" aria-hidden="true" />
+            <span className="w-px self-stretch my-1.5 bg-slate-200" aria-hidden="true" />
             <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500 to-green-600 flex items-center justify-center text-white shadow-md shadow-emerald-500/25">
               <Sprout className="w-5 h-5" />
             </div>
@@ -126,8 +126,18 @@ export default function Navbar() {
             </div>
           </nav>
 
-          {/* RIGHT: Settings dropdown */}
+          {/* RIGHT: subscription CTA + Settings dropdown */}
           <div className="flex items-center gap-2.5 shrink-0">
+            {/* KrishiMitra Pro — subscription CTA next to Settings */}
+            <Link
+              to="/subscription"
+              className="flex items-center gap-1.5 px-3.5 py-2 rounded-full text-xs font-bold text-white bg-gradient-to-r from-emerald-600 to-green-500 hover:from-emerald-700 hover:to-green-600 shadow-md shadow-emerald-500/25 transition-all cursor-pointer"
+            >
+              <Sparkles className="w-4 h-4" />
+              <span className="hidden sm:inline">{t("subscribe")}</span>
+            </Link>
+
+            {/* Settings Dropdown — language, alerts & account in one place */}
             <div className="relative">
               <button
                 onClick={() => { setSettingsOpen(!settingsOpen); setAiMenuOpen(false); setMarketOpen(false); }}
